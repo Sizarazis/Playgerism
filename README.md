@@ -1,12 +1,12 @@
 # Playgerism
 A poem puzzle game.
--
 
-## Description
+
+### Description
 Test
 
-## Tasks
+### Tasks
 Test
 
-## Deployment
+### Deployment
 Test
