@@ -8,9 +8,13 @@ public class Line : MonoBehaviour {
 	void Start () {
 		
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    Slot    inSlot;
+    Vector3 location;
+    string  text;
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
