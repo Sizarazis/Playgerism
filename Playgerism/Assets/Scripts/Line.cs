@@ -6,15 +6,36 @@ public class Line : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+
 	}
 
-    Slot    inSlot;
-    Vector3 location;
-    string  text;
+    public Slot inSlot;
+
+    private Vector3 location;
 
     // Update is called once per frame
     void Update () {
 		
+        // TODO: Move lines here
+
 	}
+
+    // TODO: Move the line to a slot above it, and update the other slots
+    // EFFECTS: 
+    // MODIFIES: all lines and slots
+    // REQUIRES: nothing (?)
+    void MoveUp(int toSlotNum)
+    {
+
+    }
+
+    // TODO: Move the line to a slot below it, and update the other slots
+    // EFFECTS: 
+    // MODIFIES: all lines and slots
+    // REQUIRES: nothing (?)
+    void MoveDown(int toSlotNum)
+    {
+
+    }
 }

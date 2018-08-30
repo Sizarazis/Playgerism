@@ -6,12 +6,12 @@ public class Slot : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
 	}
 
-    Line currentLine;
-    Slot prevSlot;
-    Slot nextSlot;
+    public Line currentLine;
+    public Slot prevSlot;
+    public Slot nextSlot;
 
     // Update is called once per frame
     void Update () {

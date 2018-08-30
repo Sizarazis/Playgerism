@@ -133,8 +133,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 44064051}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2, y: 2.5, z: 1}
-  m_LocalScale: {x: 69, y: 1, z: 100}
+  m_LocalPosition: {x: 0, y: 2.5, z: 2}
+  m_LocalScale: {x: 10, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 1776897572}
   m_RootOrder: 1
@@ -200,14 +200,13 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 88340031}
-  - component: {fileID: 88340032}
   m_Layer: 0
   m_Name: Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &88340031
 Transform:
   m_ObjectHideFlags: 0
@@ -221,17 +220,6 @@ Transform:
   m_Father: {fileID: 1976794845}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &88340032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 88340030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &597306761
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +328,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749671853}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -48, y: 2, z: 0}
+  m_LocalPosition: {x: -48, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1776897572}
@@ -411,7 +399,6 @@ GameObject:
   - component: {fileID: 784677131}
   - component: {fileID: 784677130}
   - component: {fileID: 784677129}
-  - component: {fileID: 784677128}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -439,7 +426,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 58.46647
+  orthographic size: 77.807396
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -455,17 +442,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!114 &784677128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 784677126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ca82ff84bf82f84eb745b3abc9eb5d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &784677129
 AudioListener:
   m_ObjectHideFlags: 0
@@ -494,7 +470,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 784677126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -42, z: -100}
+  m_LocalPosition: {x: 0, y: -60, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
