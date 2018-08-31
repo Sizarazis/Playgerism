@@ -9,7 +9,7 @@ public class StateManager : MonoBehaviour {
         poem = GetPoem();
 
         numLines = poem.Length;
-        numSlots = poem.Length + 1;
+        numSlots = poem.Length + 2;
 
         BuildSlots();
         BuildLines();
