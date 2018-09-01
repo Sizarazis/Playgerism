@@ -51,16 +51,37 @@ public class Line : MonoBehaviour {
         {
             if (inSlot.transform.position.y >= this.transform.position.y)
             {
-                MoveDown();
+                // account for moving the last 1 down
+                if (inSlot.nextSlot.currentLine != null)
+                {
+                    MoveDown();
+                }
+                else
+                {
+                    this.transform.position = new Vector3(inSlot.transform.position.x, inSlot.transform.position.y, this.transform.position.z);
+                }
             }
             else
             {
-                MoveUp();
+                // account for moving the first 1 up
+                if (inSlot.prevSlot != null)
+                {
+                    MoveUp();
+                }
+                else
+                {
+                    this.transform.position = new Vector3(inSlot.transform.position.x, inSlot.transform.position.y, this.transform.position.z);
+                }
             }
+        }
+
+        // Otherwise, move the line back to its starting position
+        else
+        {
+            this.transform.position = new Vector3(inSlot.transform.position.x, inSlot.transform.position.y, this.transform.position.z);
         }
     }
 
-    // TODO: Work on edge case for when you move a line above the first line
     // EFFECTS: Move the line to a slot above it, and update the other slots
     // MODIFIES: All lines and slots
     // REQUIRES: Nothing
@@ -71,11 +92,8 @@ public class Line : MonoBehaviour {
 
         // Update all slots and lines
         ShiftLines(true, inSlot, newSlot);
-
-        // NOTE: make a case if it is put into an empty slot
     }
 
-    // TODO: Work on edge case for when you move a line below the last line
     // EFFECTS: Move the line to a slot below it, and update the other slots
     // MODIFIES: All lines and slots
     // REQUIRES: Nothing
@@ -86,8 +104,6 @@ public class Line : MonoBehaviour {
 
         // Update all slots and lines
         ShiftLines(false, inSlot, newSlot);
-
-        // NOTE: make a case if it is put into an empty slot
     }
 
     // EFFECTS: Finds the closest slot to the current position of a line
@@ -95,23 +111,29 @@ public class Line : MonoBehaviour {
     // REQUIRES: A check to see if its looking up or down
     private Slot FindSlot(bool inMoveUp)
     {
-        // Find which slot to put it in
         Slot currentSlot = inSlot;
 
         bool cont = true;
         while (cont)
         {
+            // Move the line to the top spot if the current slot is the top slot, and its above the top slot
+            if (inMoveUp == true && currentSlot.prevSlot == null  && this.transform.position.y >= currentSlot.transform.position.y)
+            {
+                return currentSlot;
+            }
+
+            // Move the line to the bottom spot if the current slot is the bottom slot, and its below the bottom slot
+            if (inMoveUp == false && currentSlot.nextSlot.currentLine == null && this.transform.position.y <= currentSlot.transform.position.y)
+            {
+                return currentSlot;
+            }
+
             if (Mathf.Abs(currentSlot.transform.position.y - this.transform.position.y) <= halfHeightOfLine)
             {
                 return currentSlot;
             }
             else
             {
-                if (currentSlot.prevSlot == null || currentSlot.nextSlot == null)
-                {
-                    cont = false;
-                }
-
                 if (inMoveUp == true)
                 {
                     currentSlot = currentSlot.prevSlot;
@@ -125,6 +147,7 @@ public class Line : MonoBehaviour {
         return null;
     }
 
+    // TODO: ANIMATE!!
     // EFFECTS: Set all the lines and slots to where they should be
     // MODIFIES: All lines and slots in the scene
     // REQUIRES: a bool to determine if a line is moving up or down, a new slot for this to go in, and the old slot
@@ -136,6 +159,7 @@ public class Line : MonoBehaviour {
         // Move the initial line
         newSlot.currentLine = oldSlot.currentLine;
         newSlot.currentLine.inSlot = newSlot;
+
         newSlot.currentLine.transform.SetPositionAndRotation(currentLine.transform.position, currentLine.transform.rotation);
 
         while (currentSlot != oldSlot)

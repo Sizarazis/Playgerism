@@ -25,9 +25,9 @@ public class StateManager : MonoBehaviour {
     public string[] poem;
     public int      numLines;
     public int      numSlots;
+    public int      yPosPoemStart = -20;
 
     private int lineHeight =    10;
-    private int yPosPoemStart = -20;
 
 	// Update is called once per frame
 	void Update () {
