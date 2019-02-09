@@ -6,35 +6,53 @@ public class StateManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        poem = GetPoem();
-
-        numLines = poem.Length;
-        numSlots = poem.Length + 2;
+        stringPoem = GetPoem();
+        numLines = stringPoem.Length;
+        numSlots = stringPoem.Length + 2;
+        poem = BuildPoem();
+        scrambledPoem = ScramblePoem();
 
         BuildSlots();
         BuildLines();
         SetLineText();
         ConnectSlots();
         AttachLinesAndSlots();
+        testScore = gameObject.transform.Find("Goal Text").GetComponent<TextMesh>();
     }
 
     public GameObject slotPrefab;
     public GameObject slots;
     public GameObject linePrefab;
     public GameObject lines;
-    public string[] poem;
+
+    public struct IDLine
+    {
+        public int ID;
+        public string line; 
+    }
+
+    public TextMesh testScore;
+
+    public string[] stringPoem;
+    public IDLine[] poem;
+    public IDLine[] scrambledPoem;
+
     public int      numLines;
     public int      numSlots;
     public int      yPosPoemStart = -20;
+    public int      score;
 
     private int lineHeight =    10;
 
 	// Update is called once per frame
 	void Update () {
-		
+        CalculateScore();
 	}
 
-    // TODO: get a poem for the puzzle
+    // TODO: Might need to change when implenting parsing
+    // EFFECTS: Gets a poem
+    // MODIFIES: this
+    // REQUIRES: nothing
     string[] GetPoem()
     {
         string[] lines = Utilities.ParsePoem();
@@ -56,6 +74,7 @@ public class StateManager : MonoBehaviour {
 
             GameObject instSlot = Instantiate(slotPrefab, position, rotation, slots.transform);
             instSlot.name = "Slot " + i;
+            instSlot.GetComponent<Slot>().relPosition = i;
 
             yPos = yPos - lineHeight;
         }
@@ -85,32 +104,91 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: Lines to have already instantiated its line children
     void SetLineText()
     {
-        string[] scramble = ScramblePoem(poem);
-
         int i = 0;
         foreach(Transform line in lines.GetComponentsInChildren<Transform>())
         {
             if (line.name == "Text")
             {
-                line.GetComponentInChildren<TextMesh>().text = scramble[i];
+                line.GetComponentInChildren<TextMesh>().text = scrambledPoem[i].line;
+                line.GetComponentInParent<Line>().lineID = scrambledPoem[i].ID;
+
+                line.GetComponentInParent<Line>().truePlaces = new int[numLines];
+                for (int j = 0; j < numLines; j++)
+                {
+                    line.GetComponentInParent<Line>().truePlaces[j] = -1;
+                }
+
+                //THERE IS A PROBLEM FROM HERE (IT ISN'T STORING THE CORRECT VALUE IN TRUEPLACES)
+                // Find all the elements in poem[] with the same IDs as scrambledPoem[i]
+                // Store their positions in poem[] in truePlaces
+
+                int duplicateCounter = 0;
+                for (int k = 0; k < numLines; k++)
+                {
+                    if (scrambledPoem[i].ID == poem[k].ID)
+                    {
+                        line.GetComponentInParent<Line>().truePlaces[duplicateCounter] = k;
+                        duplicateCounter++;
+                    }
+                }
+
                 i++;
             }
         }
     }
 
-    // EFFECTS: Randomly shuffles an array of strings
-    // MODIFIES: Nothing
-    // REQUIRES: an array of strings
-    string[] ScramblePoem(string[] poem)
+    // EFFECTS: Builds an array of lines with IDs attached
+    // MODIFIES: this
+    // REQUIRES: stringPoems and numLines to be instantiated
+    IDLine[] BuildPoem()
+    {
+        IDLine[] output = new IDLine[numLines];
+        int counter = 0;
+        bool duplicateFlag = false;
+        for (int i = 0; i < numLines; i++)
+        {
+            duplicateFlag = false;
+            output[i].line = stringPoem[i];
+
+            //Duplicate checking loop
+            for (int j = 0; j < i; j++)
+            {
+                if (stringPoem[j] == stringPoem[i])
+                {
+                    duplicateFlag = true;
+                    output[i].ID = output[j].ID;
+                    break;
+                }
+            }
+
+            if (duplicateFlag == false)
+            {
+                output[i].ID = counter;
+                counter++;
+            }
+        }
+
+        return output;
+    }
+
+    // EFFECTS: Randomly shuffles the poem's lines
+    // MODIFIES: nothing
+    // REQUIRES: nothing
+    IDLine[] ScramblePoem()
     {
         int len = poem.Length;
-        string[] outPoem = poem;
+        IDLine[] outPoem = new IDLine[numLines];
 
-        for (int i = 0; i < len; i++)
+        for (int i = 0; i < numLines; i++)
         {
-            string temp = outPoem[i];
-            int random = Random.Range(i, outPoem.Length);
-            outPoem[i] = outPoem[random];
+            outPoem[i] = poem[i];
+        }
+
+        for (int j = 0; j < len; j++)
+        {
+            IDLine temp = outPoem[j];
+            int random = Random.Range(j, outPoem.Length);
+            outPoem[j] = outPoem[random];
             outPoem[random] = temp;
         }
 
@@ -149,5 +227,13 @@ public class StateManager : MonoBehaviour {
 
             i++;
         }
+    }
+
+    // EFFECTS: Updates the score (max = 5*numLines --> 3/line for being in right slot, 1/line for each correct neighbour of that line)
+    // MODIFIES: A testing UI element, will be removed
+    // REQUIRES: Nothing
+    void CalculateScore()
+    {
+      // TODO
     }
 }

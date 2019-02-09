@@ -7,7 +7,7 @@ public static class Utilities {
     // TODO: Parse a poem
     public static string[] ParsePoem()
     {
-        string poemID = "1";
+        string poemID = "0";
         FindPoem(poemID);
 
         int poemSize = 10;
@@ -24,6 +24,7 @@ public static class Utilities {
         poemLines[7] = "Therefore lets hope for the best";
         poemLines[8] = "and maybe, just maybe";
         poemLines[9] = "this will show up in the game";
+        //poemLines[10] = "Hello";
 
         return poemLines;
     }

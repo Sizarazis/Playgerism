@@ -12,6 +12,7 @@ public class Slot : MonoBehaviour {
     public Line currentLine;
     public Slot prevSlot;
     public Slot nextSlot;
+    public int  relPosition;
 
     // Update is called once per frame
     void Update () {

@@ -341,7 +341,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749671853}
-  m_Text: 'Goal: Elegy'
+  m_Text: 'Score: '
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -414,8 +414,8 @@ Camera:
   m_GameObject: {fileID: 784677126}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.19852942, g: 0.16564925, b: 0.09488538, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -871,13 +871,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc89287fe51f34744927cbe74e92e1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  testScore: {fileID: 0}
   slotPrefab: {fileID: 1770620134546320, guid: b0371892195eabd498d67af2307e333d, type: 2}
   slots: {fileID: 88340030}
   linePrefab: {fileID: 1122359607014094, guid: 8a54f50c8d4f38744bff7f59ec1cf4f3, type: 2}
   lines: {fileID: 1449702920}
   poem: []
+  scrambledPoem: []
   numLines: 0
   numSlots: 0
+  yPosPoemStart: -20
+  score: 0
 --- !u!1 &1865320853
 GameObject:
   m_ObjectHideFlags: 0

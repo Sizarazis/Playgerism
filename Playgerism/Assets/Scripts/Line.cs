@@ -7,6 +7,7 @@ public class Line : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         halfHeightOfLine = (this.transform.localScale.y / 2) * 10;
+        score = 0;
     }
 
     public Slot inSlot;
@@ -15,10 +16,97 @@ public class Line : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
 
+    //NOTE: this is set on instantiation
+    public int lineID;
+    public int[] truePlaces; //THIS NEEDS TO ALLOW FOR DUPLICATE LINES TO GO IN MORE THAN 1 SPOT
+
+    public int inPlace;
+    public int score;
+
     // Update is called once per frame
     void Update () {
 
     }
+
+    // TODO: MOVE SOME OF THIS INTO STATEMANAGER
+    // EFFECTS: Gets the score of the line according to how many correct neighbours it has and its slot
+    // MODIFIES: this
+    // REQUIRES: nothing
+    // NOTE: Might want to include time taken as well
+    //public void SetScore()
+    //{
+    //    score = 0;
+    //    bool goodPlace = false;
+    //    bool goodBottomNeighbour = false;
+    //    bool goodTopNeighbour = false;
+
+    //    //int[] byBottom = GetBottomLinePositions();
+    //    //int[] byTop = GetTopLinePositions();
+
+    //    for (int i = 0; i < truePlaces.Length; i++)
+    //    {
+    //        if (truePlaces[i] == inPlace)
+    //        {
+    //            goodPlace = true;
+    //        }
+
+    //        if (byBottom != null)
+    //        {
+    //            for (int j = 0; j < byBottom.Length; j++)
+    //            {
+    //                if (byBottom[j] == truePlaces[i] + 1)
+    //                {
+    //                    goodBottomNeighbour = true;
+    //                }
+    //            }
+    //        }
+
+    //        if (byTop != null)
+    //        {
+    //            for (int k = 0; k < byTop.Length; k++)
+    //            {
+    //                if (byTop[k] == truePlaces[i] - 1)
+    //                {
+    //                    goodTopNeighbour = true;
+    //                }
+    //            }
+    //        }
+    //    }
+
+    //    if (goodPlace) score += 3;
+    //    if (goodBottomNeighbour) score += 1;
+    //    if (goodTopNeighbour) score += 1;
+
+    //    Debug.Log("TruePlace: " + truePlaces[0]);
+    //    Debug.Log("InPlace: " + inPlace);
+    //    Debug.Log(score);
+    //}
+
+    ////Helper function for SetScore
+    //private int[] GetBottomLinePositions()
+    //{
+    //    if (inSlot.nextSlot.currentLine == null)
+    //    {
+    //        return null;
+    //    }
+    //    else
+    //    {
+    //        return inSlot.nextSlot.currentLine.truePlaces;
+    //    }
+    //}
+
+    ////Helper function for SetScore
+    //private int[] GetTopLinePositions()
+    //{
+    //    if (inSlot.prevSlot == null)
+    //    {
+    //        return null;
+    //    }
+    //    else
+    //    {
+    //        return inSlot.prevSlot.currentLine.truePlaces;
+    //    }
+    //}
 
     private void OnMouseDown()
     {
@@ -80,6 +168,9 @@ public class Line : MonoBehaviour {
         {
             this.transform.position = new Vector3(inSlot.transform.position.x, inSlot.transform.position.y, this.transform.position.z);
         }
+
+        inPlace = inSlot.relPosition;
+        SetScore();
     }
 
     // EFFECTS: Move the line to a slot above it, and update the other slots
