@@ -234,7 +234,7 @@ TextMesh:
   m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
-    rgba: 4292006610
+    rgba: 4280690214
 --- !u!114 &114446775612830130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,3 +247,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inSlot: {fileID: 0}
+  lineID: 0
+  inPlace: 0
+  score: 0

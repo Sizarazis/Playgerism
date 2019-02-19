@@ -6,9 +6,11 @@ public class StateManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        timer = 0.0f;
+        minutes = 99;
         stringPoem = GetPoem();
         numLines = stringPoem.Length;
-        numSlots = stringPoem.Length + 2;
+        numSlots = stringPoem.Length;
         poem = BuildPoem();
         scrambledPoem = ScramblePoem();
 
@@ -17,21 +19,21 @@ public class StateManager : MonoBehaviour {
         SetLineText();
         ConnectSlots();
         AttachLinesAndSlots();
-        testScore = gameObject.transform.Find("Goal Text").GetComponent<TextMesh>();
+        lines = GetLines();
     }
 
     public GameObject slotPrefab;
     public GameObject slots;
     public GameObject linePrefab;
-    public GameObject lines;
+    public GameObject linesObj;
+    public Line[]     lines;
 
     public struct IDLine
     {
         public int ID;
-        public string line; 
+        public string line;
+        public bool isLast;
     }
-
-    public TextMesh testScore;
 
     public string[] stringPoem;
     public IDLine[] poem;
@@ -39,14 +41,20 @@ public class StateManager : MonoBehaviour {
 
     public int      numLines;
     public int      numSlots;
-    public int      yPosPoemStart = -20;
-    public int      score;
 
-    private int lineHeight =    10;
+    private int lineHeight = 10;
+    private float timer;
+    private int minutes;
 
-	// Update is called once per frame
-	void Update () {
-        CalculateScore();
+    // Update is called once per frame
+    void Update () {
+        CheckLineMatches();
+        UpdateLineColors();
+
+        if (minutes < 100)
+        {
+            UpdateTimer();
+        }
 	}
 
     // TODO: Might need to change when implenting parsing
@@ -60,12 +68,17 @@ public class StateManager : MonoBehaviour {
         return lines;
     }
 
+    Line[] GetLines()
+    {
+        return linesObj.GetComponentsInChildren<Line>();
+    }
+
     // EFFECTS: Instantiates slots from the slot prefab
     // MODIFIES: the slots gameObject
     // REQUIRES: slotPrefab and slots to reference a prefab and gameObject in the Unity project
     void BuildSlots()
     {
-        int yPos = yPosPoemStart;
+        int yPos = -25;
 
         for (int i = 0; i < numSlots; i++)
         {
@@ -85,14 +98,14 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: linePrefab and lines to reference a prefab and gameObject in the Unity project
     void BuildLines()
     {
-        int yPos = yPosPoemStart;
+        int yPos = -25;
 
         for (int i = 0; i < numLines; i++)
         {
             Quaternion rotation = linePrefab.transform.rotation;
             Vector3 position = new Vector3(0, yPos, 0);
 
-            GameObject instLine = Instantiate(linePrefab, position, rotation, lines.transform);
+            GameObject instLine = Instantiate(linePrefab, position, rotation, linesObj.transform);
             instLine.name = "Line " + i;
 
             yPos = yPos - lineHeight;
@@ -105,32 +118,13 @@ public class StateManager : MonoBehaviour {
     void SetLineText()
     {
         int i = 0;
-        foreach(Transform line in lines.GetComponentsInChildren<Transform>())
+        foreach(Transform line in linesObj.GetComponentsInChildren<Transform>())
         {
             if (line.name == "Text")
             {
                 line.GetComponentInChildren<TextMesh>().text = scrambledPoem[i].line;
                 line.GetComponentInParent<Line>().lineID = scrambledPoem[i].ID;
-
-                line.GetComponentInParent<Line>().truePlaces = new int[numLines];
-                for (int j = 0; j < numLines; j++)
-                {
-                    line.GetComponentInParent<Line>().truePlaces[j] = -1;
-                }
-
-                //THERE IS A PROBLEM FROM HERE (IT ISN'T STORING THE CORRECT VALUE IN TRUEPLACES)
-                // Find all the elements in poem[] with the same IDs as scrambledPoem[i]
-                // Store their positions in poem[] in truePlaces
-
-                int duplicateCounter = 0;
-                for (int k = 0; k < numLines; k++)
-                {
-                    if (scrambledPoem[i].ID == poem[k].ID)
-                    {
-                        line.GetComponentInParent<Line>().truePlaces[duplicateCounter] = k;
-                        duplicateCounter++;
-                    }
-                }
+                line.GetComponentInParent<Line>().isLast = scrambledPoem[i].isLast;
 
                 i++;
             }
@@ -143,28 +137,15 @@ public class StateManager : MonoBehaviour {
     IDLine[] BuildPoem()
     {
         IDLine[] output = new IDLine[numLines];
-        int counter = 0;
-        bool duplicateFlag = false;
         for (int i = 0; i < numLines; i++)
         {
-            duplicateFlag = false;
             output[i].line = stringPoem[i];
+            output[i].ID = i;
+            output[i].isLast = false;
 
-            //Duplicate checking loop
-            for (int j = 0; j < i; j++)
+            if (i == numLines - 1)
             {
-                if (stringPoem[j] == stringPoem[i])
-                {
-                    duplicateFlag = true;
-                    output[i].ID = output[j].ID;
-                    break;
-                }
-            }
-
-            if (duplicateFlag == false)
-            {
-                output[i].ID = counter;
-                counter++;
+                output[i].isLast = true;
             }
         }
 
@@ -220,7 +201,7 @@ public class StateManager : MonoBehaviour {
         Slot[] allSlots = slots.transform.GetComponentsInChildren<Slot>();
 
         int i = 0;
-        foreach (Line instLine in lines.transform.GetComponentsInChildren<Line>())
+        foreach (Line instLine in linesObj.transform.GetComponentsInChildren<Line>())
         {
             instLine.inSlot = allSlots[i];
             allSlots[i].currentLine = instLine;
@@ -229,11 +210,94 @@ public class StateManager : MonoBehaviour {
         }
     }
 
-    // EFFECTS: Updates the score (max = 5*numLines --> 3/line for being in right slot, 1/line for each correct neighbour of that line)
-    // MODIFIES: A testing UI element, will be removed
-    // REQUIRES: Nothing
-    void CalculateScore()
+    // EFFECTS: Calls UpdateMatches() on every line in the poem. Ensures that each line's matches are up-to-date
+    // MODIFIES: every line object in the poem
+    // REQUIRES: nothing
+    void CheckLineMatches()
     {
-      // TODO
+        foreach(Line line in lines)
+        {
+            line.UpdateMatches();
+        }
     }
+
+    // EFFECTS: Modifies the color of all lines in the poem according to how many matches they have
+    // MODIFIES: the line object's background color
+    // REQUIRES: the background to have a MeshRenderer
+    void UpdateLineColors()
+    {
+        Color baseColor;
+        Color green = new Color(0.23529f, 0.68627f, 0.39215f, 1);
+        Color yellow = new Color(1, 1, 0.49019f, 1);
+        Color outColor;
+
+        if (lines.Length <= 0) return;
+        else baseColor = lines[0].gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color;
+
+        foreach (Line line in lines)
+        {
+            int neighbours = 0;
+            if (line.topMatch)
+            {
+                neighbours++;
+            }
+            if (line.bottomMatch)
+            {
+                neighbours++;
+            }
+
+            if (neighbours == 1)
+            {
+                outColor = yellow;
+            }
+            else if (neighbours == 2)
+            {
+                outColor = green;
+            }
+            else outColor = baseColor;
+
+            line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = outColor;
+            //line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.SetColor("_Color", outColor);
+        }
+    }
+
+    // EFFECTS: Updates the game timer
+    // MODIFIES: the in-game timer, this
+    // REQUIRES: nothing
+    private void UpdateTimer()
+    {
+        string outMin = "";
+        string outSec = "";
+        int seconds = 0;
+
+        if (timer > 60)
+        {
+            minutes++;
+            timer = 0;
+        }
+        else
+        {
+            timer = timer + Time.deltaTime;
+            seconds = (int)timer;
+        }
+
+        if (minutes < 10)
+        {
+            outMin = "0" + minutes;
+        }
+        else outMin = minutes.ToString();
+
+        if (seconds < 10)
+        {
+            outSec = "0" + seconds;
+        }
+        else outSec = seconds.ToString();
+
+        //NOTE: THIS GAMEOBJECT WILL CHANGE NAMES
+        gameObject.transform.Find("Goal Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
+    }
+
+
+    //NOTE: The lines should be locked in place at that point.
+    //      So when we click around one, they all move
 }

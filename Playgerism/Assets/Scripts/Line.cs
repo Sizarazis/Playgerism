@@ -7,7 +7,9 @@ public class Line : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         halfHeightOfLine = (this.transform.localScale.y / 2) * 10;
-        score = 0;
+
+        topMatch = false;
+        bottomMatch = false;
     }
 
     public Slot inSlot;
@@ -16,97 +18,54 @@ public class Line : MonoBehaviour {
     private Vector3 screenPoint;
     private Vector3 offset;
 
-    //NOTE: this is set on instantiation
     public int lineID;
-    public int[] truePlaces; //THIS NEEDS TO ALLOW FOR DUPLICATE LINES TO GO IN MORE THAN 1 SPOT
-
     public int inPlace;
-    public int score;
+    public bool bottomMatch;
+    public bool topMatch;
+    public bool isLast;
 
     // Update is called once per frame
     void Update () {
-
+        UpdateMatches();
     }
 
-    // TODO: MOVE SOME OF THIS INTO STATEMANAGER
-    // EFFECTS: Gets the score of the line according to how many correct neighbours it has and its slot
+    // EFFFECTS: Updates the bottomMatch and topMatch variables according to the correct order of the lines
     // MODIFIES: this
     // REQUIRES: nothing
-    // NOTE: Might want to include time taken as well
-    //public void SetScore()
-    //{
-    //    score = 0;
-    //    bool goodPlace = false;
-    //    bool goodBottomNeighbour = false;
-    //    bool goodTopNeighbour = false;
+    public void UpdateMatches()
+    {
+        // Update topMatch
+        if (inSlot.prevSlot != null)
+        {
+            if (lineID == inSlot.prevSlot.currentLine.lineID + 1)
+            {
+                topMatch = true;
+            }
+            else topMatch = false;
+        }
+        else
+        {
+            if (lineID == 0)
+            {
+                topMatch = true;
+            }
+            else topMatch = false;
+        }
 
-    //    //int[] byBottom = GetBottomLinePositions();
-    //    //int[] byTop = GetTopLinePositions();
-
-    //    for (int i = 0; i < truePlaces.Length; i++)
-    //    {
-    //        if (truePlaces[i] == inPlace)
-    //        {
-    //            goodPlace = true;
-    //        }
-
-    //        if (byBottom != null)
-    //        {
-    //            for (int j = 0; j < byBottom.Length; j++)
-    //            {
-    //                if (byBottom[j] == truePlaces[i] + 1)
-    //                {
-    //                    goodBottomNeighbour = true;
-    //                }
-    //            }
-    //        }
-
-    //        if (byTop != null)
-    //        {
-    //            for (int k = 0; k < byTop.Length; k++)
-    //            {
-    //                if (byTop[k] == truePlaces[i] - 1)
-    //                {
-    //                    goodTopNeighbour = true;
-    //                }
-    //            }
-    //        }
-    //    }
-
-    //    if (goodPlace) score += 3;
-    //    if (goodBottomNeighbour) score += 1;
-    //    if (goodTopNeighbour) score += 1;
-
-    //    Debug.Log("TruePlace: " + truePlaces[0]);
-    //    Debug.Log("InPlace: " + inPlace);
-    //    Debug.Log(score);
-    //}
-
-    ////Helper function for SetScore
-    //private int[] GetBottomLinePositions()
-    //{
-    //    if (inSlot.nextSlot.currentLine == null)
-    //    {
-    //        return null;
-    //    }
-    //    else
-    //    {
-    //        return inSlot.nextSlot.currentLine.truePlaces;
-    //    }
-    //}
-
-    ////Helper function for SetScore
-    //private int[] GetTopLinePositions()
-    //{
-    //    if (inSlot.prevSlot == null)
-    //    {
-    //        return null;
-    //    }
-    //    else
-    //    {
-    //        return inSlot.prevSlot.currentLine.truePlaces;
-    //    }
-    //}
+        // Update bottomMatch
+        if (inSlot.nextSlot != null && lineID == inSlot.nextSlot.currentLine.lineID - 1)
+        {
+            bottomMatch = true;
+        }
+        else
+        {
+            if (isLast && inSlot.nextSlot == null)
+            {
+                bottomMatch = true;
+            }
+            else bottomMatch = false;
+        }
+    }
 
     private void OnMouseDown()
     {
@@ -140,7 +99,7 @@ public class Line : MonoBehaviour {
             if (inSlot.transform.position.y >= this.transform.position.y)
             {
                 // account for moving the last 1 down
-                if (inSlot.nextSlot.currentLine != null)
+                if (inSlot.nextSlot != null)
                 {
                     MoveDown();
                 }
@@ -170,7 +129,6 @@ public class Line : MonoBehaviour {
         }
 
         inPlace = inSlot.relPosition;
-        SetScore();
     }
 
     // EFFECTS: Move the line to a slot above it, and update the other slots
@@ -214,7 +172,7 @@ public class Line : MonoBehaviour {
             }
 
             // Move the line to the bottom spot if the current slot is the bottom slot, and its below the bottom slot
-            if (inMoveUp == false && currentSlot.nextSlot.currentLine == null && this.transform.position.y <= currentSlot.transform.position.y)
+            if (inMoveUp == false && currentSlot.nextSlot == null && this.transform.position.y <= currentSlot.transform.position.y)
             {
                 return currentSlot;
             }

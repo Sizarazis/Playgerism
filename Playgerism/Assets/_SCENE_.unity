@@ -245,8 +245,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 597306761}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2.7, z: 0}
+  m_LocalScale: {x: 10, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 819009285}
   m_RootOrder: 0
@@ -341,7 +341,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 749671853}
-  m_Text: 'Score: '
+  m_Text: 'Timer:'
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -415,7 +415,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19852942, g: 0.16564925, b: 0.09488538, a: 0}
+  m_BackGroundColor: {r: 0.726, g: 0.726, b: 0.726, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -498,7 +498,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 819009284}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: -15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 597306762}
@@ -531,7 +531,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305579377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48, y: 5, z: -1}
+  m_LocalPosition: {x: -48, y: 8, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 819009285}
@@ -676,7 +676,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1445011507}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -48, y: -4, z: -1}
+  m_LocalPosition: {x: -48, y: -2, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 819009285}
@@ -871,17 +871,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc89287fe51f34744927cbe74e92e1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testScore: {fileID: 0}
   slotPrefab: {fileID: 1770620134546320, guid: b0371892195eabd498d67af2307e333d, type: 2}
   slots: {fileID: 88340030}
   linePrefab: {fileID: 1122359607014094, guid: 8a54f50c8d4f38744bff7f59ec1cf4f3, type: 2}
-  lines: {fileID: 1449702920}
-  poem: []
-  scrambledPoem: []
+  linesObj: {fileID: 1449702920}
+  lines: []
+  stringPoem: []
   numLines: 0
   numSlots: 0
-  yPosPoemStart: -20
-  score: 0
 --- !u!1 &1865320853
 GameObject:
   m_ObjectHideFlags: 0
