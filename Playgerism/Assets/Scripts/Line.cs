@@ -12,20 +12,25 @@ public class Line : MonoBehaviour {
         bottomMatch = false;
     }
 
+
+    // -- VARIABLES -- //
     public Slot inSlot;
+    public Link inLink;
 
     private float halfHeightOfLine;
     private Vector3 screenPoint;
     private Vector3 offset;
 
     public int lineID;
-    public int inPlace;
     public bool bottomMatch;
     public bool topMatch;
     public bool isLast;
 
+
     // Update is called once per frame
     void Update () {
+
+        //TODO: Remove this after link moving works
         UpdateMatches();
     }
 
@@ -34,6 +39,13 @@ public class Line : MonoBehaviour {
     // REQUIRES: nothing
     public void UpdateMatches()
     {
+
+        // NOTE: ONCE THE LINK MOVING WORKS, THINGS WILL NEVER GET OUT ORDER ONCE THEY'RE IN ORDER, SO I WON'T NEED TO KEEP UPDATING THIS
+        // AT THIS POINT I'LL BE ABLE TO OPTIMIZE
+        // I DON'T WANT TO DO IT YET THOUGH BECAUSE IT WOULD BE BROKEN UNTIL I GET THE LINKS WORK
+        topMatch = false;
+        bottomMatch = false;
+        
         // Update topMatch
         if (inSlot.prevSlot != null)
         {
@@ -67,18 +79,18 @@ public class Line : MonoBehaviour {
         }
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         // Get the screen position of this object
         screenPoint = Camera.main.WorldToScreenPoint(this.transform.position);
 
         // Get the world position of the cursor relative to the world position of this object
-        offset = this.transform.position - 
+        offset = this.transform.position -
             Camera.main.ScreenToWorldPoint(
                 new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
     }
 
-    private void OnMouseDrag()
+    public void OnMouseDrag()
     {
         // Get the position of the cursor according to the screen
         Vector3 cursorScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -91,8 +103,8 @@ public class Line : MonoBehaviour {
         this.transform.position = cursorPosition;
     }
 
-    private void OnMouseUp()
-    {    
+    public void OnMouseUp()
+    {
         // If this line moves out of its slot position, reset the lines and slots accordingly
         if (Mathf.Abs(inSlot.transform.position.y - this.transform.position.y) > halfHeightOfLine)
         {
@@ -127,14 +139,12 @@ public class Line : MonoBehaviour {
         {
             this.transform.position = new Vector3(inSlot.transform.position.x, inSlot.transform.position.y, this.transform.position.z);
         }
-
-        inPlace = inSlot.relPosition;
     }
 
     // EFFECTS: Move the line to a slot above it, and update the other slots
     // MODIFIES: All lines and slots
     // REQUIRES: Nothing
-    private void MoveUp()
+    public void MoveUp()
     {
         // Find the closest slot
         Slot newSlot = FindSlot(true);
@@ -146,7 +156,7 @@ public class Line : MonoBehaviour {
     // EFFECTS: Move the line to a slot below it, and update the other slots
     // MODIFIES: All lines and slots
     // REQUIRES: Nothing
-    void MoveDown()
+    public void MoveDown()
     {
         // Find the closest slot
         Slot newSlot = FindSlot(false);

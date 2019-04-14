@@ -7,49 +7,50 @@ public class StateManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timer = 0.0f;
-        minutes = 99;
-        stringPoem = GetPoem();
-        numLines = stringPoem.Length;
-        numSlots = stringPoem.Length;
+        minutes = 0;
         poem = BuildPoem();
+        numLines = poem.Length;
+        numSlots = poem.Length;
         scrambledPoem = ScramblePoem();
 
         BuildSlots();
-        BuildLines();
+        BuildLinksAndLines();
         SetLineText();
         ConnectSlots();
-        AttachLinesAndSlots();
         lines = GetLines();
+        AttachLinesAndSlots();
+        AttachLinesAndLinks();
     }
 
-    public GameObject slotPrefab;
-    public GameObject slots;
-    public GameObject linePrefab;
-    public GameObject linesObj;
-    public Line[]     lines;
 
+    // -- VARIABLES -- //
     public struct IDLine
     {
         public int ID;
         public string line;
         public bool isLast;
     }
+    public GameObject slotPrefab;
+    public GameObject slots;
+    public GameObject linePrefab;
+    public GameObject linesObj;
+    public GameObject lineLinks;
+    public GameObject linkPrefab;
 
-    public string[] stringPoem;
-    public IDLine[] poem;
-    public IDLine[] scrambledPoem;
+    private Line[]      lines;
+    private IDLine[]    poem;
+    private IDLine[]    scrambledPoem;
+    private int         numLines;
+    private int         numSlots;
+    private int         lineHeight = 10;
+    private float       timer;
+    private int         minutes;
 
-    public int      numLines;
-    public int      numSlots;
-
-    private int lineHeight = 10;
-    private float timer;
-    private int minutes;
 
     // Update is called once per frame
     void Update () {
         CheckLineMatches();
-        UpdateLineColors();
+        UpdateLineLinks();
 
         if (minutes < 100)
         {
@@ -57,93 +58,21 @@ public class StateManager : MonoBehaviour {
         }
 	}
 
-    // TODO: Might need to change when implenting parsing
-    // EFFECTS: Gets a poem
-    // MODIFIES: this
-    // REQUIRES: nothing
-    string[] GetPoem()
-    {
-        string[] lines = Utilities.ParsePoem();
-
-        return lines;
-    }
-
-    Line[] GetLines()
-    {
-        return linesObj.GetComponentsInChildren<Line>();
-    }
-
-    // EFFECTS: Instantiates slots from the slot prefab
-    // MODIFIES: the slots gameObject
-    // REQUIRES: slotPrefab and slots to reference a prefab and gameObject in the Unity project
-    void BuildSlots()
-    {
-        int yPos = -25;
-
-        for (int i = 0; i < numSlots; i++)
-        {
-            Quaternion rotation = slotPrefab.transform.rotation;
-            Vector3 position = new Vector3(0, yPos, 1);
-
-            GameObject instSlot = Instantiate(slotPrefab, position, rotation, slots.transform);
-            instSlot.name = "Slot " + i;
-            instSlot.GetComponent<Slot>().relPosition = i;
-
-            yPos = yPos - lineHeight;
-        }
-    }
-
-    // EFFECTS: Instantiates lines from the line prefab
-    // MODIFIES: the lines gameObject
-    // REQUIRES: linePrefab and lines to reference a prefab and gameObject in the Unity project
-    void BuildLines()
-    {
-        int yPos = -25;
-
-        for (int i = 0; i < numLines; i++)
-        {
-            Quaternion rotation = linePrefab.transform.rotation;
-            Vector3 position = new Vector3(0, yPos, 0);
-
-            GameObject instLine = Instantiate(linePrefab, position, rotation, linesObj.transform);
-            instLine.name = "Line " + i;
-
-            yPos = yPos - lineHeight;
-        }
-    }
-
-    // EFFECTS: Sets the lines 
-    // MODIFIES: the text displayed in each Lines/Line/Text gameObject
-    // REQUIRES: Lines to have already instantiated its line children
-    void SetLineText()
-    {
-        int i = 0;
-        foreach(Transform line in linesObj.GetComponentsInChildren<Transform>())
-        {
-            if (line.name == "Text")
-            {
-                line.GetComponentInChildren<TextMesh>().text = scrambledPoem[i].line;
-                line.GetComponentInParent<Line>().lineID = scrambledPoem[i].ID;
-                line.GetComponentInParent<Line>().isLast = scrambledPoem[i].isLast;
-
-                i++;
-            }
-        }
-    }
-
-    // EFFECTS: Builds an array of lines with IDs attached
+    // EFFECTS: builds an array of lines with IDs attached
     // MODIFIES: this
     // REQUIRES: stringPoems and numLines to be instantiated
     IDLine[] BuildPoem()
     {
-        IDLine[] output = new IDLine[numLines];
-        for (int i = 0; i < numLines; i++)
+        string[] lines = Utilities.ParsePoem();
+        int size = lines.Length;
+
+        IDLine[] output = new IDLine[size];
+        for (int i = 0; i < size; i++)
         {
-            output[i].line = stringPoem[i];
+            output[i].line = lines[i];
             output[i].ID = i;
             output[i].isLast = false;
-
-            if (i == numLines - 1)
+            if (i == size - 1)
             {
                 output[i].isLast = true;
             }
@@ -152,7 +81,7 @@ public class StateManager : MonoBehaviour {
         return output;
     }
 
-    // EFFECTS: Randomly shuffles the poem's lines
+    // EFFECTS: randomly shuffles the poem's lines
     // MODIFIES: nothing
     // REQUIRES: nothing
     IDLine[] ScramblePoem()
@@ -176,7 +105,91 @@ public class StateManager : MonoBehaviour {
         return outPoem;
     }
 
-    // EFFECTS: Sets the previous and next slots for each given slot
+    // NOTE: Might need to change when implenting parsing
+    // EFFECTS: gets a poem
+    // MODIFIES: this
+    // REQUIRES: nothing
+    string[] GetPoem()
+    {
+        string[] lines = Utilities.ParsePoem();
+
+        return lines;
+    }
+
+    Line[] GetLines()
+    {
+        return lineLinks.GetComponentsInChildren<Line>();
+    }
+
+    Link[] GetLinks()
+    {
+        return lineLinks.GetComponentsInChildren<Link>();
+    }
+
+    // EFFECTS: instantiates slots from the slot prefab
+    // MODIFIES: the slots gameObject
+    // REQUIRES: slotPrefab and slots to reference a prefab and gameObject in the Unity project
+    void BuildSlots()
+    {
+        int yPos = -25;
+
+        for (int i = 0; i < numSlots; i++)
+        {
+            Quaternion rotation = slotPrefab.transform.rotation;
+            Vector3 position = new Vector3(0, yPos, 1);
+
+            GameObject instSlot = Instantiate(slotPrefab, position, rotation, slots.transform);
+            instSlot.name = "Slot " + i;
+            instSlot.GetComponent<Slot>().relPosition = i;
+
+            yPos = yPos - lineHeight;
+        }
+    }
+
+    // EFFECTS: instantiates links and lines from their prefabs
+    // MODIFIES: the lines and links gameObjects
+    // REQUIRES: references prefabs and gameObjects in the Unity project
+    void BuildLinksAndLines()
+    {
+        int yPos = -25;
+
+        for (int i = 0; i < numLines; i++)
+        {
+            Quaternion linkRot = linkPrefab.transform.rotation;
+            Vector3 linkPos = new Vector3(42, yPos, -2);
+            GameObject instLink = Instantiate(linkPrefab, linkPos, linkRot, lineLinks.transform);
+            instLink.name = "Link " + i;
+
+            Quaternion lineRot = linePrefab.transform.rotation;
+            Vector3 linePos = new Vector3(0, yPos, 0);
+            GameObject instLine = Instantiate(linePrefab, linePos, lineRot, instLink.transform);
+            instLine.name = "Line " + i;
+
+            yPos = yPos - lineHeight;
+        }
+    }
+
+    // EFFECTS: sets the lines 
+    // MODIFIES: the text displayed in each Lines/Line/Text gameObject
+    // REQUIRES: lines to have already instantiated its line children
+    void SetLineText()
+    {
+        //Transform lineLoc = lineLinks.Get
+        int i = 0;
+        foreach(Transform line in lineLinks.GetComponentsInChildren<Transform>())
+        {
+            if (line.name == "Text")
+            {
+                line.GetComponentInChildren<TextMesh>().text = scrambledPoem[i].line;
+                line.GetComponentInParent<Line>().lineID = scrambledPoem[i].ID;
+                line.GetComponentInParent<Line>().isLast = scrambledPoem[i].isLast;
+
+                i++;
+            }
+        }
+    }
+
+    // EFFECTS: sets the previous and next slots for each given slot
     // MODIFIES: the Slot gameObjects
     // REQUIRES: nothing
     void ConnectSlots()
@@ -193,7 +206,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
-    // EFFECTS: Initially attaches the Lines to Slots, and Slots to Lines
+    // EFFECTS: initially attaches the Lines to Slots, and Slots to Lines
     // MODIFIES: the Line and Slot gameObjects
     // REQUIRES: nothing
     void AttachLinesAndSlots()
@@ -201,7 +214,7 @@ public class StateManager : MonoBehaviour {
         Slot[] allSlots = slots.transform.GetComponentsInChildren<Slot>();
 
         int i = 0;
-        foreach (Line instLine in linesObj.transform.GetComponentsInChildren<Line>())
+        foreach (Line instLine in lineLinks.transform.GetComponentsInChildren<Line>())
         {
             instLine.inSlot = allSlots[i];
             allSlots[i].currentLine = instLine;
@@ -210,58 +223,79 @@ public class StateManager : MonoBehaviour {
         }
     }
 
-    // EFFECTS: Calls UpdateMatches() on every line in the poem. Ensures that each line's matches are up-to-date
+    // EFFECTS: initially attaches the Lines to Links and Links to Lines
+    // MODIFIES: the Link game objects
+    // REQUIRES: the lines[] array to be instantiated first
+    void AttachLinesAndLinks()
+    {
+        int i = 0;
+        foreach (Link link in lineLinks.transform.GetComponentsInChildren<Link>())
+        {
+            link.lines.AddFirst(lines[i]);
+            lines[i].inLink = link;
+            i++;
+        }
+    }
+
+    // EFFECTS: calls UpdateMatches() on every line in the poem. Ensures that each line's matches are up-to-date
     // MODIFIES: every line object in the poem
     // REQUIRES: nothing
     void CheckLineMatches()
     {
+        lines = GetLines();
         foreach(Line line in lines)
         {
             line.UpdateMatches();
         }
     }
 
-    // EFFECTS: Modifies the color of all lines in the poem according to how many matches they have
-    // MODIFIES: the line object's background color
-    // REQUIRES: the background to have a MeshRenderer
-    void UpdateLineColors()
-    {
-        Color baseColor;
-        Color green = new Color(0.23529f, 0.68627f, 0.39215f, 1);
-        Color yellow = new Color(1, 1, 0.49019f, 1);
-        Color outColor;
 
+    // EFFECTS: moves a line to its correct link
+    // MODIFIES: line and link objects
+    // REQUIRES: nothing
+    void UpdateLineLinks()
+    {
+        lines = GetLines();
         if (lines.Length <= 0) return;
-        else baseColor = lines[0].gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color;
 
         foreach (Line line in lines)
         {
-            int neighbours = 0;
-            if (line.topMatch)
+            if (line.topMatch || line.bottomMatch)
             {
-                neighbours++;
+                if (line.topMatch && line.lineID > 0)
+                {
+                    line.inSlot.prevSlot.currentLine.inLink.MergeLinks(line.inLink);
+                }
+                if (line.bottomMatch && line.isLast == false)
+                {
+                    line.inLink.MergeLinks(line.inSlot.nextSlot.currentLine.inLink);
+                }
             }
-            if (line.bottomMatch)
-            {
-                neighbours++;
-            }
-
-            if (neighbours == 1)
-            {
-                outColor = yellow;
-            }
-            else if (neighbours == 2)
-            {
-                outColor = green;
-            }
-            else outColor = baseColor;
-
-            line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = outColor;
-            //line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.SetColor("_Color", outColor);
+            UpdateLineColors(line);
         }
     }
 
-    // EFFECTS: Updates the game timer
+    // TODO: It is possible to get all green but have lines be out of order (FIX THIS!!!)
+    // NOTE: Think about adding a list of acceptable colours and giving each link one of them
+    // EFFECTS: modifies the color of all lines in the poem according to how many matches they have
+    // MODIFIES: the line object's background color
+    // REQUIRES: the background to have a MeshRenderer
+    void UpdateLineColors(Line line)
+    {
+        Color baseColor = new Color (0.94117f, 0.94117f, 0.94117f, 1);
+        Color green = new Color(0.23529f, 0.68627f, 0.39215f, 1);
+        Color outColor;
+
+        if (line.topMatch || line.bottomMatch)
+        {
+            outColor = green;
+        }
+        else outColor = baseColor;
+
+        line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = outColor;
+    }
+
+    // EFFECTS: updates the game timer
     // MODIFIES: the in-game timer, this
     // REQUIRES: nothing
     private void UpdateTimer()
@@ -296,8 +330,4 @@ public class StateManager : MonoBehaviour {
         //NOTE: THIS GAMEOBJECT WILL CHANGE NAMES
         gameObject.transform.Find("Goal Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
     }
-
-
-    //NOTE: The lines should be locked in place at that point.
-    //      So when we click around one, they all move
 }
