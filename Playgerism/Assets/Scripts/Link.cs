@@ -133,18 +133,18 @@ public class Link : MonoBehaviour {
         SetColliderSize();
     }
 
-    // EFFECTS:
-    // MODIFIES:
-    // REQUIRES:
+    // EFFECTS: resizes the connector object in the link to express how big the link is in the game
+    // MODIFIES: the connector object in a link
+    // REQUIRES: nothing
     private void ResizeLinkConnector()
     {
         //Set  position
-        float yPos = (lines.Count - 1) * (-10/2);
+        float yPos = (lines.Count - 1) * -5;
         transform.Find("Connector").transform.localPosition = new Vector3(40, yPos, 1);
 
 
         // Set scale
-        float xScale = (float)lines.Count - (float)0.1 * lines.Count;
+        float xScale = (float)lines.Count - (float)0.5;
         transform.Find("Connector").transform.localScale = new Vector3(xScale, 1, (float)0.1);
 
 
