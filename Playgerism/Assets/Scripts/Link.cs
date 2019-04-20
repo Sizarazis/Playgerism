@@ -128,8 +128,26 @@ public class Link : MonoBehaviour {
         }
 
         Destroy(toMerge.gameObject);
+        ResizeLinkConnector();
         SetColliderPos();
         SetColliderSize();
+    }
+
+    // EFFECTS:
+    // MODIFIES:
+    // REQUIRES:
+    private void ResizeLinkConnector()
+    {
+        //Set  position
+        float yPos = (lines.Count - 1) * (-10/2);
+        transform.Find("Connector").transform.localPosition = new Vector3(40, yPos, 1);
+
+
+        // Set scale
+        float xScale = (float)lines.Count - (float)0.1 * lines.Count;
+        transform.Find("Connector").transform.localScale = new Vector3(xScale, 1, (float)0.1);
+
+
     }
 
 
@@ -139,7 +157,7 @@ public class Link : MonoBehaviour {
     public void SetColliderPos()
     {
         Vector2 outOffset = new Vector2();
-        int newOffsetY = (transform.childCount - 1) * -5;
+        int newOffsetY = (transform.childCount - 2) * -5;
         outOffset.x = GetComponent<BoxCollider2D>().offset.x;
         outOffset.y = newOffsetY;
         GetComponent<BoxCollider2D>().offset = outOffset;
@@ -158,7 +176,7 @@ public class Link : MonoBehaviour {
     public void SetColliderSize()
     {
         Vector2 outSize = new Vector2();
-        int newSizeY = transform.childCount * 10;
+        int newSizeY = (transform.childCount - 1) * 10;
         outSize.x = GetComponent<BoxCollider2D>().size.x;
         outSize.y = newSizeY;
 
