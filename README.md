@@ -18,8 +18,7 @@ I think this mode might be fun if people want to make a different poem from the 
 
 ### To Do
 - Test the game with some poems to see if the rules work well
-- Test and complete the line colouring
-- Integrate the line-locking
+- Colour links
 - End the game upon completion of the poem
 - Menus
 - Animations
