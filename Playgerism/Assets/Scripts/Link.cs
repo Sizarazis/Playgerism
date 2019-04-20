@@ -28,35 +28,6 @@ public class Link : MonoBehaviour {
     }
 
 
-    // EFFECTS: merges the two Link objects. The toMerge Link is destroyed, and it's LinkedList is added to the bottom of this one
-    // MODIFIES: this, the toMerge Link
-    // REQUIRES: another Link to merge
-    public void MergeLinks(Link toMerge)
-    {
-        if (this == toMerge) return;
-
-        Line[] temp = new Line[toMerge.lines.Count];
-        int i = 0;
-        foreach (Line t in toMerge.lines)
-        {
-            temp[i] = t;
-            t.transform.SetParent(transform);
-            i++;
-        }
-
-        foreach (Line line in temp)
-        {
-            lines.Add(line);
-            line.inLink = this;
-            toMerge.lines.Remove(line);
-        }
-
-        Destroy(toMerge.gameObject);
-        SetColliderPos();
-        SetColliderSize();
-    }
-
-
     public void OnMouseDown()
     {
         relPos = transform.position;
@@ -77,7 +48,7 @@ public class Link : MonoBehaviour {
     public void OnMouseDrag()
     {
         // Get the position of the cursor according to the screen
-        Vector3 cursorScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
+        Vector3 cursorScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2);
 
         // Get the new position of the object in the world according to the cursors offset to 
         // this object in the world
@@ -108,7 +79,7 @@ public class Link : MonoBehaviour {
                     }
                     else
                     {
-                        transform.position = relPos; //HERE
+                        transform.position = relPos;
                     }
                 }
                 else
@@ -120,44 +91,51 @@ public class Link : MonoBehaviour {
                     }
                     else
                     {
-                        transform.position = relPos; //AND HERE
+                        transform.position = relPos;
                     }
                 }
             }
             //Otherwise, move the line back to its starting position
             else
             {
-                transform.position = relPos; //AND HERE
+                transform.position = relPos;
             }
         }
     }
 
 
-    // EFFECTS: moves all the lines
-    // MODIFIES: links and lines
-    // REQUIRES: nothing
-    public void MoveLines(bool moveUp)
+    // EFFECTS: merges the two Link objects. The toMerge Link is destroyed, and it's LinkedList is added to the bottom of this one
+    // MODIFIES: this, the toMerge Link
+    // REQUIRES: another Link to merge
+    public void MergeLinks(Link toMerge)
     {
-        Line firstLine  = (Line)lines[0];
-        Line lastLine   = (Line)lines[lines.Count - 1];
-        Slot newSlot;
+        if (this == toMerge) return;
 
-        if (moveUp)
+        Line[] temp = new Line[toMerge.lines.Count];
+        int i = 0;
+        foreach (Line t in toMerge.lines)
         {
-            newSlot = firstLine.FindSlot(true);
-            ShiftLines(true, newSlot, firstLine.inSlot, lastLine.inSlot);
+            temp[i] = t;
+            t.transform.SetParent(transform);
+            i++;
         }
-        else
+
+        foreach (Line line in temp)
         {
-            newSlot = lastLine.FindSlot(false);
-            ShiftLines(false, firstLine.inSlot, lastLine.inSlot, newSlot);
+            lines.Add(line);
+            line.inLink = this;
+            toMerge.lines.Remove(line);
         }
+
+        Destroy(toMerge.gameObject);
         SetColliderPos();
         SetColliderSize();
-
     }
 
 
+    // EFFECTS: set the position and offset of this link object, and set the relative position of all the line objects in the link
+    // MODIFIES: links and lines
+    // REQUIRES: nothing
     public void SetColliderPos()
     {
         Vector2 outOffset = new Vector2();
@@ -187,6 +165,9 @@ public class Link : MonoBehaviour {
         GetComponent<BoxCollider2D>().size = outSize;
     }
 
+    // EFFECTS: set the relative position of lines within a link
+    // MODIFIES: lines
+    // REQUIRES: nothing
     public void SetLinePositions()
     {
         for (int i = 0; i < lines.Count; i++)
@@ -200,66 +181,44 @@ public class Link : MonoBehaviour {
     }
 
 
+    // EFFECTS: moves all the lines
+    // MODIFIES: links and lines
+    // REQUIRES: nothing
+    public void MoveLines(bool moveUp)
+    {
+        Line firstLine = (Line)lines[0];
+        Line lastLine = (Line)lines[lines.Count - 1];
+        Slot newSlot;
+
+        if (moveUp)
+        {
+            newSlot = firstLine.FindSlot(true);
+            ShiftLines(true, newSlot, firstLine.inSlot, lastLine.inSlot);
+        }
+        else
+        {
+            newSlot = lastLine.FindSlot(false);
+            ShiftLines(false, firstLine.inSlot, lastLine.inSlot, newSlot);
+        }
+        SetColliderPos();
+        SetColliderSize();
+    }
+
+
     // TODO: ANIMATE!!
     // EFFECTS: shifts all the lines into correct position after a move
     // MODIFIES: links and lines
     // REQUIRES: nothing
     public void ShiftLines(bool moveUp, Slot top, Slot mid, Slot bottom)
     {
-        Slot ptr;
-        Slot end;
 
-        //MOVE UP
         if (moveUp)
         {
-            //Shift everything between top and mid down by the size of the link
-            ptr = top;
-            end = mid;
-
-            Line[] toMove;
-            int moveBy = lines.Count;
-
-            //Get number of lines to move
-            int acc1 = 0;
-            while (ptr != end)
-            {
-                acc1++;
-                ptr = ptr.nextSlot;
-            }
-            toMove = new Line[acc1];
-
-            //Get the lines to move
-            ptr = top;
-            int acc2 = 0;
-            while (ptr != end)
-            {
-                toMove[acc2] = ptr.currentLine;
-                acc2++;
-                ptr = ptr.nextSlot;
-            }
-
-            //Move all lines
-            Slot newSlot;
-            for (int i = 0; i < toMove.Length; i++)
-            {
-                newSlot = top;
-
-                //Find correct spot for this line
-                for (int j = 0; j < moveBy; j++)
-                {
-                    newSlot = newSlot.nextSlot;
-                }
-
-                //Set this line to the correct slot
-                toMove[i].inSlot = newSlot;
-                newSlot.currentLine = toMove[i];
-
-                toMove[i].inLink.SetColliderPos();
-                moveBy++;
-            }
+            //Shift all relevant lines not in the link down
+            ShiftPoemDown(top, mid);
 
 
-            //Then, just place everything from mid to bottom at the top
+            //Shift link up
             Slot toGo = top;
             for (int i = 0; i < lines.Count; i++)
             {
@@ -271,58 +230,12 @@ public class Link : MonoBehaviour {
             }
             SetColliderPos();
         }
-
-        //MOVE DOWN
         else
         {
-            //Shift everything between mid and bottom up by the size of the link
-            ptr = bottom;
-            end = mid;
+            //Shift all relevant lines not in the link up
+            ShiftPoemUp(mid, bottom);
 
-            Line[] toMove;
-            int moveBy = lines.Count;
-
-            //Get number of things to move
-            int acc1 = 0;
-            while (ptr != end)
-            {
-                acc1++;
-                ptr = ptr.prevSlot;
-            }
-            toMove = new Line[acc1];
-
-            //Get the lines to move
-            ptr = bottom;
-            int acc2 = 0;
-            while (ptr != end)
-            {
-                toMove[acc2] = ptr.currentLine;
-                acc2++;
-                ptr = ptr.prevSlot;
-            }
-
-            //Move all lines
-            Slot newSlot;
-            for (int i = 0; i < toMove.Length; i++)
-            {
-                newSlot = bottom;
-
-                //Find correct spot for this line
-                for (int j = 0; j < moveBy; j++)
-                {
-                    newSlot = newSlot.prevSlot;
-                }
-
-                //Set this line to the correct slot
-                toMove[i].inSlot = newSlot;
-                newSlot.currentLine = toMove[i];
-
-                toMove[i].inLink.SetColliderPos();
-
-                moveBy++;
-            }
-
-            //Then, just place everything from top to mid at the bottom
+            //Shift link down
             Slot toGo = bottom;
             for (int i = 0; i < lines.Count; i++)
             {
@@ -333,6 +246,120 @@ public class Link : MonoBehaviour {
                 toGo = toGo.prevSlot;
             }
             SetColliderPos();
+        }
+    }
+
+
+    //EFFECTS: moves all the lines, from mid to bottom, up by the number of lines in this link
+    //REQUIRES: mid to be eventually reached by bottom.prevSlot, i.e., bottom to be later on in the Slots' Linked List than mid. 
+    //          This is such that bottom is a starting point and mid is the endpoint reached by bottom.prevSlot
+    //MODIFIES: lines and links
+    private void ShiftPoemUp(Slot mid, Slot bottom)
+    {
+        Slot ptr = bottom;
+        Slot end = mid;
+
+        //Shift everything between mid and bottom up by the size of the link
+        //ptr = bottom;
+        //end = mid;
+
+        Line[] toMove;
+        int moveBy = lines.Count;
+
+        //Get number of things to move
+        int acc1 = 0;
+        while (ptr != end)
+        {
+            acc1++;
+            ptr = ptr.prevSlot;
+        }
+        toMove = new Line[acc1];
+
+        //Get the lines to move
+        ptr = bottom;
+        int acc2 = 0;
+        while (ptr != end)
+        {
+            toMove[acc2] = ptr.currentLine;
+            acc2++;
+            ptr = ptr.prevSlot;
+        }
+
+        //Move all lines
+        Slot newSlot;
+        for (int i = 0; i < toMove.Length; i++)
+        {
+            newSlot = bottom;
+
+            //Find correct spot for this line
+            for (int j = 0; j < moveBy; j++)
+            {
+                newSlot = newSlot.prevSlot;
+            }
+
+            //Set this line to the correct slot
+            toMove[i].inSlot = newSlot;
+            newSlot.currentLine = toMove[i];
+
+            toMove[i].inLink.SetColliderPos();
+
+            moveBy++;
+        }
+    }
+
+    //EFFECTS: moves all the lines, from top to mid, up by the number of lines in this link
+    //REQUIRES: mid to be eventually reached by top.nextSlot, i.e., mid to be later on in the Slots' Linked List than top. 
+    //          This is such that top is a starting point and mid is the endpoint reached by top.nextSlot
+    //MODIFIES: lines and links
+    private void ShiftPoemDown(Slot top, Slot mid)
+    {
+        Slot ptr = top;
+        Slot end = mid;
+
+        //Shift everything between top and mid down by the size of the link
+        //ptr = top;
+       // end = mid;
+
+        Line[] toMove;
+        int moveBy = lines.Count;
+
+        //Get number of lines to move
+        int acc1 = 0;
+        while (ptr != end)
+        {
+            acc1++;
+            ptr = ptr.nextSlot;
+        }
+        toMove = new Line[acc1];
+
+        //Get the lines to move
+        ptr = top;
+        int acc2 = 0;
+        while (ptr != end)
+        {
+            toMove[acc2] = ptr.currentLine;
+            acc2++;
+            ptr = ptr.nextSlot;
+        }
+
+        //Move all lines
+        Slot newSlot;
+        for (int i = 0; i < toMove.Length; i++)
+        {
+            newSlot = top;
+
+            //Find correct spot for this line
+            for (int j = 0; j < moveBy; j++)
+            {
+                newSlot = newSlot.nextSlot;
+            }
+
+            //Set this line to the correct slot
+            toMove[i].inSlot = newSlot;
+            newSlot.currentLine = toMove[i];
+
+            toMove[i].inLink.SetColliderPos();
+            moveBy++;
         }
     }
 }

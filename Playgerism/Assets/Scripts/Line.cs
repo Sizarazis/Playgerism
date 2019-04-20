@@ -30,8 +30,6 @@ public class Line : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        //TODO: Remove this after link moving works
-        UpdateMatches();
     }
 
 
@@ -40,9 +38,6 @@ public class Line : MonoBehaviour {
     // REQUIRES: nothing
     public void UpdateMatches()
     {
-        // NOTE: ONCE THE LINK MOVING WORKS, THINGS WILL NEVER GET OUT ORDER ONCE THEY'RE IN ORDER, SO I WON'T NEED TO KEEP UPDATING THIS
-        // AT THIS POINT I'LL BE ABLE TO OPTIMIZE
-        // I DON'T WANT TO DO IT YET THOUGH BECAUSE IT WOULD BE BROKEN UNTIL I GET THE LINKS WORK
         topMatch = false;
         bottomMatch = false;
         
@@ -80,7 +75,6 @@ public class Line : MonoBehaviour {
     }
 
 
-    // TODO: THIS DOESN'T WORK BECAUSE LINKS ARE BLOCKS, NOT JUST LINES. SO I NEED TO FIND THE NEXT LINK
     // EFFECTS: finds the closest slot to the current position of a line
     // MODIFIES: nothing
     // REQUIRES: a check to see if its looking up or down
@@ -134,6 +128,11 @@ public class Line : MonoBehaviour {
         return null;
     }
 
+
+
+
+    //The following I'm keeping around if I want to implement a single line moving game mode
+    //--------------------------------------------------------------------------------------
 
     // EFFECTS: move the line to a slot above it, and update the other slots
     // MODIFIES: all lines and slots
