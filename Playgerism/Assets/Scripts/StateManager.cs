@@ -81,6 +81,7 @@ public class StateManager : MonoBehaviour {
         return output;
     }
 
+
     // EFFECTS: randomly shuffles the poem's lines
     // MODIFIES: nothing
     // REQUIRES: nothing
@@ -105,6 +106,7 @@ public class StateManager : MonoBehaviour {
         return outPoem;
     }
 
+
     // NOTE: Might need to change when implenting parsing
     // EFFECTS: gets a poem
     // MODIFIES: this
@@ -116,15 +118,18 @@ public class StateManager : MonoBehaviour {
         return lines;
     }
 
+
     Line[] GetLines()
     {
         return lineLinks.GetComponentsInChildren<Line>();
     }
 
+
     Link[] GetLinks()
     {
         return lineLinks.GetComponentsInChildren<Link>();
     }
+
 
     // EFFECTS: instantiates slots from the slot prefab
     // MODIFIES: the slots gameObject
@@ -146,6 +151,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     // EFFECTS: instantiates links and lines from their prefabs
     // MODIFIES: the lines and links gameObjects
     // REQUIRES: references prefabs and gameObjects in the Unity project
@@ -156,7 +162,7 @@ public class StateManager : MonoBehaviour {
         for (int i = 0; i < numLines; i++)
         {
             Quaternion linkRot = linkPrefab.transform.rotation;
-            Vector3 linkPos = new Vector3(42, yPos, -2);
+            Vector3 linkPos = new Vector3(0, yPos, -2);
             GameObject instLink = Instantiate(linkPrefab, linkPos, linkRot, lineLinks.transform);
             instLink.name = "Link " + i;
 
@@ -168,6 +174,7 @@ public class StateManager : MonoBehaviour {
             yPos = yPos - lineHeight;
         }
     }
+
 
     // EFFECTS: sets the lines 
     // MODIFIES: the text displayed in each Lines/Line/Text gameObject
@@ -189,6 +196,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     // EFFECTS: sets the previous and next slots for each given slot
     // MODIFIES: the Slot gameObjects
     // REQUIRES: nothing
@@ -205,6 +213,7 @@ public class StateManager : MonoBehaviour {
             prevSlot = slot;
         }
     }
+
 
     // EFFECTS: initially attaches the Lines to Slots, and Slots to Lines
     // MODIFIES: the Line and Slot gameObjects
@@ -223,6 +232,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     // EFFECTS: initially attaches the Lines to Links and Links to Lines
     // MODIFIES: the Link game objects
     // REQUIRES: the lines[] array to be instantiated first
@@ -231,11 +241,12 @@ public class StateManager : MonoBehaviour {
         int i = 0;
         foreach (Link link in lineLinks.transform.GetComponentsInChildren<Link>())
         {
-            link.lines.AddFirst(lines[i]);
+            link.lines.Add(lines[i]);
             lines[i].inLink = link;
             i++;
         }
     }
+
 
     // EFFECTS: calls UpdateMatches() on every line in the poem. Ensures that each line's matches are up-to-date
     // MODIFIES: every line object in the poem
@@ -275,6 +286,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     // TODO: It is possible to get all green but have lines be out of order (FIX THIS!!!)
     // NOTE: Think about adding a list of acceptable colours and giving each link one of them
     // EFFECTS: modifies the color of all lines in the poem according to how many matches they have
@@ -294,6 +306,7 @@ public class StateManager : MonoBehaviour {
 
         line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = outColor;
     }
+
 
     // EFFECTS: updates the game timer
     // MODIFIES: the in-game timer, this
