@@ -8,6 +8,7 @@ public class StateManager : MonoBehaviour {
 	void Start () {
         timer = 0.0f;
         minutes = 0;
+        isEnd = false;
         poem = BuildPoem();
         numLines = poem.Length;
         numSlots = poem.Length;
@@ -17,6 +18,7 @@ public class StateManager : MonoBehaviour {
         BuildLinksAndLines();
         SetLineText();
         ConnectSlots();
+
         lines = GetLines();
         AttachLinesAndSlots();
         AttachLinesAndLinks();
@@ -43,20 +45,29 @@ public class StateManager : MonoBehaviour {
     private int         numLines;
     private int         numSlots;
     private int         lineHeight = 10;
-    private float       timer;
     private int         minutes;
-
+    private float       timer;
+    private bool        isEnd;
 
     // Update is called once per frame
     void Update () {
-        CheckLineMatches();
-        UpdateLineLinks();
-
-        if (minutes < 100)
+        if (!isEnd)
         {
-            UpdateTimer();
+            CheckLineMatches();
+            UpdateLineLinks();
+
+            if (minutes < 100)
+            {
+                UpdateTimer();
+            }
+
+            CheckEnd();
         }
-	}
+        else
+        {
+            HandleEnd();
+        }
+    }
 
     // EFFECTS: builds an array of lines with IDs attached
     // MODIFIES: this
@@ -341,6 +352,52 @@ public class StateManager : MonoBehaviour {
         else outSec = seconds.ToString();
 
         //NOTE: THIS GAMEOBJECT WILL CHANGE NAMES
-        gameObject.transform.Find("Goal Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
+        gameObject.transform.Find("Timer Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
+    }
+
+
+    // EFFECTS: checks if the game has ended
+    // MODIFIES: isEnd
+    // REQUIRES: nothing
+    private void CheckEnd()
+    {
+        foreach (Line line in lines)
+        {
+            if (line.lineID != line.inSlot.relPosition)
+            {
+                isEnd = false;
+                return;
+            }
+        }
+
+        isEnd = true;
+    }
+
+
+    // EFFECTS: Go through the end game procedures
+    // MODIFIES: this/end popup
+    // REQUIRES: nothing
+    private void HandleEnd()
+    {
+        GetEndStats();
+        transform.Find("End Popup").gameObject.SetActive(true);
+        transform.Find("Poem").gameObject.transform.Find("Links").transform.GetChild(0).transform.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
+
+    // EFFECTS: Get the stats for the game's end
+    // MODIFIES: this/end popup
+    // REQUIRES: nothing
+    private void GetEndStats()
+    {
+        TextMesh toModify = transform.Find("End Popup").gameObject.transform.Find("Results").gameObject.GetComponent<TextMesh>();
+
+        string prevBest;
+        string time;
+
+        prevBest =  "todo";
+        time = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+
+        toModify.text = prevBest + "\n" + time;
     }
 }
