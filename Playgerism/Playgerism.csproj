@@ -78,12 +78,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AuthorList.cs" />
+    <Compile Include="Assets\Scripts\ChooseElement.cs" />
     <Compile Include="Assets\Scripts\Line.cs" />
     <Compile Include="Assets\Scripts\Link.cs" />
     <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
     <Compile Include="Assets\Scripts\Slot.cs" />
     <Compile Include="Assets\Scripts\StateManager.cs" />
     <Compile Include="Assets\Scripts\Utilities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Resources\Poems\Authors\0.txt" />
+    <None Include="Assets\Resources\Poems\Authors\1.txt" />
+    <None Include="Assets\Resources\Poems\Authors\2.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

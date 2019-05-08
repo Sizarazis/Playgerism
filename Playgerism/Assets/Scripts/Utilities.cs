@@ -1,15 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public static class Utilities {
+    public static int authID;
+    public static int poemID;
+
+
+    // EFFECTS: updates the authID and poemID to the currently selected poem
+    // REQUIRES: nothing
+    // MODIFIES: this
+    public static void SetIDs(int currentAuth, int currentPoem)
+    {
+        authID = currentAuth;
+        poemID = currentPoem;
+    }
 
     // TODO: Parse a poem
     public static string[] ParsePoem()
-    {
-        string poemID = "0";
-        FindPoem(poemID);
-
+    {     
         int poemSize = 10;
         string[] poemLines = new string[poemSize];
 
@@ -30,8 +40,13 @@ public static class Utilities {
     }
 
     // TODO: find the poem in the project
-    private static void FindPoem(string id)
+    public static string[] FindPoem()
     {
+        string[] poem;
+        string dir = Directory.GetCurrentDirectory();
+        string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
 
+        poem = ParsePoem();
+        return poem;
     }
 }

@@ -9,6 +9,7 @@ public class StateManager : MonoBehaviour {
         timer = 0.0f;
         minutes = 0;
         isEnd = false;
+
         poem = BuildPoem();
         numLines = poem.Length;
         numSlots = poem.Length;
@@ -69,6 +70,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     // EFFECTS: builds an array of lines with IDs attached
     // MODIFIES: this
     // REQUIRES: stringPoems and numLines to be instantiated
@@ -115,18 +117,6 @@ public class StateManager : MonoBehaviour {
         }
 
         return outPoem;
-    }
-
-
-    // NOTE: Might need to change when implenting parsing
-    // EFFECTS: gets a poem
-    // MODIFIES: this
-    // REQUIRES: nothing
-    string[] GetPoem()
-    {
-        string[] lines = Utilities.ParsePoem();
-
-        return lines;
     }
 
 
@@ -298,7 +288,6 @@ public class StateManager : MonoBehaviour {
     }
 
 
-    // TODO: It is possible to get all green but have lines be out of order (FIX THIS!!!)
     // NOTE: Think about adding a list of acceptable colours and giving each link one of them
     // EFFECTS: modifies the color of all lines in the poem according to how many matches they have
     // MODIFIES: the line object's background color
