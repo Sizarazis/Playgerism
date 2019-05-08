@@ -6,6 +6,7 @@ info = {
 poem {
 	id = 0
 	title = The Cloud
+	size = 84
 	lines = {
 		I bring fresh showers for the thirsting flowers,
 		From the seas and the streams;

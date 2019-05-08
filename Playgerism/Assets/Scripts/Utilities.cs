@@ -9,44 +9,58 @@ public static class Utilities {
 
 
     // EFFECTS: updates the authID and poemID to the currently selected poem
-    // REQUIRES: nothing
     // MODIFIES: this
+    // REQUIRES: nothing
     public static void SetIDs(int currentAuth, int currentPoem)
     {
         authID = currentAuth;
         poemID = currentPoem;
     }
 
-    // TODO: Parse a poem
+
+    // EFFECTS: Parses a poem from an author's text file
+    // MODIFIES: nothing
+    // REQUIRES: authID and poemID to be set
     public static string[] ParsePoem()
-    {     
-        int poemSize = 10;
-        string[] poemLines = new string[poemSize];
-
-        // test
-        poemLines[0] = "Hello";
-        poemLines[1] = "This is a test";
-        poemLines[2] = "And a poem";
-        poemLines[3] = "I hope it works";
-        poemLines[4] = "But it may not";
-        poemLines[5] = "And that would be sad";
-        poemLines[6] = "Devastating, in fact";
-        poemLines[7] = "Therefore lets hope for the best";
-        poemLines[8] = "and maybe, just maybe";
-        poemLines[9] = "this will show up in the game";
-        //poemLines[10] = "Hello";
-
-        return poemLines;
-    }
-
-    // TODO: find the poem in the project
-    public static string[] FindPoem()
     {
-        string[] poem;
+        string[] poem = new string[0];
+        int poemSize = 0;
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
 
-        poem = ParsePoem();
+        using (var reader = new StreamReader(path))
+        {
+            bool inPoem = false;
+            while (!reader.EndOfStream)
+            {
+                if (reader.ReadLine().Contains("id = " + poemID))   // id =
+                {
+                    string[] split = new string[2];
+
+                    reader.ReadLine();                              // title =
+                    split = reader.ReadLine().Split('=');           // size =
+                    split[1].Trim();
+                    poemSize = int.Parse(split[1]);
+
+                    poem = new string[poemSize];
+
+                    reader.ReadLine();                              // lines = {
+
+                    inPoem = true;
+                }
+                if (inPoem)
+                {
+                    for (int i = 0; i < poemSize; i++)
+                    {
+                        poem[i] = reader.ReadLine().Trim();
+                        Debug.Log(poem[i]);
+                    }
+                    inPoem = false;
+                    break;
+                }
+            }
+        }
+
         return poem;
     }
 }

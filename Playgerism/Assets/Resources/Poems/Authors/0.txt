@@ -6,6 +6,7 @@ info = {
 poem {
 	id = 0
 	title = Sonnet 1
+	size = 14
 	lines = {	
 		FROM fairest creatures we desire increase,
 		That thereby beauty's rose might never die,
@@ -27,6 +28,7 @@ poem {
 poem {
 	id = 1
 	title = Sonnet 2
+	size = 14
 	lines = {
 		When forty winters shall beseige thy brow,
 		And dig deep trenches in thy beauty's field,

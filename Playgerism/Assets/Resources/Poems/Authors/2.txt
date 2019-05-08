@@ -4,8 +4,9 @@ info = {
 }
 
 poem {
-	poem = 0
+	id = 0
 	title = Hymn to Proserpine (After the Proclamation in Rome of the Christian Faith)
+	size = 111
 	lines = {
 		Vicisti, Galilæe.
 		I have lived long enough, having seen one thing, that love hath an end;
