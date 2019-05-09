@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class StateManager : MonoBehaviour {
 
@@ -9,6 +10,7 @@ public class StateManager : MonoBehaviour {
         timer = 0.0f;
         minutes = 0;
         isEnd = false;
+        endHandled = false;
 
         poem = BuildPoem();
         numLines = poem.Length;
@@ -17,6 +19,7 @@ public class StateManager : MonoBehaviour {
 
         BuildSlots();
         BuildLinksAndLines();
+        SetTitleAndAuthor();
         SetLineText();
         ConnectSlots();
 
@@ -49,6 +52,7 @@ public class StateManager : MonoBehaviour {
     private int         minutes;
     private float       timer;
     private bool        isEnd;
+    private bool        endHandled;
 
     // Update is called once per frame
     void Update () {
@@ -66,7 +70,11 @@ public class StateManager : MonoBehaviour {
         }
         else
         {
-            HandleEnd();
+            if (!endHandled)
+            {
+                HandleEnd();
+                endHandled = true;
+            }
         }
     }
 
@@ -174,6 +182,16 @@ public class StateManager : MonoBehaviour {
 
             yPos = yPos - lineHeight;
         }
+    }
+
+
+    // TODO
+    // EFFECTS:
+    // MODIFIES:
+    // REQUIRES:
+    void SetTitleAndAuthor()
+    {
+
     }
 
 
@@ -384,9 +402,151 @@ public class StateManager : MonoBehaviour {
         string prevBest;
         string time;
 
-        prevBest =  "todo";
+        prevBest = ParseBestTime();
+
         time = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
         toModify.text = prevBest + "\n" + time;
+    }
+
+
+    // EFFECTS: parses the userStats.csv for their record poem time. If they don't have a record, then it will insert this one. If they're new time is better, it will update the userStats
+    // MODIFIES: this, userStats.csv
+    // REQUIRES: nothing
+    private string ParseBestTime()
+    {
+        string time = "";
+
+        string dir = Directory.GetCurrentDirectory();
+        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+
+        bool foundRecord = false;
+        bool newBest = false;
+
+        using (var reader = new StreamReader(path))
+        {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    if (line.Contains(Utilities.authID.ToString() + ", " + Utilities.poemID.ToString()))
+                    {
+                        foundRecord = true;
+
+                        string[] temp = new string[3];
+                        temp = line.Split(',');
+
+                        time = temp[2].Trim();
+
+                        newBest = CompareTimes(time);
+
+                        if (newBest)
+                        {
+                            string record;
+                            string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+
+                            record = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+                        }
+
+                        break;
+                    }
+                }
+        }
+
+        if (!foundRecord)
+        {
+            InsertNewRecord();
+        }
+
+        if (foundRecord && newBest)
+        {
+            UpdateRecordTime();
+        }
+
+        return time;
+    }
+
+
+    // EFFECTS: compares the previous best time with the new time
+    // MODIFIES: nothing
+    // REQUIRES: nothing
+    private bool CompareTimes(string prevTime)
+    {
+        bool newBest = false;
+        int newHours = 0;
+        int newMins = 0;
+
+        int prevHours = 0;
+        int prevMins = 0;
+
+        // get new times
+        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        string[] newTimeSplit = newTime.Split(':');
+        newHours = int.Parse(newTimeSplit[0].Trim());
+        newMins = int.Parse(newTimeSplit[1].Trim());
+
+
+        // get old times
+        string[] prevTimeSplit = prevTime.Split(':');
+        prevHours = int.Parse(prevTimeSplit[0].Trim());
+        prevMins = int.Parse(prevTimeSplit[1].Trim());
+
+        if (newHours < prevHours)
+        {
+            newBest = true;
+        }
+
+        if (newHours == prevHours && newMins < prevMins)
+        {
+            newBest = true;
+        }
+
+        return newBest;
+    }
+
+
+    // EFFECTS: insert an entirely new record for the poem
+    // MODIFIES: UserStats.csv
+    // REQUIRES: nothing
+    private void InsertNewRecord()
+    {
+        string dir = Directory.GetCurrentDirectory();
+        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+
+        string record;
+        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+
+        record = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+
+        using (StreamWriter w = File.AppendText(path))
+        {
+            w.WriteLine(record);
+        }
+
+    }
+
+
+    // EFFECTS: update the record of this poem with a new best time
+    // MODIFIES: UserStats.csv
+    // REQUIRES: nothing
+    private void UpdateRecordTime()
+    {
+        string dir = Directory.GetCurrentDirectory();
+        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+        string[] lines = File.ReadAllLines(path);
+
+        string newRecord;
+        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        newRecord = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+        newRecord.Trim();
+
+        for(int i = 0; i < lines.Length; i++)
+        { 
+            if (lines[i].Contains(Utilities.authID + ", " + Utilities.poemID))
+            {
+                lines[i] = newRecord;
+            }
+        }
+
+        File.WriteAllLines(path, lines);
     }
 }

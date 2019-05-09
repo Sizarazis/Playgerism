@@ -1,10 +1,19 @@
 fileFormatVersion: 2
 guid: cc89287fe51f34744927cbe74e92e1e5
-timeCreated: 1534916620
+timeCreated: 1557357917
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - slotPrefab: {fileID: 1770620134546320, guid: b0371892195eabd498d67af2307e333d,
+      type: 2}
+  - slots: {instanceID: 0}
+  - linePrefab: {fileID: 1122359607014094, guid: 8a54f50c8d4f38744bff7f59ec1cf4f3,
+      type: 2}
+  - linesObj: {instanceID: 0}
+  - lineLinks: {instanceID: 0}
+  - linkPrefab: {fileID: 1106508198497596, guid: aba216ac0cbc5bc42b4ab302124bf045,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

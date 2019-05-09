@@ -53,7 +53,6 @@ public static class Utilities {
                     for (int i = 0; i < poemSize; i++)
                     {
                         poem[i] = reader.ReadLine().Trim();
-                        Debug.Log(poem[i]);
                     }
                     inPoem = false;
                     break;

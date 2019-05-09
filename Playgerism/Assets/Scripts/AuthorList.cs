@@ -71,7 +71,7 @@ public class AuthorList : MonoBehaviour {
 
 
     // TODO: display the itmes in alphebetical order
-    // TODO: handle text overflows
+    // TODO: handle horizontal text overflows
     // TODO: have the back button go back to the authors if we're getting poems
     // EFFECTS: instantiates a list of authors or poems in the Unity scene
     // MODIFIES: the _CHOOSEPOEM_ scene
@@ -175,7 +175,6 @@ public class AuthorList : MonoBehaviour {
             }
         }
     }
-
 
 
     // EFFECTS: End this scene, and call the new _SCENE_ with the selected poem
