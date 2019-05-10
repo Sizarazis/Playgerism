@@ -19,7 +19,6 @@ public class StateManager : MonoBehaviour {
 
         BuildSlots();
         BuildLinksAndLines();
-        SetTitleAndAuthor();
         SetLineText();
         ConnectSlots();
 
