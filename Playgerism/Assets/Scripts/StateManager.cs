@@ -87,6 +87,9 @@ public class StateManager : MonoBehaviour {
         string[] lines = Utilities.ParsePoem();
         int size = lines.Length;
 
+        transform.Find("Poem").transform.Find("Title").transform.Find("Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
+        transform.Find("Poem").transform.Find("Title").transform.Find("Author").GetComponent<TextMesh>().text = Utilities.authName;
+
         IDLine[] output = new IDLine[size];
         for (int i = 0; i < size; i++)
         {
@@ -182,16 +185,6 @@ public class StateManager : MonoBehaviour {
 
             yPos = yPos - lineHeight;
         }
-    }
-
-
-    // TODO
-    // EFFECTS:
-    // MODIFIES:
-    // REQUIRES:
-    void SetTitleAndAuthor()
-    {
-
     }
 
 
@@ -428,7 +421,7 @@ public class StateManager : MonoBehaviour {
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    if (line.Contains(Utilities.authID.ToString() + ", " + Utilities.poemID.ToString()))
+                    if (line.Contains(Utilities.authName + ", " + Utilities.poemTitle))
                     {
                         foundRecord = true;
 
@@ -444,7 +437,7 @@ public class StateManager : MonoBehaviour {
                             string record;
                             string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
-                            record = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+                            record = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
                         }
 
                         break;
@@ -515,7 +508,7 @@ public class StateManager : MonoBehaviour {
         string record;
         string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
-        record = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+        record = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
 
         using (StreamWriter w = File.AppendText(path))
         {
@@ -536,12 +529,12 @@ public class StateManager : MonoBehaviour {
 
         string newRecord;
         string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
-        newRecord = Utilities.authID + ", " + Utilities.poemID + ", " + newTime;
+        newRecord = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
         newRecord.Trim();
 
         for(int i = 0; i < lines.Length; i++)
         { 
-            if (lines[i].Contains(Utilities.authID + ", " + Utilities.poemID))
+            if (lines[i].Contains(Utilities.authName + ", " + Utilities.poemTitle))
             {
                 lines[i] = newRecord;
             }

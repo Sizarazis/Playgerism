@@ -442,6 +442,53 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &327135471
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 327135472}
+  - component: {fileID: 327135473}
+  m_Layer: 5
+  m_Name: StatText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &327135472
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327135471}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1215953989}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.00000071525574, y: 4.5475006}
+  m_SizeDelta: {x: 100, y: 64.745}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &327135473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 327135471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd565283847495242924971a943e9564, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statRecordPrefab: {fileID: 1112764218635512, guid: 777f9dc745eeedd4ca29dc3170d3afb6,
+    type: 2}
 --- !u!1 &516980308
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,117 +711,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 586428146}
---- !u!1 &619570056
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 619570057}
-  - component: {fileID: 619570059}
-  - component: {fileID: 619570058}
-  m_Layer: 5
-  m_Name: Right Body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &619570057
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619570056}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
-  m_Children: []
-  m_Father: {fileID: 1215953989}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 37.5, y: 7.4999924}
-  m_SizeDelta: {x: 135, y: 525}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &619570058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619570056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\rLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus
-    massa quis maximus consequat. Sed eget est at augue condimentum pulvinar non non
-    tellus. Fusce mollis aliquam metus, sit amet malesuada ante ultricies sed. Pellentesque
-    habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-    Sed vitae ligula id tellus tristique accumsan. In venenatis posuere velit sit
-    amet ornare. Etiam dolor turpis, volutpat nec urna sit amet, convallis aliquam
-    sem. Nullam venenatis, felis a porttitor lobortis, sapien diam egestas enim, bibendum
-    efficitur nisl enim eget arcu. Suspendisse accumsan posuere magna, sit amet mattis
-    nisi mollis egestas. Mauris rhoncus leo sit amet augue pellentesque varius. In
-    in aliquet elit, in feugiat risus.\r\n\r\nDuis ut nisi risus. Nullam suscipit
-    faucibus dictum. Integer mollis elementum libero sed efficitur. Maecenas ut molestie
-    metus, et ultrices nulla. In vel ipsum quis lectus luctus euismod. Maecenas semper
-    eleifend arcu et commodo. Aenean vitae nisl in justo rhoncus tempus eu quis nulla.
-    Sed id malesuada lacus. Nam scelerisque quam tortor, sed venenatis lectus mattis
-    a. Sed a lectus est. Maecenas et tortor sed elit pulvinar venenatis. Nullam eleifend
-    elit eros, a lacinia felis interdum non. Morbi dignissim lacus vitae eros congue
-    mollis.\r\n\r\nMorbi dictum elit sit amet enim lobortis, id convallis metus vestibulum.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-    himenaeos. Sed at leo non nisi elementum cursus. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ac tortor
-    dignissim, feugiat nunc ac, maximus turpis. In luctus, nisl eu auctor accumsan,
-    elit libero iaculis turpis, quis malesuada urna neque eu metus. Morbi eu augue
-    vel purus molestie imperdiet.\r\n\r\nMorbi ultrices erat sapien, vel venenatis
-    nibh luctus egestas. Ut at orci vel mauris elementum consequat in et eros. Suspendisse
-    potenti. Donec semper quam id felis congue tempor. In vehicula nisi nec molestie
-    interdum. In ultrices tristique tincidunt. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Fusce dictum vitae nisi in tincidunt. Mauris vitae congue est.
-    Proin porttitor augue vel volutpat consectetur. Quisque in lorem id magna tempus
-    elementum ac sed enim. Aenean lobortis gravida consequat. Quisque sit amet convallis
-    purus.\r\n\r\nProin pharetra dolor metus, sed posuere urna mollis a. Sed tempus
-    pharetra quam, eu condimentum mauris faucibus ut. Vivamus pellentesque sed tellus
-    lacinia commodo. Pellentesque id lobortis tortor. Donec massa felis, porttitor
-    sit amet tellus a, luctus tristique risus. Donec aliquet sed mi sit amet mollis.
-    Duis et malesuada metus. Curabitur porttitor, augue ornare tempor venenatis, nulla
-    sapien hendrerit dolor, ac imperdiet nibh arcu consectetur turpis. Nulla dapibus
-    felis vitae justo rhoncus, eu fermentum eros cursus. Vivamus viverra dignissim
-    nulla vel convallis. Aenean at neque diam. Nam suscipit dignissim maximus. Maecenas
-    scelerisque ultrices tortor, a vulputate metus posuere eget. "
---- !u!222 &619570059
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 619570056}
 --- !u!1 &665423401
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,7 +852,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Stats
+  m_Text: Best Times
 --- !u!222 &847973656
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1208,7 +1144,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Random Start
+  m_Text: Random Poem
 --- !u!222 &955369482
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1356,124 +1292,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Stats
+  m_Text: Best Times
 --- !u!222 &999947902
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 999947899}
---- !u!1 &1186437103
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1186437104}
-  - component: {fileID: 1186437106}
-  - component: {fileID: 1186437105}
-  m_Layer: 5
-  m_Name: Left Body
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1186437104
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1186437103}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.099999994, z: 0.099999994}
-  m_Children: []
-  m_Father: {fileID: 1215953989}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -20, y: 7.4999924}
-  m_SizeDelta: {x: 450, y: 525}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1186437105
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1186437103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 60
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: "\rLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus
-    massa quis maximus consequat. Sed eget est at augue condimentum pulvinar non non
-    tellus. Fusce mollis aliquam metus, sit amet malesuada ante ultricies sed. Pellentesque
-    habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-    Sed vitae ligula id tellus tristique accumsan. In venenatis posuere velit sit
-    amet ornare. Etiam dolor turpis, volutpat nec urna sit amet, convallis aliquam
-    sem. Nullam venenatis, felis a porttitor lobortis, sapien diam egestas enim, bibendum
-    efficitur nisl enim eget arcu. Suspendisse accumsan posuere magna, sit amet mattis
-    nisi mollis egestas. Mauris rhoncus leo sit amet augue pellentesque varius. In
-    in aliquet elit, in feugiat risus.\r\n\r\nDuis ut nisi risus. Nullam suscipit
-    faucibus dictum. Integer mollis elementum libero sed efficitur. Maecenas ut molestie
-    metus, et ultrices nulla. In vel ipsum quis lectus luctus euismod. Maecenas semper
-    eleifend arcu et commodo. Aenean vitae nisl in justo rhoncus tempus eu quis nulla.
-    Sed id malesuada lacus. Nam scelerisque quam tortor, sed venenatis lectus mattis
-    a. Sed a lectus est. Maecenas et tortor sed elit pulvinar venenatis. Nullam eleifend
-    elit eros, a lacinia felis interdum non. Morbi dignissim lacus vitae eros congue
-    mollis.\r\n\r\nMorbi dictum elit sit amet enim lobortis, id convallis metus vestibulum.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-    himenaeos. Sed at leo non nisi elementum cursus. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ac tortor
-    dignissim, feugiat nunc ac, maximus turpis. In luctus, nisl eu auctor accumsan,
-    elit libero iaculis turpis, quis malesuada urna neque eu metus. Morbi eu augue
-    vel purus molestie imperdiet.\r\n\r\nMorbi ultrices erat sapien, vel venenatis
-    nibh luctus egestas. Ut at orci vel mauris elementum consequat in et eros. Suspendisse
-    potenti. Donec semper quam id felis congue tempor. In vehicula nisi nec molestie
-    interdum. In ultrices tristique tincidunt. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Fusce dictum vitae nisi in tincidunt. Mauris vitae congue est.
-    Proin porttitor augue vel volutpat consectetur. Quisque in lorem id magna tempus
-    elementum ac sed enim. Aenean lobortis gravida consequat. Quisque sit amet convallis
-    purus.\r\n\r\nProin pharetra dolor metus, sed posuere urna mollis a. Sed tempus
-    pharetra quam, eu condimentum mauris faucibus ut. Vivamus pellentesque sed tellus
-    lacinia commodo. Pellentesque id lobortis tortor. Donec massa felis, porttitor
-    sit amet tellus a, luctus tristique risus. Donec aliquet sed mi sit amet mollis.
-    Duis et malesuada metus. Curabitur porttitor, augue ornare tempor venenatis, nulla
-    sapien hendrerit dolor, ac imperdiet nibh arcu consectetur turpis. Nulla dapibus
-    felis vitae justo rhoncus, eu fermentum eros cursus. Vivamus viverra dignissim
-    nulla vel convallis. Aenean at neque diam. Nam suscipit dignissim maximus. Maecenas
-    scelerisque ultrices tortor, a vulputate metus posuere eget. "
---- !u!222 &1186437106
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1186437103}
 --- !u!1 &1215953988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1484,7 +1309,6 @@ GameObject:
   - component: {fileID: 1215953989}
   - component: {fileID: 1215953991}
   - component: {fileID: 1215953990}
-  - component: {fileID: 1215953992}
   m_Layer: 5
   m_Name: Stats Panel
   m_TagString: Untagged
@@ -1504,8 +1328,7 @@ RectTransform:
   m_Children:
   - {fileID: 847973654}
   - {fileID: 2023044052}
-  - {fileID: 1186437104}
-  - {fileID: 619570057}
+  - {fileID: 327135472}
   m_Father: {fileID: 246366728}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1547,17 +1370,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1215953988}
---- !u!114 &1215953992
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1215953988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd565283847495242924971a943e9564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1279740916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,7 +1714,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1321173982}
-        m_MethodName: LoadByIndex
+        m_MethodName: LoadRandom
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

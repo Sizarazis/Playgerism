@@ -37,11 +37,11 @@ public class ChooseElement : MonoBehaviour {
     {
         if (isAuthor)
         {
-            list.SelectAuthor(id);
+            list.SelectAuthor(id, text);
         }
         else
         {
-            list.SelectPoem(id);
+            list.SelectPoem(id, text);
         }
     }
 

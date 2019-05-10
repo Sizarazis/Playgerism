@@ -114,9 +114,10 @@ public class AuthorList : MonoBehaviour {
     // EFFECTS: send the user to a new page displaying the poems under the selected author
     // MODIFIES: this, the "List Item" objects in the scene
     // REQUIRES: an author to have some poems in their text files?
-    public void SelectAuthor(int authID)
+    public void SelectAuthor(int authID, string authName)
     {
         currentAuth = authID;
+        Utilities.authName = authName;
 
         // so poems fill up per author
         poemIDs.Clear();
@@ -126,7 +127,7 @@ public class AuthorList : MonoBehaviour {
         GetComponentInParent<Canvas>().transform.Find("Header").Find("Poems Title").gameObject.SetActive(true);
         isAuthorScreen = false;
 
-        DestroyAuthors();
+        DestroyItems();
 
         GetPoemData(authID);
         DisplayItems();
@@ -136,7 +137,7 @@ public class AuthorList : MonoBehaviour {
     // EFFECTS: destroy all of the game objects that are children of the "List" object
     // MODIFIES: the "List" object's children
     // REQUIRES: nothing
-    private void DestroyAuthors()
+    private void DestroyItems()
     {
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -180,8 +181,9 @@ public class AuthorList : MonoBehaviour {
     // EFFECTS: End this scene, and call the new _SCENE_ with the selected poem
     // MODIFIES: this, the _SCENE_ scene, the _CHOOSEPOEM_ scene
     // REQUIRES: currentAuth to have been set
-    public void SelectPoem(int poemID)
+    public void SelectPoem(int poemID, string poemTitle)
     {
+        Utilities.poemTitle = poemTitle;
         Utilities.SetIDs(currentAuth, poemID);
         SceneManager.LoadScene(0);
     }

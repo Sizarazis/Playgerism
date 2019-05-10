@@ -6,6 +6,8 @@ using System.IO;
 public static class Utilities {
     public static int authID;
     public static int poemID;
+    public static string authName;
+    public static string poemTitle;
 
 
     // EFFECTS: updates the authID and poemID to the currently selected poem
