@@ -24,6 +24,19 @@ public class Stats : MonoBehaviour {
 	}
 
 
+    // TODO: Test
+    // EFFECTS: Sets the height of the Viewport to enable the whole list to be scrolled
+    // MODIFIES: this
+    // REQUIRES: nothing
+    void SetContentHeight(int numItems)
+    {
+        RectTransform content = transform.GetComponentInParent<RectTransform>();
+        content.offsetMin = new Vector2(content.offsetMin.x, -numItems);
+        content.offsetMax = new Vector2(content.offsetMax.x, 0);
+
+    }
+
+
     // EFFECTS: Gets the poem titles and author names and thWeir associated best times from resources
     // MODIFIES: this
     // REQUIRES: nothing

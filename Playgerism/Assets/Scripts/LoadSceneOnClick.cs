@@ -36,7 +36,7 @@ public class LoadSceneOnClick : MonoBehaviour {
         {
             if (authLines[i].Contains("full name = "))
             {
-                Utilities.authName = authLines[i].Substring(12);
+                Utilities.authName = authLines[i].Substring(12).Trim();
             }
             if (authLines[i].Contains("poem {")) 
             {
@@ -51,7 +51,7 @@ public class LoadSceneOnClick : MonoBehaviour {
         {
             if (authLines[i].Contains("id = " + randomPoem))
             {
-                Utilities.poemTitle = authLines[i + 1].Substring(8);
+                Utilities.poemTitle = authLines[i + 1].Substring(8).Trim();
             }
         }
 

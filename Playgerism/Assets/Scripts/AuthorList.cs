@@ -98,7 +98,7 @@ public class AuthorList : MonoBehaviour {
 
             GameObject instListItem = Instantiate(listItemPrefab, position, rotation, this.transform);
             instListItem.name = "Item " + i;
-            instListItem.transform.position = new Vector3(0, yPos, -1);
+            instListItem.transform.position = new Vector3(3.3f, yPos, -1);
 
             instListItem.transform.Find("Caption").GetComponent<TextMesh>().text = dict[key];
 
@@ -108,8 +108,22 @@ public class AuthorList : MonoBehaviour {
             i++;
             yPos = yPos - 10;
         }
+
+        SetContentHeight(dict.Count);
     }
 
+
+    // TODO: Test
+    // EFFECTS: Sets the height of the Viewport to enable the whole list to be scrolled
+    // MODIFIES: this
+    // REQUIRES: nothing
+    void SetContentHeight(int numItems)
+    {
+        RectTransform content = transform.GetComponentInParent<RectTransform>();
+        content.offsetMin = new Vector2(content.offsetMin.x, -numItems);
+        content.offsetMax = new Vector2(content.offsetMax.x, 0);
+
+    }
 
     // EFFECTS: send the user to a new page displaying the poems under the selected author
     // MODIFIES: this, the "List Item" objects in the scene

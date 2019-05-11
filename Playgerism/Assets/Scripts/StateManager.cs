@@ -25,6 +25,7 @@ public class StateManager : MonoBehaviour {
         lines = GetLines();
         AttachLinesAndSlots();
         AttachLinesAndLinks();
+        SetContentHeight();
     }
 
 
@@ -78,6 +79,20 @@ public class StateManager : MonoBehaviour {
     }
 
 
+
+    // EFFECTS: Sets the height of the Viewport to enable the whole poem to be scrolled
+    // MODIFIES: this
+    // REQUIRES: nothing
+    void SetContentHeight()
+    {
+        Transform content = transform.Find("Scroll View").Find("Viewport").Find("Content");
+        RectTransform rectTransform = content.GetComponent<RectTransform>();
+        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -numSlots);
+        rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, 0);
+
+    }
+
+
     // EFFECTS: builds an array of lines with IDs attached
     // MODIFIES: this
     // REQUIRES: stringPoems and numLines to be instantiated
@@ -86,8 +101,8 @@ public class StateManager : MonoBehaviour {
         string[] lines = Utilities.ParsePoem();
         int size = lines.Length;
 
-        transform.Find("Poem").transform.Find("Title").transform.Find("Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
-        transform.Find("Poem").transform.Find("Title").transform.Find("Author").GetComponent<TextMesh>().text = Utilities.authName;
+        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").Find("Title").Find("Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
+        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").Find("Title").Find("Author").GetComponent<TextMesh>().text = Utilities.authName;
 
         IDLine[] output = new IDLine[size];
         for (int i = 0; i < size; i++)
@@ -379,8 +394,9 @@ public class StateManager : MonoBehaviour {
     private void HandleEnd()
     {
         GetEndStats();
-        transform.Find("End Popup").gameObject.SetActive(true);
-        transform.Find("Poem").gameObject.transform.Find("Links").transform.GetChild(0).transform.GetComponent<BoxCollider2D>().enabled = false;
+        transform.Find("Scroll View").Find("End Popup").gameObject.SetActive(true);
+        //transform.Find("Scroll View").gameObject.SetActive(false);
+        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").gameObject.transform.Find("Links").transform.GetChild(0).transform.GetComponent<BoxCollider2D>().enabled = false;
     }
 
 
@@ -389,7 +405,7 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void GetEndStats()
     {
-        TextMesh toModify = transform.Find("End Popup").gameObject.transform.Find("Results").gameObject.GetComponent<TextMesh>();
+        TextMesh toModify = transform.Find("Scroll View").Find("End Popup").gameObject.transform.Find("Results").gameObject.GetComponent<TextMesh>();
 
         string prevBest;
         string time;
