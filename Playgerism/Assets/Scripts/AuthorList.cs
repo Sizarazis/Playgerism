@@ -98,7 +98,7 @@ public class AuthorList : MonoBehaviour {
 
             GameObject instListItem = Instantiate(listItemPrefab, position, rotation, this.transform);
             instListItem.name = "Item " + i;
-            instListItem.transform.position = new Vector3(3.3f, yPos, -1);
+            instListItem.transform.position = new Vector3(0, yPos, -1);
 
             instListItem.transform.Find("Caption").GetComponent<TextMesh>().text = dict[key];
 

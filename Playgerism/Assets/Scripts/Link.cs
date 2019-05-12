@@ -183,6 +183,7 @@ public class Link : MonoBehaviour {
         GetComponent<BoxCollider2D>().size = outSize;
     }
 
+
     // EFFECTS: set the relative position of lines within a link
     // MODIFIES: lines
     // REQUIRES: nothing
