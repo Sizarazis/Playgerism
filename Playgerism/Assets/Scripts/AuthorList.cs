@@ -70,7 +70,6 @@ public class AuthorList : MonoBehaviour {
     }
 
 
-    // TODO: display the itmes in alphebetical order
     // TODO: handle horizontal text overflows
     // TODO: have the back button go back to the authors if we're getting poems
     // EFFECTS: instantiates a list of authors or poems in the Unity scene
@@ -78,20 +77,34 @@ public class AuthorList : MonoBehaviour {
     // REQUIRES: nothing
     private void DisplayItems()
     {
-        Dictionary<int, string> dict;
+        Dictionary<string, int> dict = new Dictionary<string, int>();
+        ArrayList abcList = new ArrayList();
+
         int yPos = -15;
         int i = 0;
 
         if (isAuthorScreen)
         {
-            dict = authIDs;
+            foreach (int id in authIDs.Keys)
+            {
+                dict.Add(authIDs[id], id);
+            }
         }
         else
         {
-            dict = poemIDs;
+            foreach (int id in poemIDs.Keys)
+            {
+                dict.Add(poemIDs[id], id);
+            }
         }
 
-        foreach (int key in dict.Keys)
+        foreach (string key in dict.Keys)
+        {
+            abcList.Add(key);
+        }
+        abcList.Sort();
+
+        foreach (string name in abcList)
         {
             Quaternion rotation = listItemPrefab.transform.rotation;
             Vector3 position = new Vector3(0, yPos, -1);
@@ -100,10 +113,10 @@ public class AuthorList : MonoBehaviour {
             instListItem.name = "Item " + i;
             instListItem.transform.position = new Vector3(0, yPos, -1);
 
-            instListItem.transform.Find("Caption").GetComponent<TextMesh>().text = dict[key];
+            instListItem.transform.Find("Caption").GetComponent<TextMesh>().text = name;
 
             ChooseElement item = instListItem.GetComponent<ChooseElement>();
-            item.id = key;
+            item.id = dict[name];
 
             i++;
             yPos = yPos - 10;

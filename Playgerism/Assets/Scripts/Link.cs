@@ -41,14 +41,14 @@ public class Link : MonoBehaviour {
         // Get the world position of the cursor relative to the world position of this object
         offset = transform.position -
             Camera.main.ScreenToWorldPoint(
-                new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
+                new Vector3(200, Input.mousePosition.y, screenPoint.z));
     }
 
 
     public void OnMouseDrag()
     {
         // Get the position of the cursor according to the screen
-        Vector3 cursorScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 2);
+        Vector3 cursorScreenPoint = new Vector3(200, Input.mousePosition.y, 2);
 
         // Get the new position of the object in the world according to the cursors offset to 
         // this object in the world

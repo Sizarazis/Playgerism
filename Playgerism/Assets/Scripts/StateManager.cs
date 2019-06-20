@@ -321,11 +321,12 @@ public class StateManager : MonoBehaviour {
     {
         Color baseColor = new Color (0.94117f, 0.94117f, 0.94117f, 1);
         Color green = new Color(0.23529f, 0.68627f, 0.39215f, 1);
+        Color test = new Color(118/255f, 219/255f, 148/255f, 1);
         Color outColor;
 
         if (line.topMatch || line.bottomMatch)
         {
-            outColor = green;
+            outColor = test;
         }
         else outColor = baseColor;
 

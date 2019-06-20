@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_CHOOSEPOEM_.unity
+- path: Assets/_MAINMENU_.unity
   isLoaded: 1
   isActive: 1
