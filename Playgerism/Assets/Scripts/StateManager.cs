@@ -89,7 +89,6 @@ public class StateManager : MonoBehaviour {
         RectTransform rectTransform = content.GetComponent<RectTransform>();
         rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -numSlots);
         rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, 0);
-
     }
 
 

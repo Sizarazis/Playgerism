@@ -30,10 +30,9 @@ public class Stats : MonoBehaviour {
     // REQUIRES: nothing
     void SetContentHeight(int numItems)
     {
-        RectTransform content = transform.GetComponentInParent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -numItems);
+        RectTransform content = transform.GetComponent<RectTransform>();
+        content.offsetMin = new Vector2(content.offsetMin.x, -numItems*3);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
-
     }
 
 
@@ -70,13 +69,15 @@ public class Stats : MonoBehaviour {
         Vector3 position = statRecordPrefab.transform.localPosition;
         Quaternion rotation = statRecordPrefab.transform.localRotation;
 
+        SetContentHeight(stats.GetLength(0));
+
         for (int i = 0; i < stats.GetLength(0); i++)
         {
             string author = stats[i, 0].Trim();
             string poem = stats[i, 1].Trim();
             string time = stats[i, 2].Trim();
 
-            position = new Vector3(0, -28 - (i * 10), -1);
+            position = new Vector3(0, -30 - (i * 10), -5);
             GameObject stat = Instantiate(statRecordPrefab, position, rotation, this.transform);
 
             stat.transform.Find("Author").GetComponent<Text>().text = author;

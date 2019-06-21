@@ -5,9 +5,9 @@ info = {
 
 poem {
 	id = 0
-	title = Sonnet 1
+	title = Sonnet 01
 	size = 14
-	lines = {	
+	lines = {
 		FROM fairest creatures we desire increase,
 		That thereby beauty's rose might never die,
 		But as the riper should by time decease,
@@ -27,7 +27,7 @@ poem {
 
 poem {
 	id = 1
-	title = Sonnet 2
+	title = Sonnet 02
 	size = 14
 	lines = {
 		When forty winters shall beseige thy brow,
@@ -44,6 +44,121 @@ poem {
 		Proving his beauty by succession thine!
 		This were to be new made when thou art old,
 		And see thy blood warm when thou feel'st it cold.
+	}
+
+}
+
+poem {
+	id = 2
+	title = Sonnet 18
+	size = 14
+	lines = {
+		Shall I compare thee to a summer's day?
+		Thou art more lovely and more temperate:
+		Rough winds do shake the darling buds of May,
+		And summer's lease hath all too short a date:
+		Sometime too hot the eye of heaven shines,
+		And often is his gold complexion dimm'd;
+		And every fair from fair sometime declines,
+		By chance or nature's changing course untrimm'd;
+		But thy eternal summer shall not fade
+		Nor lose possession of that fair thou owest;
+		Nor shall Death brag thou wander'st in his shade,
+		When in eternal lines to time thou growest:
+		So long as men can breathe or eyes can see,
+		So long lives this and this gives life to thee.
+	}
+
+}
+
+poem {
+	id = 3
+	title = Sonnet 30
+	size = 14
+	lines = {
+		When to the sessions of sweet silent thought
+		I summon up remembrance of things past,
+		I sigh the lack of many a thing I sought,
+		And with old woes new wail my dear time's waste:
+		Then can I drown an eye, unused to flow,
+		For precious friends hid in death's dateless night,
+		And weep afresh love's long since cancell'd woe,
+		And moan the expense of many a vanish'd sight:
+		Then can I grieve at grievances foregone,
+		And heavily from woe to woe tell o'er
+		The sad account of fore-bemoaned moan,
+		Which I new pay as if not paid before.
+		But if the while I think on thee, dear friend,
+		All losses are restored and sorrows end.
+	}
+
+}
+
+poem {
+	id = 4
+	title = Sonnet 33
+	size = 14
+	lines = {
+		Full many a glorious morning have I seen
+		Flatter the mountain-tops with sovereign eye,
+		Kissing with golden face the meadows green,
+		Gilding pale streams with heavenly alchemy;
+		Anon permit the basest clouds to ride
+		With ugly rack on his celestial face,
+		And from the forlorn world his visage hide,
+		Stealing unseen to west with this disgrace:
+		Even so my sun one early morn did shine
+		With all triumphant splendor on my brow;
+		But out, alack! he was but one hour mine;
+		The region cloud hath mask'd him from me now.
+		Yet him for this my love no whit disdaineth;
+		Suns of the world may stain when heaven's sun staineth.
+	}
+
+}
+
+poem {
+	id = 5
+	title = Sonnet 73
+	size = 14
+	lines = {
+		That time of year thou mayst in me behold
+		When yellow leaves, or none, or few, do hang
+		Upon those boughs which shake against the cold,
+		Bare ruin'd choirs, where late the sweet birds sang.
+		In me thou seest the twilight of such day
+		As after sunset fadeth in the west,
+		Which by and by black night doth take away,
+		Death's second self, that seals up all in rest.
+		In me thou see'st the glowing of such fire
+		That on the ashes of his youth doth lie,
+		As the death-bed whereon it must expire
+		Consumed with that which it was nourish'd by.
+		This thou perceivest, which makes thy love more strong,
+		To love that well which thou must leave ere long.
+	}
+
+}
+
+poem {
+	id = 6
+	title = Sonnet 104
+	size = 14
+	lines = {
+		To me, fair friend, you never can be old,
+		For as you were when first your eye I eyed,
+		Such seems your beauty still. Three winters cold
+		Have from the forests shook three summers' pride,
+		Three beauteous springs to yellow autumn turn'd
+		In process of the seasons have I seen,
+		Three April perfumes in three hot Junes burn'd,
+		Since first I saw you fresh, which yet are green.
+		Ah! yet doth beauty, like a dial-hand,
+		Steal from his figure and no pace perceived;
+		So your sweet hue, which methinks still doth stand,
+		Hath motion and mine eye may be deceived:
+		For fear of which, hear this, thou age unbred;
+		Ere you were born was beauty's summer dead.
 	}
 
 }
