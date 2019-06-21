@@ -17,12 +17,11 @@ Free Mode: The player will select a poem and be given its lines scrambled. They 
 I think this mode might be fun if people want to make a different poem from the source lines.  </br>
 
 ### To Do
-1. Alphabetize poems and authors in the selection and stats pages
-2. Build the poem database
-3. Colour the line links uniquely (make it look like a rainbow at the start!)
-4. Animations
-5. Art
-6. IPhone and Android integration
+1. Build the poem database
+2. Colour the line links uniquely (make it look like a rainbow at the start!)
+3. Animations
+4. Art
+5. IPhone and Android integration
 
 ### Bugs and Issues
 - Horizontal text overflowing isn't handled
