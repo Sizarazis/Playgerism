@@ -1,0 +1,4 @@
+info = {
+	authID = 6
+	full name = John Milton
+}

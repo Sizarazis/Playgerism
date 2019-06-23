@@ -1,0 +1,4 @@
+info = {
+	authID = 10
+	full name = Thomas Wyatt
+}

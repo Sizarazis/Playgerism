@@ -1,0 +1,4 @@
+info = {
+	authID = 7
+	full name = Elizabeth Barrett Browning
+}

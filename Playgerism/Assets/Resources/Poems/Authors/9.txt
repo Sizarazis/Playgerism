@@ -1,0 +1,4 @@
+info = {
+	authID = 9
+	full name = William Blake
+}

@@ -2,15 +2,3 @@ info = {
 	authID = 2
 	full name = Algernon Charles Swinburne
 }
-
-poem {
-	id = 0
-	title = Hymn to Proserpine (After the Proclamation in Rome of the Christian Faith)
-	size = 4
-	lines = {
-		Vicisti, Galilæe.
-		I have lived long enough, having seen one thing, that love hath an end;
-		Goddess and maiden and queen, be near me now and befriend.
-		Thou art more than the day or the morrow, the seasons that laugh or that weep;
-	}
-}

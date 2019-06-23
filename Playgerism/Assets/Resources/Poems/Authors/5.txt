@@ -1,0 +1,4 @@
+info = {
+	authID = 5
+	full name = Christina Rossetti
+}

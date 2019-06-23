@@ -103,6 +103,7 @@ public class AuthorList : MonoBehaviour {
             abcList.Add(key);
         }
         abcList.Sort();
+        SetContentHeight(dict.Count);
 
         foreach (string name in abcList)
         {
@@ -121,8 +122,6 @@ public class AuthorList : MonoBehaviour {
             i++;
             yPos = yPos - 10;
         }
-
-        SetContentHeight(dict.Count);
     }
 
 
@@ -132,8 +131,8 @@ public class AuthorList : MonoBehaviour {
     // REQUIRES: nothing
     void SetContentHeight(int numItems)
     {
-        RectTransform content = transform.GetComponentInParent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -numItems);
+        RectTransform content = transform.GetComponent<RectTransform>();
+        content.offsetMin = new Vector2(content.offsetMin.x, -numItems - 15);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
 
     }

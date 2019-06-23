@@ -1,0 +1,4 @@
+info = {
+	authID = 12
+	full name = Robert Burns
+}

@@ -79,7 +79,7 @@ public class StateManager : MonoBehaviour {
     }
 
 
-
+    // TODO: THIS FUNCTION DOESN'T WORK AS INTENDED
     // EFFECTS: Sets the height of the Viewport to enable the whole poem to be scrolled
     // MODIFIES: this
     // REQUIRES: nothing
