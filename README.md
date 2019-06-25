@@ -25,4 +25,6 @@ I think this mode might be fun if people want to make a different poem from the 
 
 ### Bugs and Issues
 - Horizontal text overflowing isn't handled
+- Vertical scrolling bugged
+- Need to check device OS to set and get local location of files in the project.
 - Screen regions will be an issue (see how badly it fails when I test with phones)
