@@ -132,7 +132,7 @@ public class AuthorList : MonoBehaviour {
     void SetContentHeight(int numItems)
     {
         RectTransform content = transform.GetComponent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -numItems - 15);
+        content.offsetMin = new Vector2(content.offsetMin.x, -10 * numItems + 101);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
 
     }

@@ -87,7 +87,7 @@ public class StateManager : MonoBehaviour {
     {
         Transform content = transform.Find("Scroll View").Find("Viewport").Find("Content");
         RectTransform rectTransform = content.GetComponent<RectTransform>();
-        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -numSlots);
+        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -10*numSlots + 126);
         rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, 0);
     }
 
