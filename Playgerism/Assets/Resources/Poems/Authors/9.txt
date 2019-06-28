@@ -2,3 +2,211 @@ info = {
 	authID = 9
 	full name = William Blake
 }
+
+poem {
+	id = 0
+	title = Jerusalem
+	size = 16
+	lines = {
+		And did those feet in ancient time
+		Walk upon Englands mountains green:
+		And was the holy Lamb of God,
+		On Englands pleasant pastures seen!
+		And did the Countenance Divine,
+		Shine forth upon our clouded hills?
+		And was Jerusalem builded here,
+		Among these dark Satanic Mills?
+		Bring me my Bow of burning gold:
+		Bring me my arrows of desire:
+		Bring me my Spear: O clouds unfold!
+		Bring me my Chariot of fire!
+		I will not cease from Mental Fight,
+		Nor shall my sword sleep in my hand:
+		Till we have built Jerusalem,
+		In Englands green & pleasant Land.
+	}
+}
+
+poem {
+	id = 1
+	title = London
+	size = 16
+	lines = {
+		I wander thro' each charter'd street,
+		Near where the charter'd Thames does flow. 
+		And mark in every face I meet
+		Marks of weakness, marks of woe.
+		In every cry of every Man,
+		In every Infants cry of fear,
+		In every voice: in every ban,
+		The mind-forg'd manacles I hear 
+		How the Chimney-sweepers cry
+		Every blackning Church appalls, 
+		And the hapless Soldiers sigh
+		Runs in blood down Palace walls 
+		But most thro' midnight streets I hear
+		How the youthful Harlots curse
+		Blasts the new-born Infants tear 
+		And blights with plagues the Marriage hearse 
+	}
+}
+
+poem {
+	id = 2
+	title = The Sick Rose
+	size = 8
+	lines = {
+		O Rose thou art sick. 
+		The invisible worm, 
+		That flies in the night 
+		In the howling storm: 
+		Has found out thy bed
+		Of crimson joy:
+		And his dark secret love
+		Does thy life destroy.
+	}
+}
+
+poem {
+	id = 3
+	title = A Poison Tree
+	size = 26
+	lines = {
+		I was angry with my friend; 
+		I told my wrath, my wrath did end.
+		I was angry with my foe: 
+		I told it not, my wrath did grow. 
+		And I waterd it in fears,
+		Night & morning with my tears: 
+		And I sunned it with smiles,
+		And with soft deceitful wiles. 
+		And it grew both day and night. 
+		Till it bore an apple bright. 
+		And my foe beheld it shine,
+		And he knew that it was mine. 
+		And into my garden stole, 
+		When the night had veild the pole; 
+		In the morning glad I see; 
+		My foe outstretched beneath the tree.
+	}
+}
+
+poem {
+	id = 4
+	title = The Tyger
+	size = 24
+	lines = {
+		Tyger Tyger, burning bright, 
+		In the forests of the night; 
+		What immortal hand or eye, 
+		Could frame thy fearful symmetry?
+		In what distant deeps or skies. 
+		Burnt the fire of thine eyes?
+		On what wings dare he aspire?
+		What the hand, dare seize the fire?
+		And what shoulder, & what art,
+		Could twist the sinews of thy heart?
+		And when thy heart began to beat,
+		What dread hand? & what dread feet?
+		What the hammer? what the chain, 
+		In what furnace was thy brain?
+		What the anvil? what dread grasp, 
+		Dare its deadly terrors clasp! 
+		When the stars threw down their spears 
+		And water'd heaven with their tears: 
+		Did he smile his work to see?
+		Did he who made the Lamb make thee?
+		Tyger Tyger burning bright, 
+		In the forests of the night: 
+		What immortal hand or eye,
+		Dare frame thy fearful symmetry?
+	}
+}
+
+poem {
+	id = 5
+	title = The Clod and Pebble
+	size = 12
+	lines = {
+		"Love seeketh not itself to please,
+		Nor for itself hath any care,
+		But for another gives its ease,
+		And builds a Heaven in Hell's despair."
+		So sung a little Clod of Clay
+		Trodden with the cattle's feet,
+		But a Pebble of the brook
+		Warbled out these metres meet:
+		"Love seeketh only self to please,
+		To bind another to its delight,
+		Joys in another's loss of ease,
+		And builds a Hell in Heaven's despite." 
+	}
+}
+
+poem {
+	id = 6
+	title = The Lamb
+	size = 20
+	lines = {
+		Little Lamb who made thee 
+		Dost thou know who made thee 
+		Gave thee life & bid thee feed. 
+		By the stream & o'er the mead;
+		Gave thee clothing of delight,
+		Softest clothing wooly bright;
+		Gave thee such a tender voice,
+		Making all the vales rejoice! 
+		Little Lamb who made thee 
+		Dost thou know who made thee 
+		Little Lamb I'll tell thee,
+		Little Lamb I'll tell thee!
+		He is called by thy name,
+		For he calls himself a Lamb: 
+		He is meek & he is mild, 
+		He became a little child: 
+		I a child & thou a lamb, 
+		We are called by his name.
+		Little Lamb God bless thee. 
+		Little Lamb God bless thee.
+	}
+}
+
+poem {
+	id = 7
+	title = The Garden of Love
+	size = 12
+	lines = {
+		I went to the Garden of Love,
+		And saw what I never had seen:
+		A Chapel was built in the midst,
+		Where I used to play on the green.
+		And the gates of this Chapel were shut,
+		And Thou shalt not. writ over the door;
+		So I turn'd to the Garden of Love,
+		That so many sweet flowers bore. 
+		And I saw it was filled with graves,
+		And tomb-stones where flowers should be:
+		And Priests in black gowns, were walking their rounds,
+		And binding with briars, my joys & desires.
+	}
+}
+
+poem {
+	id = 8
+	title = Never Seek to Tell thy Love
+	size = 12
+	lines = {
+		Never seek to tell thy love
+		Love that never told can be 
+		For the gentle wind does move
+		Silently invisibly
+		I told my love I told my love 
+		I told her all my heart 
+		Trembling cold in ghastly fears
+		Ah she doth depart
+		Soon as she was gone from me
+		A traveller came by
+		Silently invisibly 
+		O was no deny 
+	}
+}

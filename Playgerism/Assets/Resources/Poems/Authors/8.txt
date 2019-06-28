@@ -2,3 +2,281 @@ info = {
 	authID = 8
 	full name = John Donne
 }
+
+poem {
+	id = 0
+	title = Go and Catch a Falling Star
+	size = 27
+	lines = {
+		Go and catch a falling star,
+		Get with child a mandrake root,
+		Tell me where all past years are,
+		Or who cleft the devil's foot,
+		Teach me to hear mermaids singing,
+		Or to keep off envy's stinging,
+		And find
+		What wind
+		Serves to advance an honest mind.
+		If thou be'st born to strange sights,
+		Things invisible to see,
+		Ride ten thousand days and nights,
+		Till age snow white hairs on thee,
+		Thou, when thou return'st, wilt tell me,
+		All strange wonders that befell thee,
+		And swear,
+		No where
+		Lives a woman true, and fair.
+		If thou find'st one, let me know,
+		Such a pilgrimage were sweet;
+		Yet do not, I would not go,
+		Though at next door we might meet;
+		Though she were true, when you met her,
+		And last, till you write your letter,
+		Yet she
+		Will be
+		False, ere I come, to two, or three.
+	}
+}
+
+poem {
+	id = 1
+	title = Batter my Heart
+	size = 14
+	lines = {
+		Batter my heart, three-person'd God, for you
+		As yet but knock, breathe, shine, and seek to mend;
+		That I may rise and stand, o'erthrow me, and bend
+		Your force to break, blow, burn, and make me new.
+		I, like an usurp'd town to another due,
+		Labor to admit you, but oh, to no end;
+		Reason, your viceroy in me, me should defend,
+		But is captiv'd, and proves weak or untrue.
+		Yet dearly I love you, and would be lov'd fain,
+		But am betroth'd unto your enemy;
+		Divorce me, untie or break that knot again,
+		Take me to you, imprison me, for I,
+		Except you enthrall me, never shall be free,
+		Nor ever chaste, except you ravish me. 
+	}
+}
+
+poem {
+	id = 2
+	title = A Valediction: Forbidden Mourning
+	size = 36
+	lines = {
+		As virtuous men pass mildly away,
+		And whisper to their souls to go,
+		Whilst some of their sad friends do say
+		The breath goes now, and some say, No:
+		So let us melt, and make no noise,
+		No tear-floods, nor sigh-tempests move;
+		'Twere profanation of our joys
+		To tell the laity our love.
+		Moving of th' earth brings harms and fears,
+		Men reckon what it did, and meant;
+		But trepidation of the spheres,
+		Though greater far, is innocent.
+		Dull sublunary lovers' love
+		(Whose soul is sense) cannot admit
+		Absence, because it doth remove
+		Those things which elemented it.
+		But we by a love so much refined,
+		That our selves know not what it is,
+		Inter-assured of the mind,
+		Care less, eyes, lips, and hands to miss.
+		Our two souls therefore, which are one,
+		Though I must go, endure not yet
+		A breach, but an expansion,
+		Like gold to airy thinness beat.
+		If they be two, they are two so
+		As stiff twin compasses are two;
+		Thy soul, the fixed foot, makes no show
+		To move, but doth, if the other do.
+		And though it in the center sit,
+		Yet when the other far doth roam,
+		It leans and hearkens after it,
+		And grows erect, as that comes home.
+		Such wilt thou be to me, who must,
+		Like th' other foot, obliquely run;
+		Thy firmness makes my circle just,
+		And makes me end where I begun. 
+	}
+}
+
+poem {
+	id = 3
+	title = The Sun Rising
+	size = 30
+	lines = {
+		Busy old fool, unruly sun,
+		Why dost thou thus,
+		Through windows, and through curtains call on us?
+		Must to thy motions lovers' seasons run?
+		Saucy pedantic wretch, go chide
+		Late school boys and sour prentices,
+		Go tell court huntsmen that the king will ride,
+		Call country ants to harvest offices,
+		Love, all alike, no season knows nor clime,
+		Nor hours, days, months, which are the rags of time.
+		Thy beams, so reverend and strong
+		Why shouldst thou think?
+		I could eclipse and cloud them with a wink,
+		But that I would not lose her sight so long;
+		If her eyes have not blinded thine,
+		Look, and tomorrow late, tell me,
+		Whether both th' Indias of spice and mine
+		Be where thou leftst them, or lie here with me.
+		Ask for those kings whom thou saw'st yesterday,
+		And thou shalt hear, All here in one bed lay.
+		She's all states, and all princes, I,
+		Nothing else is.
+		Princes do but play us; compared to this,
+		All honor's mimic, all wealth alchemy.
+		Thou, sun, art half as happy as we,
+		In that the world's contracted thus.
+		Thine age asks ease, and since thy duties be
+		To warm the world, that's done in warming us.
+		Shine here to us, and thou art everywhere;
+		This bed thy center is, these walls, thy sphere.
+	}
+}
+
+poem {
+	id = 4
+	title = The Canonizations
+	size = 41
+	lines = {
+		For God's sake hold your tongue, and let me love,
+		Or chide my palsy, or my gout,
+		My five gray hairs, or ruined fortune flout,
+		With wealth your state, your mind with arts improve,
+		Take you a course, get you a place,
+		Observe his honor, or his grace,
+		Or the king's real, or his stampèd face
+		Contemplate; what you will, approve,
+		So you will let me love.
+		Alas, alas, who's injured by my love?
+		What merchant's ships have my sighs drowned?
+		Who says my tears have overflowed his ground?
+		When did my colds a forward spring remove?
+		When did the heats which my veins fill
+		Add one more to the plaguy bill?
+		Soldiers find wars, and lawyers find out still
+		Litigious men, which quarrels move,
+		Though she and I do love.
+		Call us what you will, we are made such by love;
+		Call her one, me another fly,
+		We're tapers too, and at our own cost die,
+		And we in us find the eagle and the dove.
+		The phoenix riddle hath more wit
+		By us; we two being one, are it.
+		So, to one neutral thing both sexes fit.
+		We die and rise the same, and prove
+		Mysterious by this love.
+		We can die by it, if not live by love,
+		And if unfit for tombs and hearse
+		Our legend be, it will be fit for verse;
+		And if no piece of chronicle we prove,
+		We'll build in sonnets pretty rooms;
+		As well a well-wrought urn becomes
+		The greatest ashes, as half-acre tombs,
+		And by these hymns, all shall approve
+		Us canonized for Love.
+		And thus invoke us: "You, whom reverend love
+		Made one another's hermitage;
+		You, to whom love was peace, that now is rage;
+		Who did the whole world's soul contract, and drove
+		Into the glasses of your eyes
+		(So made such mirrors, and such spies,
+		That they did all to you epitomize)
+		Countries, towns, courts: beg from above
+		A pattern of your love!"
+	}
+}
+
+poem {
+	id = 5
+	title = Death, be not Proud
+	size = 14
+	lines = {
+		Death, be not proud, though some have called thee
+		Mighty and dreadful, for thou art not so;
+		For those whom thou think'st thou dost overthrow
+		Die not, poor Death, nor yet canst thou kill me.
+		From rest and sleep, which but thy pictures be,
+		Much pleasure; then from thee much more must flow,
+		And soonest our best men with thee do go,
+		Rest of their bones, and soul's delivery.
+		Thou art slave to fate, chance, kings, and desperate men,
+		And dost with poison, war, and sickness dwell,
+		And poppy or charms can make us sleep as well
+		And better than thy stroke; why swell'st thou then?
+		One short sleep past, we wake eternally
+		And death shall be no more; Death, thou shalt die. 
+	}
+}
+
+poem {
+	id = 6
+	title = The Flea
+	size = 27
+	lines = {
+		Mark but this flea, and mark in this,   
+		How little that which thou deniest me is;   
+		It sucked me first, and now sucks thee,
+		And in this flea our two bloods mingled be;   
+		Thou know’st that this cannot be said
+		A sin, nor shame, nor loss of maidenhead,
+		Yet this enjoys before it woo,
+		And pampered swells with one blood made of two,
+		And this, alas, is more than we would do.
+		Oh stay, three lives in one flea spare,
+		Where we almost, nay more than married are.   
+		This flea is you and I, and this
+		Our marriage bed, and marriage temple is;   
+		Though parents grudge, and you, w'are met,   
+		And cloistered in these living walls of jet.
+		Though use make you apt to kill me,
+		Let not to that, self-murder added be,
+		And sacrilege, three sins in killing three.
+		Cruel and sudden, hast thou since
+		Purpled thy nail, in blood of innocence?   
+		Wherein could this flea guilty be,
+		Except in that drop which it sucked from thee?   
+		Yet thou triumph’st, and say'st that thou   
+		Find’st not thy self, nor me the weaker now;
+		’Tis true; then learn how false, fears be:
+		Just so much honor, when thou yield’st to me,
+		Will waste, as this flea’s death took life from thee.
+	}
+}
+
+poem {
+	id = 7
+	title = The Good-Morrow
+	size = 21
+	lines = {
+		I wonder, by my troth, what thou and I
+		Did, till we loved? Were we not weaned till then?
+		But sucked on country pleasures, childishly?
+		Or snorted we in the Seven Sleepers’ den?
+		’Twas so; but this, all pleasures fancies be.
+		If ever any beauty I did see,
+		Which I desired, and got, ’twas but a dream of thee.
+		And now good-morrow to our waking souls,
+		Which watch not one another out of fear;
+		For love, all love of other sights controls,
+		And makes one little room an everywhere.
+		Let sea-discoverers to new worlds have gone,
+		Let maps to other, worlds on worlds have shown,
+		Let us possess one world, each hath one, and is one.
+		My face in thine eye, thine in mine appears,
+		And true plain hearts do in the faces rest;
+		Where can we find two better hemispheres,
+		Without sharp north, without declining west?
+		Whatever dies, was not mixed equally;
+		If our two loves be one, or, thou and I
+		Love so alike, that none do slacken, none can die.
+	}
+}

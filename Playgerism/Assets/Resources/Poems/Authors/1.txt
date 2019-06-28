@@ -16,7 +16,7 @@ poem {
 		And teach them thine own sorrow, say: "With me
 		Died Adonais; till the Future dares
 		Forget the Past, his fate and fame shall be
-		An echo and a light unto eternity!" 
+		An echo and a light unto eternity!
 	}
 }
 
@@ -88,7 +88,7 @@ poem {
 		Look on my Works, ye Mighty, and despair!
 		Nothing beside remains. Round the decay
 		Of that colossal Wreck, boundless and bare
-		The lone and level sands stretch far away.”
+		The lone and level sands stretch far away.
 	}
 }
 

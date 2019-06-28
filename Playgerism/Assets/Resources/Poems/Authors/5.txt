@@ -2,3 +2,165 @@ info = {
 	authID = 5
 	full name = Christina Rossetti
 }
+
+poem {
+	id = 0
+	title = A Birthday
+	size = 16
+	lines = {
+		My heart is like a singing bird
+        Whose nest is in a water'd shoot;
+		My heart is like an apple-tree
+        Whose boughs are bent with thickset fruit;
+		My heart is like a rainbow shell
+        That paddles in a halcyon sea;
+		My heart is gladder than all these
+        Because my love is come to me.
+		Raise me a dais of silk and down;
+        Hang it with vair and purple dyes;
+		Carve it in doves and pomegranates,
+        And peacocks with a hundred eyes;
+		Work it in gold and silver grapes,
+        In leaves and silver fleurs-de-lys;
+		Because the birthday of my life
+        Is come, my love is come to me.
+	}
+}
+
+poem {
+	id = 1
+	title = In the Bleak Midwinter
+	size = 20
+	lines = {
+		In the bleak midwinter, frosty wind made moan,
+		Earth stood hard as iron, water like a stone;
+		Snow had fallen, snow on snow, snow on snow,
+		In the bleak midwinter, long ago.
+		Our God, Heaven cannot hold Him, nor earth sustain;
+		Heaven and earth shall flee away when He comes to reign.
+		In the bleak midwinter a stable place sufficed
+		The Lord God Almighty, Jesus Christ.
+		Enough for Him, whom cherubim, worship night and day,
+		Breastful of milk, and a mangerful of hay;
+		Enough for Him, whom angels fall before,
+		The ox and ass and camel which adore.
+		Angels and archangels may have gathered there,
+		Cherubim and seraphim thronged the air;
+		But His mother only, in her maiden bliss,
+		Worshipped the beloved with a kiss.
+		What can I give Him, poor as I am?
+		If I were a shepherd, I would bring a lamb;
+		If I were a Wise Man, I would do my part;
+		Yet what I can I give Him: give my heart.
+	}
+}
+
+poem {
+	id = 2
+	title = In An Artist's Studio
+	size = 14
+	lines = {
+		One face looks out from all his canvases,
+		One selfsame figure sits or walks or leans:
+		We found her hidden just behind those screens,
+		That mirror gave back all her loveliness.
+		A queen in opal or in ruby dress,
+		A nameless girl in freshest summer-greens,
+		A saint, an angel — every canvas means
+		The same one meaning, neither more or less.
+		He feeds upon her face by day and night,
+		And she with true kind eyes looks back on him,
+		Fair as the moon and joyful as the light:
+		Not wan with waiting, not with sorrow dim;
+		Not as she is, but was when hope shone bright;
+		Not as she is, but as she fills his dream.
+	}
+}
+
+poem {
+	id = 3
+	title = When I am Dead, my Dearest
+	size = 16
+	lines = {
+		When I am dead, my dearest,
+		Sing no sad songs for me;
+		Plant thou no roses at my head,
+		Nor shady cypress tree:
+		Be the green grass above me
+		With showers and dewdrops wet;
+		And if thou wilt, remember,
+		And if thou wilt, forget.
+		I shall not see the shadows,
+		I shall not feel the rain;
+		I shall not hear the nightingale
+		Sing on, as if in pain:
+		And dreaming through the twilight
+		That doth not rise nor set,
+		Haply I may remember,
+		And haply may forget. 
+	}
+}
+
+poem {
+	id = 4
+	title = Remember
+	size = 14
+	lines = {
+		Remember me when I am gone away,
+        Gone far away into the silent land;
+        When you can no more hold me by the hand,
+		Nor I half turn to go yet turning stay.
+		Remember me when no more day by day
+        You tell me of our future that you plann'd:
+        Only remember me; you understand
+		It will be late to counsel then or pray.
+		Yet if you should forget me for a while
+        And afterwards remember, do not grieve:
+        For if the darkness and corruption leave
+        A vestige of the thoughts that once I had,
+		Better by far you should forget and smile
+        Than that you should remember and be sad.
+	}
+}
+
+poem {
+	id = 5
+	title = Winter: My Secret
+	size = 34
+	lines = {
+		I tell my secret? No indeed, not I;
+		Perhaps some day, who knows?
+		But not today; it froze, and blows and snows,
+		And you’re too curious: fie!
+		You want to hear it? well:
+		Only, my secret’s mine, and I won’t tell.
+		Or, after all, perhaps there’s none:
+		Suppose there is no secret after all,
+		But only just my fun.
+		Today’s a nipping day, a biting day;
+		In which one wants a shawl,
+		A veil, a cloak, and other wraps:
+		I cannot ope to everyone who taps,
+		And let the draughts come whistling thro’ my hall;
+		Come bounding and surrounding me,
+		Come buffeting, astounding me,
+		Nipping and clipping thro’ my wraps and all.
+		I wear my mask for warmth: who ever shows
+		His nose to Russian snows
+		To be pecked at by every wind that blows?
+		You would not peck? I thank you for good will,
+		Believe, but leave the truth untested still.
+		Spring’s an expansive time: yet I don’t trust
+		March with its peck of dust,
+		Nor April with its rainbow-crowned brief showers,
+		Nor even May, whose flowers
+		One frost may wither thro’ the sunless hours.
+		Perhaps some languid summer day,
+		When drowsy birds sing less and less,
+		And golden fruit is ripening to excess,
+		If there’s not too much sun nor too much cloud,
+		And the warm wind is neither still nor loud,
+		Perhaps my secret I may say,
+		Or you may guess.
+	}
+}

@@ -2,3 +2,134 @@ info = {
 	authID = 12
 	full name = Robert Burns
 }
+
+poem {
+	id = 0
+	title = To a Mouse
+	size = 48
+	lines = {
+		Wee, sleeket, cowran, tim’rous beastie,
+		O, what a panic’s in thy breastie!
+		Thou need na start awa sae hasty,
+		Wi’ bickerin brattle!
+		I wad be laith to rin an’ chase thee
+		Wi’ murd’ring pattle!
+		I’m truly sorry Man’s dominion
+		Has broken Nature’s social union,
+		An’ justifies that ill opinion,
+		Which makes thee startle,
+		At me, thy poor, earth-born companion,
+		An’ fellow-mortal!
+		I doubt na, whyles, but thou may thieve;
+		What then? poor beastie, thou maun live!
+		A daimen-icker in a thrave
+		’S a sma’ request:
+		I’ll get a blessin wi’ the lave,
+		An’ never miss ’t!
+		Thy wee-bit housie, too, in ruin!
+		It’s silly wa’s the win’s are strewin!
+		An’ naething, now, to big a new ane,
+		O’ foggage green!
+		An’ bleak December’s winds ensuin,
+		Baith snell an’ keen!
+		Thou saw the fields laid bare an’ waste,
+		An’ weary Winter comin fast,
+		An’ cozie here, beneath the blast,
+		Thou thought to dwell,
+		Till crash! the cruel coulter past
+		Out thro’ thy cell.
+		That wee-bit heap o’ leaves an’ stibble
+		Has cost thee monie a weary nibble!
+		Now thou’s turn’d out, for a’ thy trouble,
+		But house or hald,
+		To thole the Winter’s sleety dribble,
+		An’ cranreuch cauld!
+		But Mousie, thou art no thy-lane,
+		In proving foresight may be vain:
+		The best laid schemes o’ Mice an’ Men
+		Gang aft agley,
+		An’ lea’e us nought but grief an’ pain,
+		For promis’d joy!
+		Still, thou art blest, compar’d wi’ me!
+		The present only toucheth thee:
+		But Och! I backward cast my e’e,
+		On prospects drear!
+		An’ forward tho’ I canna see,
+		I guess an’ fear!
+	}
+}
+
+poem {
+	id = 1
+	title = Ye Flowery Banks (Bonie Doon)
+	size = 20
+	lines = {
+		Ye flowery banks o' bonie Doon,
+        How can ye blume sae fair?
+		How can ye chant, ye little birds,
+        And I sae fu' o' care?
+		Thou'll break my heart, thou bonie bird,
+        That sings upon the bough;
+		Thou minds me o' the happy days,
+        When my fause love was true.
+		Thou'll break my heart, thou bonie bird,
+        That sings beside thy mate;
+		For sae I sat, and sae I sang,
+        And wist na o' my fate.
+		Aft hae I rov'd by bonie Doon
+        To see the wood-bine twine,
+		And ilka bird sang o' its luve,
+        And sae did I o' mine.
+		Wi' lightsome heart I pu'd a rose
+        Frae aff its thorny tree;
+		And my fause luver staw my rose
+        But left the thorn wi' me. 
+	}
+}
+
+poem {
+	id = 2
+	title = John Anderson my jo, John
+	size = 16
+	lines = {
+		John Anderson my jo, John,
+		When we were first acquent,
+		Your locks were like the raven,
+		Your bonie brow was brent;
+		But now your brow is beld, John,
+		Your locks are like the snaw,
+		but blessings on your frosty pow,
+		John Anderson, my jo!
+		John Anderson my jo, John,
+		We clamb the hill thegither,
+		And monie a cantie day, John,
+		We've had wi' ane anither;
+		Now we maun totter down, John,
+		And hand in hand we'll go,
+		And sleep thegither at the foot,
+		John Anderson, my jo! 
+	}
+
+poem {
+	id = 3
+	title = A Red, Red Rose
+	size = 16
+	lines = {
+		O my Luve is like a red, red rose
+		That’s newly sprung in June;
+		O my Luve is like the melody
+		That’s sweetly played in tune.
+		So fair art thou, my bonnie lass,
+		So deep in luve am I;
+		And I will luve thee still, my dear,
+		Till a’ the seas gang dry.
+		Till a’ the seas gang dry, my dear,
+		And the rocks melt wi’ the sun;
+		I will love thee still, my dear,
+		While the sands o’ life shall run.
+		And fare thee weel, my only luve!
+		And fare thee weel awhile!
+		And I will come again, my luve,
+		Though it were ten thousand mile.
+	}
+}

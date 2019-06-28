@@ -2,3 +2,196 @@ info = {
 	authID = 11
 	full name = William Wordsworth
 }
+
+poem {
+	id = 0
+	title = My Heart Leaps Up
+	size = 9
+	lines = {
+		My heart leaps up when I behold 
+		A rainbow in the sky:
+		So was it when my life began; 
+		So is it now I am a man; 
+		So be it when I shall grow old, 
+		Or let me die!
+		The Child is father of the Man;
+		And I could wish my days to be
+		Bound each to each by natural piety.
+	}
+}
+
+poem {
+	id = 1
+	title = Composed upon Westminster Bridge
+	size = 14
+	lines = {
+		Earth has not any thing to show more fair:
+		Dull would he be of soul who could pass by
+		A sight so touching in its majesty:
+		This City now doth, like a garment, wear
+		The beauty of the morning; silent, bare,
+		Ships, towers, domes, theatres, and temples lie
+		Open unto the fields, and to the sky;
+		All bright and glittering in the smokeless air.
+		Never did sun more beautifully steep
+		In his first splendour, valley, rock, or hill;
+		Ne'er saw I, never felt, a calm so deep!
+		The river glideth at his own sweet will:
+		Dear God! the very houses seem asleep;
+		And all that mighty heart is lying still!
+	}
+}
+
+poem {
+	id = 2
+	title = I Wandered Lonely as a Cloud
+	size = 24
+	lines = {
+		I wandered lonely as a cloud
+		That floats on high o'er vales and hills,
+		When all at once I saw a crowd,
+		A host, of golden daffodils;
+		Beside the lake, beneath the trees,
+		Fluttering and dancing in the breeze.
+		Continuous as the stars that shine
+		And twinkle on the milky way,
+		They stretched in never-ending line
+		Along the margin of a bay:
+		Ten thousand saw I at a glance,
+		Tossing their heads in sprightly dance.
+		The waves beside them danced; but they
+		Out-did the sparkling waves in glee:
+		A poet could not but be gay,
+		In such a jocund company:
+		I gazed—and gazed—but little thought
+		What wealth the show to me had brought:
+		For oft, when on my couch I lie
+		In vacant or in pensive mood,
+		They flash upon that inward eye
+		Which is the bliss of solitude;
+		And then my heart with pleasure fills,
+		And dances with the daffodils.
+	}
+}
+
+poem {
+	id = 3
+	title = London, 1802
+	size = 14
+	lines = {
+		Milton! thou shouldst be living at this hour:
+		England hath need of thee: she is a fen
+		Of stagnant waters: altar, sword, and pen,
+		Fireside, the heroic wealth of hall and bower,
+		Have forfeited their ancient English dower
+		Of inward happiness. We are selfish men;
+		Oh! raise us up, return to us again;
+		And give us manners, virtue, freedom, power.
+		Thy soul was like a Star, and dwelt apart:
+		Thou hadst a voice whose sound was like the sea:
+		Pure as the naked heavens, majestic, free,
+		So didst thou travel on life's common way,
+		In cheerful godliness; and yet thy heart
+		The lowliest duties on herself did lay.
+	}
+}
+
+poem {
+	id = 4
+	title = A Slumber did my Spirit Seal
+	size = 8
+	lines = {
+		A slumber did my spirit seal;
+		I had no human fears:
+		She seemed a thing that could not feel
+		The touch of earthly years.
+		No motion has she now, no force;
+		She neither hears nor sees;
+		Rolled round in earth's diurnal course,
+		With rocks, and stones, and trees. 
+	}
+}
+
+poem {
+	id = 5
+	title = The Solitary Reaper
+	size = 32
+	lines = {
+		Behold her, single in the field,
+		Yon solitary Highland Lass!
+		Reaping and singing by herself;
+		Stop here, or gently pass!
+		Alone she cuts and binds the grain,
+		And sings a melancholy strain;
+		O listen! for the Vale profound
+		Is overflowing with the sound.
+		No Nightingale did ever chaunt
+		More welcome notes to weary bands
+		Of travellers in some shady haunt,
+		Among Arabian sands:
+		A voice so thrilling ne'er was heard
+		In spring-time from the Cuckoo-bird,
+		Breaking the silence of the seas
+		Among the farthest Hebrides.
+		Will no one tell me what she sings?—
+		Perhaps the plaintive numbers flow
+		For old, unhappy, far-off things,
+		And battles long ago:
+		Or is it some more humble lay,
+		Familiar matter of to-day?
+		Some natural sorrow, loss, or pain,
+		That has been, and may be again?
+		Whate'er the theme, the Maiden sang
+		As if her song could have no ending;
+		I saw her singing at her work,
+		And o'er the sickle bending;—
+		I listened, motionless and still;
+		And, as I mounted up the hill,
+		The music in my heart I bore,
+		Long after it was heard no more. 
+	}
+}
+
+poem {
+	id = 6
+	title = Surprised by Joy
+	size = 14
+	lines = {
+		Surprised by joy—impatient as the Wind
+		I turned to share the transport—Oh! with whom
+		But Thee, long buried in the silent Tomb,
+		That spot which no vicissitude can find?
+		Love, faithful love, recalled thee to my mind—
+		But how could I forget thee?—Through what power,
+		Even for the least division of an hour,
+		Have I been so beguiled as to be blind
+		To my most grievous loss!—That thought’s return
+		Was the worst pang that sorrow ever bore,
+		Save one, one only, when I stood forlorn,
+		Knowing my heart’s best treasure was no more;
+		That neither present time, nor years unborn
+		Could to my sight that heavenly face restore. 
+	}
+}
+
+poem {
+	id = 7
+	title = It is a Beauteous Evening
+	size = 14
+	lines = {
+		It is a beauteous evening, calm and free,
+		The holy time is quiet as a Nun
+		Breathless with adoration; the broad sun
+		Is sinking down in its tranquility;
+		The gentleness of heaven broods o'er the Sea;
+		Listen! the mighty Being is awake,
+		And doth with his eternal motion make
+		A sound like thunder—everlastingly.
+		Dear child! dear Girl! that walkest with me here,
+		If thou appear untouched by solemn thought,
+		Thy nature is not therefore less divine:
+		Thou liest in Abraham's bosom all the year;
+		And worshipp'st at the Temple's inner shrine,
+		God being with thee when we know it not. 
+	}
+}

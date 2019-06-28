@@ -2,3 +2,154 @@ info = {
 	authID = 10
 	full name = Thomas Wyatt
 }
+
+poem {
+	id = 0
+	title = Whose List to Hunt
+	size = 14
+	lines = {
+		Whoso list to hunt, I know where is an hind,
+		But as for me, hélas, I may no more.
+		The vain travail hath wearied me so sore,
+		I am of them that farthest cometh behind.
+		Yet may I by no means my wearied mind
+		Draw from the deer, but as she fleeth afore
+		Fainting I follow. I leave off therefore,
+		Sithens in a net I seek to hold the wind.
+		Who list her hunt, I put him out of doubt,
+		As well as I may spend his time in vain.
+		And graven with diamonds in letters plain
+		There is written, her fair neck round about:
+		Noli me tangere, for Caesar's I am,
+		And wild for to hold, though I seem tame. 
+	}
+}
+
+poem {
+	id = 1
+	title = They Flee From Me
+	size = 21
+	lines = {
+		They flee from me that sometime did me seek
+		With naked foot, stalking in my chamber.
+		I have seen them gentle, tame, and meek,
+		That now are wild and do not remember
+		That sometime they put themself in danger
+		To take bread at my hand; and now they range,
+		Busily seeking with a continual change.
+		Thanked be fortune it hath been otherwise
+		Twenty times better; but once in special,
+		In thin array after a pleasant guise,
+		When her loose gown from her shoulders did fall,
+		And she me caught in her arms long and small;
+		Therewithall sweetly did me kiss
+		And softly said, “Dear heart, how like you this?”
+		It was no dream: I lay broad waking.
+		But all is turned thorough my gentleness
+		Into a strange fashion of forsaking;
+		And I have leave to go of her goodness,
+		And she also, to use newfangleness.
+		But since that I so kindly am served
+		I would fain know what she hath deserved.
+	}
+}
+
+poem {
+	id = 2
+	title = Forget not Yet the Tried Intent
+	size = 20
+	lines = {
+		Forget not yet the tried intent
+		Of such a truth as I have meant;
+		My great travail so gladly spent,
+		Forget not yet.
+		Forget not yet when first began
+		The weary life ye know, since whan
+		The suit, the service, none tell can;
+		Forget not yet.
+		Forget not yet the great assays,
+		The cruel wrong, the scornful ways;
+		The painful patience in denays,
+		Forget not yet.
+		Forget not yet, forget not this,
+		How long ago hath been and is
+		The mind that never meant amiss;
+		Forget not yet.
+		Forget not then thine own approved,
+		The which so long hath thee so loved,
+		Whose steadfast faith yet never moved;
+		Forget not this. 
+	}
+}
+
+poem {
+	id = 3
+	title = The Long Love
+	size = 14
+	lines = {
+		The longe love that in my thought doth harbour
+		And in mine hert doth keep his residence,
+		Into my face presseth with bold pretence
+		And therein campeth, spreading his banner.
+		She that me learneth to love and suffer
+		And will that my trust and lustes negligence
+		Be rayned by reason, shame, and reverence,
+		With his hardiness taketh displeasure.
+		Wherewithall unto the hert's forest he fleeth,
+		Leaving his enterprise with pain and cry,
+		And there him hideth and not appeareth.
+		What may I do when my master feareth
+		But in the field with him to live and die?
+		For good is the life ending faithfully. 
+	}
+}
+
+poem {
+	id = 4
+	title = And Wilt thou Leave me Thus?
+	size = 24
+	lines = {
+		And wilt thou leave me thus?
+		Say nay, say nay, for shame,
+		To save thee from the blame
+		Of all my grief and grame;
+		And wilt thou leave me thus?
+		Say nay, say nay!
+		And wilt thou leave me thus,
+		That hath loved thee so long
+		In wealth and woe among?
+		And is thy heart so strong
+		As for to leave me thus?
+		Say nay, say nay!
+		And wilt thou leave me thus,
+		That hath given thee my heart
+		Never for to depart,
+		Nother for pain nor smart;
+		And wilt thou leave me thus?
+		Say nay, say nay!
+		And wilt thou leave me thus
+		And have no more pity
+		Of him that loveth thee?
+		Hélas, thy cruelty!
+		And wilt thou leave me thus?
+		Say nay, say nay!
+	}
+}
+
+poem {
+	id = 5
+	title = Stand Whoso List
+	size = 10
+	lines = {
+		Stand whoso list upon the slipper top
+		Of court’s estates, and let me here rejoice;
+		And use me quiet without let or stop,
+		Unknown in court, that hath such brackish joys:
+		In hidden place, so let my days forth pass,
+		That when my years be done, withouten noise,
+		I may die agèd after the common trace,
+		For him death gripeth right hard by the crope
+		That is much known of other; and of himself alas,
+		Doth die unknown, dazed with dreadful face.
+	}
+}

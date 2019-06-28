@@ -2,3 +2,133 @@ info = {
 	authID = 6
 	full name = John Milton
 }
+
+poem {
+	id = 0
+	title = On Shakespeare
+	size = 16
+	lines = {
+		What needs my Shakespeare, for his honoured bones,
+		The labour of an age in pilèd stones?
+		Or that his hollowed relics should be hid
+		Under a stary-pointing pyramid?
+		Dear son of Memory, great heir of Fame,
+		What need’st thou such weak witness of thy name?
+		Thou, in our wonder and astonishment,
+		Hast built thyself a livelong monument.
+		For whilst, to the shame of slow-endeavouring art,
+		Thy easy numbers flow, and that each heart
+		Hath, from the leaves of thy unvalued book,
+		Those Delphic lines with deep impression took;
+		Then thou, our fancy of itself bereaving,
+		Dost make us marble, with too much conceiving;
+		And, so sepulchred, in such pomp dost lie,
+		That kings for such a tomb would wish to die.
+	}
+}
+
+poem {
+	id = 1
+	title = On His Deceased Wife
+	size = 14
+	lines = {
+		Methought I saw my late espoused saint
+        Brought to me, like Alcestis, from the grave,
+        Whom Jove's great son to her glad husband gave,
+        Rescu'd from death by force, though pale and faint.
+		Mine, as whom wash'd from spot of child-bed taint
+        Purification in the old Law did save,
+        And such as yet once more I trust to have
+        Full sight of her in Heaven without restraint,
+		Came vested all in white, pure as her mind;
+        Her face was veil'd, yet to my fancied sight
+        Love, sweetness, goodness, in her person shin'd
+		So clear as in no face with more delight.
+        But Oh! as to embrace me she inclin'd,
+        I wak'd, she fled, and day brought back my night.
+	}
+}
+
+poem {
+	id = 2
+	title = Song on May Morning
+	size = 10
+	lines = {
+		Now the bright morning-star, Day’s harbinger,
+		Comes dancing from the East, and leads with her
+		The flowery May, who from her green lap throws
+		The yellow cowslip and the pale primrose.
+		Hail, bounteous May, that dost inspire
+		Mirth, and youth, and warm desire!
+		Woods and groves are of thy dressing;
+		Hill and dale doth boast thy blessing.
+		Thus we salute thee with our early song,
+		And welcome thee, and wish thee long.
+	}
+}
+
+poem {
+	id = 3
+	title = On His Being Arrived to the Age of 23
+	size =
+	lines = {
+		How soon hath Time, the subtle thief of youth,
+        Stol'n on his wing my three-and-twentieth year!
+        My hasting days fly on with full career,
+        But my late spring no bud or blossom shew'th.
+		Perhaps my semblance might deceive the truth
+        That I to manhood am arriv'd so near;
+        And inward ripeness doth much less appear,
+        That some more timely-happy spirits endu'th.
+		Yet be it less or more, or soon or slow,
+        It shall be still in strictest measure ev'n
+        To that same lot, however mean or high,
+		Toward which Time leads me, and the will of Heav'n:
+        All is, if I have grace to use it so
+        As ever in my great Task-Master's eye.
+	}
+}
+
+poem {
+	id = 4
+	title = To Cyriack Skinner
+	size = 14
+	lines = {
+		Cyriack, whose grandsire on the royal bench
+		Of British Themis, with no mean applause,
+		Pronounced, and in his volumes taught, our laws,
+		Which others at their bar so often wrench,
+		To-day deep thoughts resolve with me to drench
+		In mirth that after no repenting draws;
+		Let Euclid rest, and Archimedes pause,
+		And what the Swede intend, and what the French.
+		To measure life learn thou betimes, and know
+		Toward solid good what leads the nearest way;
+		For other things mild Heaven a time ordains,
+		And disapproves that care, though wise in show,
+		That with superfluous burden loads the day,
+		And, when God sends a cheerful hour, refrains.
+	}
+}
+
+poem {
+	id = 5
+	title = On His Blindness
+	size = 14
+	lines = {
+		When I consider how my light is spent
+		Ere half my days in this dark world and wide,
+		And that one Talent which is death to hide
+		Lodged with me useless, though my soul more bent
+		To serve therewith my Maker, and present
+		My true account, lest He returning chide,
+		“Doth God exact day-labour, light denied?”
+		I fondly ask. But Patience, to prevent
+		That murmur, soon replies, “God doth not need
+		Either man’s work or his own gifts. Who best
+		Bear his mild yoke, they serve him best. His state
+		Is kingly: thousands at his bidding speed,
+		And post o’er land and ocean without rest;
+		They also serve who only stand and wait.
+	}
+}
