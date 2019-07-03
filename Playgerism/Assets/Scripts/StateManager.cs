@@ -9,6 +9,7 @@ public class StateManager : MonoBehaviour {
 	void Start () {
         timer = 0.0f;
         minutes = 0;
+        isPaused = false;
         isEnd = false;
         endHandled = false;
 
@@ -42,6 +43,7 @@ public class StateManager : MonoBehaviour {
     public GameObject linesObj;
     public GameObject lineLinks;
     public GameObject linkPrefab;
+    public GameObject menu;
 
     private Line[]      lines;
     private IDLine[]    poem;
@@ -51,12 +53,15 @@ public class StateManager : MonoBehaviour {
     private int         lineHeight = 10;
     private int         minutes;
     private float       timer;
+    private bool        isPaused;
     private bool        isEnd;
     private bool        endHandled;
 
     // Update is called once per frame
     void Update () {
-        if (!isEnd)
+        CheckPause();
+
+        if (!isEnd && !isPaused)
         {
             CheckLineMatches();
             UpdateLineLinks();
@@ -70,7 +75,7 @@ public class StateManager : MonoBehaviour {
         }
         else
         {
-            if (!endHandled)
+            if (!endHandled && isEnd)
             {
                 HandleEnd();
                 endHandled = true;
@@ -79,7 +84,6 @@ public class StateManager : MonoBehaviour {
     }
 
 
-    // TODO: THIS FUNCTION DOESN'T WORK AS INTENDED
     // EFFECTS: Sets the height of the Viewport to enable the whole poem to be scrolled
     // MODIFIES: this
     // REQUIRES: nothing
@@ -385,6 +389,22 @@ public class StateManager : MonoBehaviour {
         }
 
         isEnd = true;
+    }
+
+
+    // EFFECTS: checks if the game is paused
+    // MODIFIES: isPaused
+    // REQUIRES: the menu gameObject
+    private void CheckPause()
+    {
+        if (!menu.activeInHierarchy)
+        {
+            isPaused = false;
+        }
+        else
+        {
+            isPaused = true;
+        }
     }
 
 

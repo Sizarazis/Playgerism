@@ -79,11 +79,11 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.Monetization.Editor">
-      <HintPath>Assets\UnityAds\UnityEngine.Monetization.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
       <HintPath>Assets\UnityAds\UnityEngine.Advertisements.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Monetization.Editor">
+      <HintPath>Assets\UnityAds\UnityEngine.Monetization.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -92,7 +92,9 @@
     <Compile Include="Assets\Scripts\Line.cs" />
     <Compile Include="Assets\Scripts\Link.cs" />
     <Compile Include="Assets\Scripts\LoadSceneOnClick.cs" />
+    <Compile Include="Assets\Scripts\MenuButton.cs" />
     <Compile Include="Assets\Scripts\NoDragScrollRect.cs" />
+    <Compile Include="Assets\Scripts\ResumeButton.cs" />
     <Compile Include="Assets\Scripts\Slot.cs" />
     <Compile Include="Assets\Scripts\StateManager.cs" />
     <Compile Include="Assets\Scripts\Stats.cs" />
