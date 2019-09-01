@@ -22,6 +22,7 @@ I think this mode might be fun if people want to make a different poem from the 
 3. Animations
 4. Art
 5. IPhone and Android integration
+6. Unity Ads integration
 
 ### Bugs and Issues
 - Horizontal text overflowing isn't handled
