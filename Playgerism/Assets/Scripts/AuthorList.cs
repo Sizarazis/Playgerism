@@ -58,6 +58,11 @@ public class AuthorList : MonoBehaviour {
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\Poems\\AuthIDs.csv";
 
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//Poems//AuthIDs.csv";
+        }
+
         string[] temp = File.ReadAllLines(path);
         authorData = new string[temp.Length - 1];
 
@@ -180,6 +185,11 @@ public class AuthorList : MonoBehaviour {
         string[] poemData;
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
+
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//Poems//Authors//" + authID + ".txt";
+        }
 
         int currentID = 0;
         string currentTitle = "";

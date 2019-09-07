@@ -43,6 +43,12 @@ public class Stats : MonoBehaviour {
     {
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\UserStats.csv";
+
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//UserStats.csv";
+        }
+
         string[] lines = File.ReadAllLines(path);
 
         if (lines.Length < 1) return;

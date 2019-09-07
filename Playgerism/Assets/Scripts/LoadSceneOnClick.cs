@@ -23,12 +23,24 @@ public class LoadSceneOnClick : MonoBehaviour {
 
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\Poems\\AuthIDs.csv";
+
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//Poems//AuthIDs.csv";
+        }
+
         string[] lines = File.ReadAllLines(path);
 
         int randomAuth = Random.Range(1, lines.Length);
         Utilities.authID = randomAuth - 1;
 
         string authPath = dir + "\\Assets\\Resources\\Poems\\Authors\\" + Utilities.authID + ".txt";
+
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            authPath = dir + "//Assets//Resources//Poems//Authors//" + Utilities.authID + ".txt";
+        }
+
         string[] authLines = File.ReadAllLines(authPath);
 
         int poemCount = 0;

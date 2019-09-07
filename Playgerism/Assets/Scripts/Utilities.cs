@@ -9,6 +9,12 @@ public static class Utilities {
     public static string authName;
     public static string poemTitle;
 
+    public enum OSVersion
+    {
+        Windows,
+        MacOSX,
+        Invalid
+    }
 
     // EFFECTS: updates the authID and poemID to the currently selected poem
     // MODIFIES: this
@@ -19,6 +25,28 @@ public static class Utilities {
         poemID = currentPoem;
     }
 
+    // EFFECTS: Checks the OS Version and sets the deliminator between paths
+    // MODIFIES: nothing
+    // REQUIRES: nothing
+    public static OSVersion GetOSVersion()
+    {
+        System.OperatingSystem os = System.Environment.OSVersion;
+        System.PlatformID pid = os.Platform;
+
+        switch (pid)
+        {
+            case System.PlatformID.Win32NT:
+            case System.PlatformID.Win32S:
+            case System.PlatformID.Win32Windows:
+            case System.PlatformID.WinCE:
+                return OSVersion.Windows;
+            case System.PlatformID.Unix:
+            case System.PlatformID.MacOSX:
+                return OSVersion.MacOSX;
+            default:
+                return OSVersion.Invalid;
+        }
+    }
 
     // EFFECTS: Parses a poem from an author's text file
     // MODIFIES: nothing
@@ -29,6 +57,11 @@ public static class Utilities {
         int poemSize = 0;
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
+
+        if (GetOSVersion() == OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//Poems//Authors//" + authID + ".txt";
+        }
 
         using (var reader = new StreamReader(path))
         {

@@ -13,6 +13,8 @@ public class StateManager : MonoBehaviour {
         isEnd = false;
         endHandled = false;
 
+        OSVersion = Utilities.GetOSVersion();
+
         poem = BuildPoem();
         numLines = poem.Length;
         numSlots = poem.Length;
@@ -56,6 +58,8 @@ public class StateManager : MonoBehaviour {
     private bool        isPaused;
     private bool        isEnd;
     private bool        endHandled;
+
+    private Utilities.OSVersion OSVersion;
 
     // Update is called once per frame
     void Update () {
@@ -448,6 +452,11 @@ public class StateManager : MonoBehaviour {
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\UserStats.csv";
 
+        if (OSVersion == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//UserStats.csv";
+        }
+
         bool foundRecord = false;
         bool newBest = false;
 
@@ -540,6 +549,11 @@ public class StateManager : MonoBehaviour {
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\UserStats.csv";
 
+        if (OSVersion == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//UserStats.csv";
+        }
+
         string record;
         string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
@@ -560,6 +574,12 @@ public class StateManager : MonoBehaviour {
     {
         string dir = Directory.GetCurrentDirectory();
         string path = dir + "\\Assets\\Resources\\UserStats.csv";
+
+        if (OSVersion == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Assets//Resources//UserStats.csv";
+        }
+
         string[] lines = File.ReadAllLines(path);
 
         string newRecord;
