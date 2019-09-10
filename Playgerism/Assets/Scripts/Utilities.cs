@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.Networking;
 
 public static class Utilities {
     public static int authID;
@@ -48,6 +49,7 @@ public static class Utilities {
         }
     }
 
+
     // EFFECTS: Parses a poem from an author's text file
     // MODIFIES: nothing
     // REQUIRES: authID and poemID to be set
@@ -55,17 +57,20 @@ public static class Utilities {
     {
         string[] poem = new string[0];
         int poemSize = 0;
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
+
+//JUST FOR TESTING
+#if UNITY_EDITOR
+        string dir = Application.streamingAssetsPath;
+        string path = dir + "\\Authors\\" + authID + ".txt";
 
         if (GetOSVersion() == OSVersion.MacOSX)
         {
-            path = dir + "//Assets//Resources//Poems//Authors//" + authID + ".txt";
+            path = dir + "//Authors//" + authID + ".txt";
         }
 
         using (var reader = new StreamReader(path))
         {
-            bool inPoem = false;
+            bool inPoemEditor = false;
             while (!reader.EndOfStream)
             {
                 if (reader.ReadLine().Contains("id = " + poemID))   // id =
@@ -81,20 +86,68 @@ public static class Utilities {
 
                     reader.ReadLine();                              // lines = {
 
-                    inPoem = true;
+                    inPoemEditor = true;
                 }
-                if (inPoem)
+                if (inPoemEditor)
                 {
-                    for (int i = 0; i < poemSize; i++)
+                    for (int k = 0; k < poemSize; k++)
                     {
-                        poem[i] = reader.ReadLine().Trim();
+                        poem[k] = reader.ReadLine().Trim();
                     }
-                    inPoem = false;
+                    inPoemEditor = false;
                     break;
                 }
             }
         }
+#endif
 
+#if PLATFORM_ANDROID
+        var _path = Application.streamingAssetsPath + "/Authors/" + authID + ".txt";
+
+        UnityWebRequest www = UnityWebRequest.Get(_path);
+        www.Send();
+        while (!www.isDone)
+        {
+        }
+        //Debug.Log(www.downloadHandler.text);
+        string[] content = www.downloadHandler.text.Split('\n');
+
+        bool inPoem = false;
+        bool poemStarted = false;
+        for (int i=0; i<content.Length; i++)
+        {
+
+            if (content[i].Contains("id = " + poemID))   // id =
+            {
+                poemStarted = true;
+                continue;
+            }
+            if (content[i].Contains("title = "))
+            {
+                continue;
+            }
+            if (content[i].Contains("size = ") && poemStarted)
+            {
+                string[] split = content[i].Split('=');
+                split[1].Trim();
+                poemSize = int.Parse(split[1]);
+                poem = new string[poemSize];
+            }
+            if (content[i].Contains("lines = ") && poemStarted) {
+                inPoem = true;
+                continue;
+            }
+            if (inPoem && poemStarted)
+            {
+                for (int j = 0; j < poemSize; j++)
+                {
+                    poem[j] = content[i + j].Trim();
+                }
+                inPoem = false;
+                poemStarted = false;
+            }
+        }
+#endif
         return poem;
     }
 }

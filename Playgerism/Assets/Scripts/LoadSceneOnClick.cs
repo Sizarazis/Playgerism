@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.Networking;
 
 public class LoadSceneOnClick : MonoBehaviour {
 
@@ -21,27 +22,31 @@ public class LoadSceneOnClick : MonoBehaviour {
         // Get random author
         // Get random poem from author
 
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\Poems\\AuthIDs.csv";
+        string tp = Resources.Load<TextAsset>("AuthIDs").ToString();
+        string[] lines = tp.Split('\n');
 
-        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
-        {
-            path = dir + "//Assets//Resources//Poems//AuthIDs.csv";
-        }
-
-        string[] lines = File.ReadAllLines(path);
-
-        int randomAuth = Random.Range(1, lines.Length);
+        int randomAuth = UnityEngine.Random.Range(1, lines.Length);
         Utilities.authID = randomAuth - 1;
+        string[] authLines;
 
-        string authPath = dir + "\\Assets\\Resources\\Poems\\Authors\\" + Utilities.authID + ".txt";
+#if UNITY_EDITOR
+        string path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
 
         if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
         {
-            authPath = dir + "//Assets//Resources//Poems//Authors//" + Utilities.authID + ".txt";
+            path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
         }
+        authLines = File.ReadAllLines(path);
 
-        string[] authLines = File.ReadAllLines(authPath);
+#elif PLATFORM_ANDROID
+        var _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        UnityWebRequest www = UnityWebRequest.Get(_path);
+        www.Send();
+        while (!www.isDone)
+        {
+        }
+        authLines = www.downloadHandler.text.Split('\n');
+#endif
 
         int poemCount = 0;
         for (int i = 0; i < authLines.Length; i++)
@@ -56,14 +61,14 @@ public class LoadSceneOnClick : MonoBehaviour {
             }
         }
 
-        int randomPoem = Random.Range(0, poemCount);
+        int randomPoem = UnityEngine.Random.Range(0, poemCount);
         Utilities.poemID = randomPoem;
 
-        for (int i = 0; i < authLines.Length; i++)
+        for (int j = 0; j < authLines.Length; j++)
         {
-            if (authLines[i].Contains("id = " + randomPoem))
+            if (authLines[j].Contains("id = " + randomPoem))
             {
-                Utilities.poemTitle = authLines[i + 1].Substring(8).Trim();
+                Utilities.poemTitle = authLines[j + 1].Substring(8).Trim();
             }
         }
 

@@ -41,28 +41,25 @@ public class Stats : MonoBehaviour {
     // REQUIRES: nothing
     private void GetStats()
     {
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+        string[] lines;
+        string path = Application.persistentDataPath + "/userStats.csv";
 
-        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
-        {
-            path = dir + "//Assets//Resources//UserStats.csv";
-        }
+        if (!File.Exists(path)) return;
 
-        string[] lines = File.ReadAllLines(path);
+        lines = File.ReadAllLines(path);
 
         if (lines.Length < 1) return;
-        else
-        {
-            stats = new string[lines.Length - 1, 3];
 
-            for (int i = 1; i < lines.Length; i++)
-            {
-                string[] split = lines[i].Split(',');
-                stats[i - 1, 0] = split[0];             // author name
-                stats[i - 1, 1] = split[1];             // poem name
-                stats[i - 1, 2] = split[2];             // record time
-            }
+        stats = new string[lines.Length - 1, 3];
+
+        for (int i = 1; i < lines.Length; i++)
+        {
+            if (lines[i] == null || !lines[i].Contains(",")) break;
+
+            string[] split = lines[i].Split(',');
+            stats[i - 1, 0] = split[0];             // author name
+            stats[i - 1, 1] = split[1];             // poem name
+            stats[i - 1, 2] = split[2];             // record time
         }
     }
 
@@ -74,6 +71,8 @@ public class Stats : MonoBehaviour {
     {
         Vector3 position = statRecordPrefab.transform.localPosition;
         Quaternion rotation = statRecordPrefab.transform.localRotation;
+
+        if (stats == null) return;
 
         SetContentHeight(stats.GetLength(0));
 

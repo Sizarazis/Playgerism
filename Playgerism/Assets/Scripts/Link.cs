@@ -28,6 +28,7 @@ public class Link : MonoBehaviour {
     }
 
 
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     public void OnMouseDown()
     {
         relPos = transform.position;
@@ -45,6 +46,7 @@ public class Link : MonoBehaviour {
     }
 
 
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     public void OnMouseDrag()
     {
         // Get the position of the cursor according to the screen
@@ -59,6 +61,7 @@ public class Link : MonoBehaviour {
     }
 
 
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     public void OnMouseUp()
     {
         //If this line moves out of its slot position, reset the lines and slots accordingly

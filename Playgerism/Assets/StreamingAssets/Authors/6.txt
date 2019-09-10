@@ -70,7 +70,7 @@ poem {
 poem {
 	id = 3
 	title = On His Being Arrived to the Age of 23
-	size =
+	size = 14
 	lines = {
 		How soon hath Time, the subtle thief of youth,
         Stol'n on his wing my three-and-twentieth year!

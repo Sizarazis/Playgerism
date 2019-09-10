@@ -27,12 +27,14 @@ public class ChooseElement : MonoBehaviour {
 
 
     // TODO: set parent's currentAuth or currentPoem when clicked
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     private void OnMouseDown()
     {
         // ANIMATE: Press down animation
     }
 
 
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     private void OnMouseUp()
     {
         if (isAuthor)

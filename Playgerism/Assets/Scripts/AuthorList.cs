@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
+using UnityEngine.Networking;
 
 public class AuthorList : MonoBehaviour {
 
@@ -55,20 +56,16 @@ public class AuthorList : MonoBehaviour {
     public static string[] GetAuthorData()
     {
         string[] authorData;
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\Poems\\AuthIDs.csv";
+        string tp = Resources.Load<TextAsset>("AuthIDs").ToString();
+        string[] lines = tp.Split('\n');
 
-        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        authorData = new string[lines.Length - 1];
+
+        for (int i = 1; i < lines.Length; i++)
         {
-            path = dir + "//Assets//Resources//Poems//AuthIDs.csv";
-        }
+            if (lines[i] == null) break;
 
-        string[] temp = File.ReadAllLines(path);
-        authorData = new string[temp.Length - 1];
-
-        for (int i = 1; i < temp.Length; i++)
-        {
-            authorData[i - 1] = temp[i];
+            authorData[i - 1] = lines[i];
         }
 
         return authorData;
@@ -176,23 +173,23 @@ public class AuthorList : MonoBehaviour {
         }
     }
 
-
     // EFFECTS: reads the authID's text file and parses the poem's name and ids
     // MODIFIES: nothing
     // REQUIRES: nothing
     public void GetPoemData(int authID)
     {
-        string[] poemData;
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\Poems\\Authors\\" + authID + ".txt";
+        int currentID = 0;
 
+#if UNITY_EDITOR
+        string[] poemData;
+        string dir = Application.streamingAssetsPath;
+        string path = dir + "\\Authors\\" + authID + ".txt";
+
+        ////JUST FOR TESTING
         if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
         {
-            path = dir + "//Assets//Resources//Poems//Authors//" + authID + ".txt";
+            path = dir + "//Authors//" + authID + ".txt";
         }
-
-        int currentID = 0;
-        string currentTitle = "";
 
         using (StreamReader sr = new StreamReader(path))
         {
@@ -206,9 +203,31 @@ public class AuthorList : MonoBehaviour {
                 }
                 else if (line.Contains("title ="))
                 {
-                    currentTitle = line.Substring(8).Trim();
+                    string currentTitle = line.Substring(8).Trim();
                     poemIDs.Add(currentID, currentTitle);
                 }
+            }
+        }
+#endif
+
+        var _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        UnityWebRequest www = UnityWebRequest.Get(_path);
+        www.Send();
+        while (!www.isDone)
+        {
+        }
+        string[] content = www.downloadHandler.text.Split('\n');
+
+        for (int i = 0; i < content.Length; i++)
+        {
+            if (content[i].Contains("id ="))
+            {
+                currentID = int.Parse(content[i].Substring(5).Trim());
+            }
+            else if (content[i].Contains("title ="))
+            {
+                string currentTitle = content[i].Substring(8).Trim();
+                poemIDs.Add(currentID, currentTitle);
             }
         }
     }
@@ -221,6 +240,6 @@ public class AuthorList : MonoBehaviour {
     {
         Utilities.poemTitle = poemTitle;
         Utilities.SetIDs(currentAuth, poemID);
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }

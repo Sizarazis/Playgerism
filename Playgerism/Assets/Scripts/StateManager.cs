@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class StateManager : MonoBehaviour {
 
@@ -143,7 +144,7 @@ public class StateManager : MonoBehaviour {
         for (int j = 0; j < len; j++)
         {
             IDLine temp = outPoem[j];
-            int random = Random.Range(j, outPoem.Length);
+            int random = UnityEngine.Random.Range(j, outPoem.Length);
             outPoem[j] = outPoem[random];
             outPoem[random] = temp;
         }
@@ -419,8 +420,6 @@ public class StateManager : MonoBehaviour {
     {
         GetEndStats();
         transform.Find("Scroll View").Find("End Popup").gameObject.SetActive(true);
-        //transform.Find("Scroll View").gameObject.SetActive(false);
-        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").gameObject.transform.Find("Links").transform.GetChild(0).transform.GetComponent<BoxCollider2D>().enabled = false;
     }
 
 
@@ -448,17 +447,24 @@ public class StateManager : MonoBehaviour {
     private string ParseBestTime()
     {
         string time = "";
+        string path = Application.persistentDataPath + "/userStats.csv";
 
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\UserStats.csv";
-
-        if (OSVersion == Utilities.OSVersion.MacOSX)
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
         {
-            path = dir + "//Assets//Resources//UserStats.csv";
+            path = Application.persistentDataPath + "\\userStats.csv";
         }
 
         bool foundRecord = false;
         bool newBest = false;
+
+        if (!File.Exists(path))
+        {
+            File.WriteAllLines(path, new string[1]{"authorName,poemTitle,bestTime"});
+            InsertNewRecord();
+
+            return transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        }
+
 
         using (var reader = new StreamReader(path))
         {
@@ -546,12 +552,11 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void InsertNewRecord()
     {
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+        string path = Application.persistentDataPath + "/userStats.csv";
 
-        if (OSVersion == Utilities.OSVersion.MacOSX)
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
         {
-            path = dir + "//Assets//Resources//UserStats.csv";
+            path = Application.persistentDataPath + "\\userStats.csv";
         }
 
         string record;
@@ -572,29 +577,27 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void UpdateRecordTime()
     {
-        string dir = Directory.GetCurrentDirectory();
-        string path = dir + "\\Assets\\Resources\\UserStats.csv";
+        string path = Application.persistentDataPath + "/userStats.csv";
 
-        if (OSVersion == Utilities.OSVersion.MacOSX)
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
         {
-            path = dir + "//Assets//Resources//UserStats.csv";
+            path = Application.persistentDataPath + "\\userStats.csv";
         }
 
-        string[] lines = File.ReadAllLines(path);
-
+        string[] statLines = File.ReadAllLines(path);
         string newRecord;
         string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
         newRecord = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
         newRecord.Trim();
 
-        for(int i = 0; i < lines.Length; i++)
+        for(int i = 0; i < statLines.Length; i++)
         { 
-            if (lines[i].Contains(Utilities.authName + ", " + Utilities.poemTitle))
+            if (statLines[i].Contains(Utilities.authName + ", " + Utilities.poemTitle))
             {
-                lines[i] = newRecord;
+                statLines[i] = newRecord;
             }
         }
 
-        File.WriteAllLines(path, lines);
+        File.WriteAllLines(path, statLines);
     }
 }

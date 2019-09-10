@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
+//TODO: TEST WITH ANDROID BUILD
 public class NoDragScrollRect : ScrollRect
 {
     public override void OnBeginDrag(PointerEventData eventData) { }
