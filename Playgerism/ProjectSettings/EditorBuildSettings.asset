@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_SCENE_.unity
-    guid: 5ff05be51ce5bdd4c8a7bf29a1e2106f
-  - enabled: 1
     path: Assets/_MAINMENU_.unity
     guid: c1888cb5c082c5d479dfedeeca562938
   - enabled: 1
+    path: Assets/_SCENE_.unity
+    guid: 5ff05be51ce5bdd4c8a7bf29a1e2106f
+  - enabled: 1
     path: Assets/_CHOOSEPOEM_.unity
     guid: e8b8c5d0c133ed343994888a3aa294d4
-  - enabled: 1
-    path: Assets/_STATS_.unity
+  - enabled: 0
+    path: 
     guid: 524009c96a08060479e946ffb676fe0c

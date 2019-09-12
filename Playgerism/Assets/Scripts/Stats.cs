@@ -8,6 +8,9 @@ public class Stats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        canvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
+        canvasSize = canvasRect.sizeDelta;
+
         GetStats();
         DisplayStats();
 	}
@@ -15,12 +18,18 @@ public class Stats : MonoBehaviour {
 
     // -- VARIABLES --
     public GameObject statRecordPrefab;
+    public RectTransform canvasRect;
+    private Vector2 canvasSize;
     private string[,] stats;
+    private float statSize = 14;
 
 
 	// Update is called once per frame
 	void Update () {
-		
+		//if (canvasSize != canvasRect.sizeDelta)
+  //      {
+  //          GetStats();
+  //      }
 	}
 
 
@@ -31,7 +40,7 @@ public class Stats : MonoBehaviour {
     void SetContentHeight(int numItems)
     {
         RectTransform content = transform.GetComponent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -10 * numItems + 65);
+        content.offsetMin = new Vector2(content.offsetMin.x, -statSize * numItems);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
     }
 
@@ -57,9 +66,15 @@ public class Stats : MonoBehaviour {
             if (lines[i] == null || !lines[i].Contains(",")) break;
 
             string[] split = lines[i].Split(',');
-            stats[i - 1, 0] = split[0];             // author name
-            stats[i - 1, 1] = split[1];             // poem name
-            stats[i - 1, 2] = split[2];             // record time
+
+            stats[i - 1, 0] = split[0]; // author name
+
+            stats[i - 1, 1] = split[1]; // poem name
+            for (int j=2; j<split.Length-1; j++)
+            {
+                stats[i - 1, 1] = stats[i - 1, 1] + "," + split[j]; // for when poems have commas
+            }
+            stats[i - 1, 2] = split[split.Length-1]; // record time
         }
     }
 
@@ -69,8 +84,17 @@ public class Stats : MonoBehaviour {
     // REQUIRES: nothing
     private void DisplayStats()
     {
-        Vector3 position = statRecordPrefab.transform.localPosition;
-        Quaternion rotation = statRecordPrefab.transform.localRotation;
+        while (transform.childCount > 0)
+        {
+            Destroy(transform.GetChild(0));
+        }
+
+        Vector3 position = statRecordPrefab.GetComponent<RectTransform>().localPosition;
+        Quaternion rotation = statRecordPrefab.GetComponent<RectTransform>().localRotation;
+
+        //float xScaler = canvasRect.sizeDelta.x;
+        //xScaler = (canvasRect.localScale.x * xScaler)/4;
+        //canvasSize = canvasRect.sizeDelta;
 
         if (stats == null) return;
 
@@ -82,11 +106,13 @@ public class Stats : MonoBehaviour {
             string poem = stats[i, 1].Trim();
             string time = stats[i, 2].Trim();
 
-            position = new Vector3(0, -30 - (i * 10), -5);
+            //position = new Vector3(0, (-i*statSize)/(float)1.26, 0);
+            position = new Vector3(0, (-i * statSize)-5, 0);
             GameObject stat = Instantiate(statRecordPrefab, position, rotation, this.transform);
 
-            stat.transform.Find("Author").GetComponent<Text>().text = author;
-            stat.transform.Find("Title").GetComponent<Text>().text = poem;
+            //stat.transform.localScale = new Vector3(xScaler, stat.transform.localScale.y, stat.transform.localScale.z);
+            stat.transform.Find("Author").GetComponent<TextMesh>().text = author;
+            stat.transform.Find("Title").GetComponent<TextMesh>().text = poem;
             stat.transform.Find("Time").GetComponent<TextMesh>().text = time;
         }
     }
