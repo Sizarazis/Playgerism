@@ -9,6 +9,7 @@ public class AuthorList : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        canvasWidth = GameObject.Find("Canvas").GetComponent<RectTransform>().sizeDelta.x;
         authIDs = new Dictionary<int, string>();
         poemIDs = new Dictionary<int, string>();
 
@@ -24,6 +25,7 @@ public class AuthorList : MonoBehaviour {
     public GameObject listItemPrefab;
     public bool isAuthorScreen;
 
+    private float canvasWidth;
     private int currentAuth;
     private int currentPoem;
 
@@ -82,7 +84,7 @@ public class AuthorList : MonoBehaviour {
         Dictionary<string, int> dict = new Dictionary<string, int>();
         ArrayList abcList = new ArrayList();
 
-        int yPos = -15;
+        float yPos = 0;
         int i = 0;
 
         if (isAuthorScreen)
@@ -110,19 +112,26 @@ public class AuthorList : MonoBehaviour {
         foreach (string name in abcList)
         {
             Quaternion rotation = listItemPrefab.transform.rotation;
-            Vector3 position = new Vector3(0, yPos, -1);
+            Vector3 position = new Vector3(0, yPos, 0);
 
             GameObject instListItem = Instantiate(listItemPrefab, position, rotation, this.transform);
             instListItem.name = "Item " + i;
             instListItem.transform.position = new Vector3(0, yPos, -1);
+            instListItem.GetComponent<RectTransform>().sizeDelta = new Vector2(canvasWidth, 40);
+            instListItem.GetComponent<BoxCollider2D>().size = new Vector2(canvasWidth, 40);
 
-            instListItem.transform.Find("Caption").GetComponent<TextMesh>().text = name;
+            Transform caption = instListItem.transform.Find("Caption");
+            caption.GetComponent<TextMesh>().text = name;
+            caption.localPosition = new Vector3(-canvasWidth/2 + 10, caption.localPosition.y, caption.localPosition.z);
+
+            Transform background = instListItem.transform.Find("Background");
+            background.localScale = new Vector3(instListItem.GetComponent<RectTransform>().sizeDelta.x/10, 1, 4);
 
             ChooseElement item = instListItem.GetComponent<ChooseElement>();
-            item.id = dict[name];
+            item.id = dict[name];   
 
             i++;
-            yPos = yPos - 10;
+            yPos = yPos - (40/3);
         }
     }
 
@@ -134,7 +143,8 @@ public class AuthorList : MonoBehaviour {
     void SetContentHeight(int numItems)
     {
         RectTransform content = transform.GetComponent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -10 * numItems + 101);
+        RectTransform scrollView = GameObject.Find("Canvas/Scroll View").GetComponent<RectTransform>();
+        content.offsetMin = new Vector2(content.offsetMin.x, -40*numItems + scrollView.sizeDelta.y);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
 
     }
@@ -151,8 +161,8 @@ public class AuthorList : MonoBehaviour {
         poemIDs.Clear();
 
         // swap headers
-        GetComponentInParent<Canvas>().transform.Find("Header").Find("Authors Title").gameObject.SetActive(false);
-        GetComponentInParent<Canvas>().transform.Find("Header").Find("Poems Title").gameObject.SetActive(true);
+        GetComponentInParent<Canvas>().transform.Find("Headers").Find("Authors Title").gameObject.SetActive(false);
+        GetComponentInParent<Canvas>().transform.Find("Headers").Find("Poems Title").gameObject.SetActive(true);
         isAuthorScreen = false;
 
         DestroyItems();

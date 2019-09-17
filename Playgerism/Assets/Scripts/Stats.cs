@@ -8,9 +8,6 @@ public class Stats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        canvasRect = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        canvasSize = canvasRect.sizeDelta;
-
         GetStats();
         DisplayStats();
 	}
@@ -18,18 +15,13 @@ public class Stats : MonoBehaviour {
 
     // -- VARIABLES --
     public GameObject statRecordPrefab;
-    public RectTransform canvasRect;
-    private Vector2 canvasSize;
     private string[,] stats;
-    private float statSize = 14;
+    private float statSize = 12;
 
 
 	// Update is called once per frame
 	void Update () {
-		//if (canvasSize != canvasRect.sizeDelta)
-  //      {
-  //          GetStats();
-  //      }
+
 	}
 
 
@@ -40,7 +32,7 @@ public class Stats : MonoBehaviour {
     void SetContentHeight(int numItems)
     {
         RectTransform content = transform.GetComponent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -statSize * numItems);
+        content.offsetMin = new Vector2(content.offsetMin.x, -3 * statSize * numItems + 335);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
     }
 
@@ -92,16 +84,14 @@ public class Stats : MonoBehaviour {
         Vector3 position = statRecordPrefab.GetComponent<RectTransform>().localPosition;
         Quaternion rotation = statRecordPrefab.GetComponent<RectTransform>().localRotation;
 
-        //float xScaler = canvasRect.sizeDelta.x;
-        //xScaler = (canvasRect.localScale.x * xScaler)/4;
-        //canvasSize = canvasRect.sizeDelta;
-
         if (stats == null) return;
 
         SetContentHeight(stats.GetLength(0));
 
         for (int i = 0; i < stats.GetLength(0); i++)
         {
+            if (stats[i, 0] == null) continue;
+
             string author = stats[i, 0].Trim();
             string poem = stats[i, 1].Trim();
             string time = stats[i, 2].Trim();

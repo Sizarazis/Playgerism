@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 using System;
 
 public class StateManager : MonoBehaviour {
@@ -13,6 +14,7 @@ public class StateManager : MonoBehaviour {
         isPaused = false;
         isEnd = false;
         endHandled = false;
+        canvasWidth = GetComponent<RectTransform>().sizeDelta.x;
 
         OSVersion = Utilities.GetOSVersion();
 
@@ -21,6 +23,7 @@ public class StateManager : MonoBehaviour {
         numSlots = poem.Length;
         scrambledPoem = ScramblePoem();
 
+        SetTitleHeaderWidth();
         BuildSlots();
         BuildLinksAndLines();
         SetLineText();
@@ -53,9 +56,10 @@ public class StateManager : MonoBehaviour {
     private IDLine[]    scrambledPoem;
     private int         numLines;
     private int         numSlots;
-    private int         lineHeight = 10;
+    private int         lineHeight = 6;
     private int         minutes;
     private float       timer;
+    private float       canvasWidth;
     private bool        isPaused;
     private bool        isEnd;
     private bool        endHandled;
@@ -88,6 +92,14 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+    void SetTitleHeaderWidth()
+    {
+        Transform titleHeader = transform.Find("Scroll View/Viewport/Content/Title/Background");
+
+        titleHeader.localScale = new Vector3(canvasWidth/10, 1, 8);
+        titleHeader.localPosition = new Vector3(canvasWidth/2, -40, 0);
+    }
+
 
     // EFFECTS: Sets the height of the Viewport to enable the whole poem to be scrolled
     // MODIFIES: this
@@ -96,7 +108,7 @@ public class StateManager : MonoBehaviour {
     {
         Transform content = transform.Find("Scroll View").Find("Viewport").Find("Content");
         RectTransform rectTransform = content.GetComponent<RectTransform>();
-        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -10*numSlots + 126);
+        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -60*numSlots + (GetComponent<RectTransform>().sizeDelta.y - 160));
         rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, 0);
     }
 
@@ -109,8 +121,8 @@ public class StateManager : MonoBehaviour {
         string[] lines = Utilities.ParsePoem();
         int size = lines.Length;
 
-        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").Find("Title").Find("Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
-        transform.Find("Scroll View").Find("Viewport").Find("Content").Find("Poem").Find("Title").Find("Author").GetComponent<TextMesh>().text = Utilities.authName;
+        transform.Find("Scroll View/Viewport/Content/Title/Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
+        transform.Find("Scroll View/Viewport/Content/Title/Author").GetComponent<TextMesh>().text = Utilities.authName;
 
         IDLine[] output = new IDLine[size];
         for (int i = 0; i < size; i++)
@@ -170,18 +182,21 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: slotPrefab and slots to reference a prefab and gameObject in the Unity project
     void BuildSlots()
     {
-        int yPos = -25;
+        int yPos = -110;
 
         for (int i = 0; i < numSlots; i++)
         {
             Quaternion rotation = slotPrefab.transform.rotation;
-            Vector3 position = new Vector3(0, yPos, 1);
+            Vector3 position = new Vector3(canvasWidth/2, yPos, 1);
 
             GameObject instSlot = Instantiate(slotPrefab, position, rotation, slots.transform);
+            instSlot.transform.localPosition = position;
+            instSlot.transform.localScale = new Vector3(canvasWidth/10, 1, lineHeight);
+
             instSlot.name = "Slot " + i;
             instSlot.GetComponent<Slot>().relPosition = i;
 
-            yPos = yPos - lineHeight;
+            yPos = yPos - lineHeight*10;
         }
     }
 
@@ -191,21 +206,26 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: references prefabs and gameObjects in the Unity project
     void BuildLinksAndLines()
     {
-        int yPos = -25;
+        int yPos = -110;
 
         for (int i = 0; i < numLines; i++)
         {
             Quaternion linkRot = linkPrefab.transform.rotation;
-            Vector3 linkPos = new Vector3(0, yPos, -2);
+            Vector3 linkPos = new Vector3(canvasWidth/2, yPos, -2);
             GameObject instLink = Instantiate(linkPrefab, linkPos, linkRot, lineLinks.transform);
+            instLink.transform.localPosition = linkPos;
+            instLink.transform.localScale = new Vector3(canvasWidth/100, lineHeight, 1);
+
             instLink.name = "Link " + i;
 
             Quaternion lineRot = linePrefab.transform.rotation;
-            Vector3 linePos = new Vector3(0, yPos, 0);
+            Vector3 linePos = new Vector3(0, 0, 0);
             GameObject instLine = Instantiate(linePrefab, linePos, lineRot, instLink.transform);
+            instLine.transform.localPosition = new Vector3(0,0,2);
+
             instLine.name = "Line " + i;
 
-            yPos = yPos - lineHeight;
+            yPos = yPos - lineHeight*10;
         }
     }
 
@@ -374,8 +394,7 @@ public class StateManager : MonoBehaviour {
         }
         else outSec = seconds.ToString();
 
-        //NOTE: THIS GAMEOBJECT WILL CHANGE NAMES
-        gameObject.transform.Find("Timer Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
+        GameObject.Find("Timer Text").GetComponent<TextMesh>().text = "Timer: " + outMin + ":" + outSec;   
     }
 
 
@@ -402,13 +421,15 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: the menu gameObject
     private void CheckPause()
     {
-        if (!menu.activeInHierarchy)
+        if (!menu.activeInHierarchy && !isEnd)
         {
             isPaused = false;
+            transform.Find("Header/Pause Button").GetComponent<Button>().interactable = true;
         }
-        else
+        else if (menu.activeInHierarchy)
         {
             isPaused = true;
+            transform.Find("Header/Pause Button").GetComponent<Button>().interactable = false;
         }
     }
 
@@ -418,24 +439,31 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void HandleEnd()
     {
-        GetEndStats();
-        transform.Find("Scroll View").Find("End Popup").gameObject.SetActive(true);
-    }
+        BoxCollider2D[] linkColliders = lineLinks.transform.GetComponentsInChildren<BoxCollider2D>();
+        foreach (BoxCollider2D col in linkColliders)
+        {
+            col.enabled = false;
+        }
 
+        GetEndStats();
+
+        transform.Find("Header/Pause Button").GetComponent<Button>().interactable = false;
+        transform.Find("Scroll View/End Popup").gameObject.SetActive(true);
+    }
 
     // EFFECTS: Get the stats for the game's end
     // MODIFIES: this/end popup
     // REQUIRES: nothing
     private void GetEndStats()
     {
-        TextMesh toModify = transform.Find("Scroll View").Find("End Popup").gameObject.transform.Find("Results").gameObject.GetComponent<TextMesh>();
+        TextMesh toModify = transform.Find("Scroll View/End Popup/End Panel/Results").gameObject.GetComponent<TextMesh>();
 
         string prevBest;
         string time;
 
         prevBest = ParseBestTime();
 
-        time = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        time = transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
         toModify.text = prevBest + "\n" + time;
     }
@@ -462,7 +490,7 @@ public class StateManager : MonoBehaviour {
             File.WriteAllLines(path, new string[1]{"authorName,poemTitle,bestTime"});
             InsertNewRecord();
 
-            return transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+            return transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
         }
 
 
@@ -485,7 +513,7 @@ public class StateManager : MonoBehaviour {
                         if (newBest)
                         {
                             string record;
-                            string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+                            string newTime = transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
                             record = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
                         }
@@ -522,7 +550,7 @@ public class StateManager : MonoBehaviour {
         int prevMins = 0;
 
         // get new times
-        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        string newTime = transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
         string[] newTimeSplit = newTime.Split(':');
         newHours = int.Parse(newTimeSplit[0].Trim());
         newMins = int.Parse(newTimeSplit[1].Trim());
@@ -560,7 +588,7 @@ public class StateManager : MonoBehaviour {
         }
 
         string record;
-        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        string newTime = transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
 
         record = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
 
@@ -586,7 +614,7 @@ public class StateManager : MonoBehaviour {
 
         string[] statLines = File.ReadAllLines(path);
         string newRecord;
-        string newTime = transform.Find("Timer Text").GetComponent<TextMesh>().text.Substring(7);
+        string newTime = transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
         newRecord = Utilities.authName + ", " + Utilities.poemTitle + ", " + newTime;
         newRecord.Trim();
 

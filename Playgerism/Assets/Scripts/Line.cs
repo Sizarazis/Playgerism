@@ -6,8 +6,7 @@ public class Line : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        halfHeightOfLine = (this.transform.localScale.y / 2) * 10;
-
+        halfHeightOfLine = (transform.localScale.y / 2) * 20;
         topMatch = false;
         bottomMatch = false;
     }
@@ -17,9 +16,9 @@ public class Line : MonoBehaviour {
     public Slot inSlot;
     public Link inLink;
 
-    private float halfHeightOfLine;
     private Vector3 screenPoint;
     private Vector3 offset;
+    private float halfHeightOfLine;
 
     public int lineID;
     public bool bottomMatch;
@@ -85,7 +84,10 @@ public class Line : MonoBehaviour {
         bool cont = true;
         while (cont)
         {
-            if (currentSlot == null) Debug.Log("currentSlot not filled");
+            if (currentSlot == null)
+            {
+                Debug.Log("currentSlot not filled");
+            }
 
             // Move the line to the top spot if the current slot is the top slot, and its above the top slot
             if (inMoveUp == true && currentSlot.prevSlot == null  && this.transform.position.y >= currentSlot.transform.position.y && !inLink.lines.Contains(currentSlot.currentLine))
