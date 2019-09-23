@@ -503,10 +503,10 @@ public class StateManager : MonoBehaviour {
                     {
                         foundRecord = true;
 
-                        string[] temp = new string[3];
+                        string[] temp;
                         temp = line.Split(',');
 
-                        time = temp[2].Trim();
+                        time = temp[temp.Length-1].Trim();
 
                         newBest = CompareTimes(time);
 

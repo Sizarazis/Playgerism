@@ -195,7 +195,7 @@ public class AuthorList : MonoBehaviour {
         string dir = Application.streamingAssetsPath;
         string path = dir + "\\Authors\\" + authID + ".txt";
 
-        ////JUST FOR TESTING
+        //JUST FOR TESTING
         if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
         {
             path = dir + "//Authors//" + authID + ".txt";
@@ -220,7 +220,18 @@ public class AuthorList : MonoBehaviour {
         }
 #endif
 
-        var _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        var _path = "";
+
+        //JUST FOR TESTING
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
+        {
+            _path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
+        }
+        else
+        {
+            _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        }
+
         UnityWebRequest www = UnityWebRequest.Get(_path);
         www.Send();
         while (!www.isDone)
@@ -237,7 +248,10 @@ public class AuthorList : MonoBehaviour {
             else if (content[i].Contains("title ="))
             {
                 string currentTitle = content[i].Substring(8).Trim();
-                poemIDs.Add(currentID, currentTitle);
+                if (!poemIDs.ContainsKey(currentID))
+                {
+                    poemIDs.Add(currentID, currentTitle);
+                }
             }
         }
     }
