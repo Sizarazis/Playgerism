@@ -16,8 +16,8 @@ public class Line : MonoBehaviour {
     public Slot inSlot;
     public Link inLink;
 
-    private Vector3 screenPoint;
-    private Vector3 offset;
+    //private Vector3 screenPoint;
+    //private Vector3 offset;
     private float halfHeightOfLine;
 
     public int lineID;
@@ -105,6 +105,9 @@ public class Line : MonoBehaviour {
             {
                 Link tempLink = currentSlot.currentLine.inLink;
                 Line line;
+
+                Debug.Log("Moving..." + name);
+
                 if (inMoveUp)
                 {
                     line = (Line)tempLink.lines[0];

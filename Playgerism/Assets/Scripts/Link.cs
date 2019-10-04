@@ -8,13 +8,23 @@ public class Link : MonoBehaviour {
     void Start() {
         hasFirstLine = false;
         hasLastLine = false;
+
+        upperArrow = GameObject.Find("Canvas/Scroll View/ScrollUp");
+        lowerArrow = GameObject.Find("Canvas/Scroll View/ScrollDown");
+        content = GameObject.Find("Canvas/Scroll View/Viewport/Content");
     }
 
 
     // -- VARIABLES -- //
+    public GameObject content;
+    public GameObject upperArrow;
+    public GameObject lowerArrow;
     public ArrayList lines = new ArrayList();
     public bool hasFirstLine;
     public bool hasLastLine;
+
+    private Vector3 initPos;
+    private Vector3 newPos;
 
     private Vector3 mouseDown;
     private Vector3 screenPoint;
@@ -28,10 +38,13 @@ public class Link : MonoBehaviour {
     }
 
 
-    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST OR EVENTSYSTEM
     public void OnMouseDown()
     {
+        RevealScrollArrows();
+
         relPos = transform.position;
+        initPos = transform.localPosition;
 
         // Get the screen position of this object
         screenPoint = Camera.main.WorldToScreenPoint(transform.position);
@@ -42,11 +55,11 @@ public class Link : MonoBehaviour {
         // Get the world position of the cursor relative to the world position of this object
         offset = transform.position -
             Camera.main.ScreenToWorldPoint(
-                new Vector3(200, Input.mousePosition.y, screenPoint.z));
+                new Vector3(200, Input.mousePosition.y, -8));
     }
 
 
-    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
+    //TODO: REPLACE WITH ONTOUCH WITH RAYCAST OR EVENTSYSTEM
     public void OnMouseDrag()
     {
         // Get the position of the cursor according to the screen
@@ -57,53 +70,73 @@ public class Link : MonoBehaviour {
         Vector3 cursorPosition = Camera.main.ScreenToWorldPoint(cursorScreenPoint) + offset;
 
         // Set the new position of this object
-        transform.position = cursorPosition;
+        //transform.position = cursorPosition;
+        transform.position = new Vector3(cursorPosition.x, cursorPosition.y, -8);
     }
 
 
     //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
     public void OnMouseUp()
     {
+        HideScrollArrows();
+
+        newPos = transform.localPosition;
+
         //If this line moves out of its slot position, reset the lines and slots accordingly
         if (lines.Count > 0)
         {
             Line first = (Line)lines[0];
             Line last = (Line)lines[lines.Count - 1];
 
-            if (Mathf.Abs(mouseDown.y - transform.position.y) > 5)
+            if (newPos.y <= initPos.y)
             {
-                if (mouseDown.y >= transform.position.y)
+                Debug.Log("Moving down...");
+                //account for moving the last 1 down
+                if (last.inSlot.nextSlot != null)
                 {
-
-                    //account for moving the last 1 down
-                    if (last.inSlot.nextSlot != null)
-                    {
-                        MoveLines(false);
-                    }
-                    else
-                    {
-                        transform.position = relPos;
-                    }
+                    MoveLines(false);
                 }
                 else
                 {
-                    //account for moving the first 1 up
-                    if (first.inSlot.relPosition != 0)
-                    {
-                        MoveLines(true);
-                    }
-                    else
-                    {
-                        transform.position = relPos;
-                    }
+                    transform.position = relPos;
                 }
             }
-            //Otherwise, move the line back to its starting position
             else
             {
-                transform.position = relPos;
+                Debug.Log("Moving up...");
+                //account for moving the first 1 up
+                if (first.inSlot.relPosition != 0)
+                {
+                    MoveLines(true);
+                }
+                else
+                {
+                    transform.position = relPos;
+                }
             }
         }
+    }
+
+
+    // TODO: ANIMATE!!! (FADE IN)
+    // EFFECTS: reveal the scroll arrows
+    // MODIFIES: the scroll arrow objects
+    // REQUIRES: nothing
+    private void RevealScrollArrows()
+    {
+        upperArrow.SetActive(true);
+        lowerArrow.SetActive(true);
+    }
+
+
+    // TODO: ANIMATE!!! (FADE OUT)
+    // EFFECTS: hide the scroll arrows
+    // MODIFIES: the scroll arrows
+    // REQUIRES: nothing
+    private void HideScrollArrows()
+    {
+        upperArrow.SetActive(false);
+        lowerArrow.SetActive(false);
     }
 
 
@@ -135,6 +168,7 @@ public class Link : MonoBehaviour {
         SetColliderPos();
         SetColliderSize();
     }
+
 
     // EFFECTS: resizes the connector object in the link to express how big the link is in the game
     // MODIFIES: the connector object in a link
