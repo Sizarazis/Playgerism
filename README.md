@@ -17,7 +17,6 @@ The players are scored based on a timer.  </br>
 5. Art
 
 ### Bugs and Issues
-- Mobile scrolling in the author/poem selection scene
 - Some text horizontally stretches according to the width of the screen. 
 
 ### Moving Forward

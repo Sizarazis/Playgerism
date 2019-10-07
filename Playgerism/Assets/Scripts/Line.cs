@@ -84,10 +84,10 @@ public class Line : MonoBehaviour {
         bool cont = true;
         while (cont)
         {
-            if (currentSlot == null)
-            {
-                Debug.Log("currentSlot not filled");
-            }
+            //if (currentSlot == null)
+            //{
+            //    Debug.Log("currentSlot not filled");
+            //}
 
             // Move the line to the top spot if the current slot is the top slot, and its above the top slot
             if (inMoveUp == true && currentSlot.prevSlot == null  && this.transform.position.y >= currentSlot.transform.position.y && !inLink.lines.Contains(currentSlot.currentLine))
@@ -106,7 +106,7 @@ public class Line : MonoBehaviour {
                 Link tempLink = currentSlot.currentLine.inLink;
                 Line line;
 
-                Debug.Log("Moving..." + name);
+                //Debug.Log("Moving..." + name);
 
                 if (inMoveUp)
                 {

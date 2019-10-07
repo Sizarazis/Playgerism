@@ -90,7 +90,7 @@ public class Link : MonoBehaviour {
 
             if (newPos.y <= initPos.y)
             {
-                Debug.Log("Moving down...");
+                //Debug.Log("Moving down...");
                 //account for moving the last 1 down
                 if (last.inSlot.nextSlot != null)
                 {
@@ -103,7 +103,7 @@ public class Link : MonoBehaviour {
             }
             else
             {
-                Debug.Log("Moving up...");
+                //Debug.Log("Moving up...");
                 //account for moving the first 1 up
                 if (first.inSlot.relPosition != 0)
                 {
@@ -125,7 +125,9 @@ public class Link : MonoBehaviour {
     private void RevealScrollArrows()
     {
         upperArrow.SetActive(true);
+        upperArrow.GetComponent<ScrollArrow>().isScroll = false;
         lowerArrow.SetActive(true);
+        lowerArrow.GetComponent<ScrollArrow>().isScroll = false;
     }
 
 

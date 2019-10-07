@@ -29,16 +29,7 @@ public class LoadSceneOnClick : MonoBehaviour {
         Utilities.authID = randomAuth - 1;
         string[] authLines;
 
-#if UNITY_EDITOR
-        string path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
-
-        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
-        {
-            path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
-        }
-        authLines = File.ReadAllLines(path);
-
-#elif PLATFORM_ANDROID
+#if PLATFORM_ANDROID
         var _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
         UnityWebRequest www = UnityWebRequest.Get(_path);
         www.Send();
@@ -46,6 +37,14 @@ public class LoadSceneOnClick : MonoBehaviour {
         {
         }
         authLines = www.downloadHandler.text.Split('\n');
+#else
+        string path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
+
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        }
+        authLines = File.ReadAllLines(path);
 #endif
 
         int poemCount = 0;

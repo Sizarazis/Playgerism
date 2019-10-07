@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
@@ -9,6 +10,8 @@ public class AuthorList : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        DestroyItems();
+
         canvasWidth = GameObject.Find("Canvas").GetComponent<RectTransform>().sizeDelta.x;
         authIDs = new Dictionary<int, string>();
         poemIDs = new Dictionary<int, string>();
@@ -16,6 +19,7 @@ public class AuthorList : MonoBehaviour {
         isAuthorScreen = true;
         FillAuthorDictionary();
         DisplayItems();
+
     }
 
 
@@ -28,6 +32,7 @@ public class AuthorList : MonoBehaviour {
     private float canvasWidth;
     private int currentAuth;
     private int currentPoem;
+    private int offset = 16;
 
 
     // Update is called once per frame
@@ -66,7 +71,6 @@ public class AuthorList : MonoBehaviour {
         for (int i = 1; i < lines.Length; i++)
         {
             if (lines[i] == null) break;
-
             authorData[i - 1] = lines[i];
         }
 
@@ -84,7 +88,7 @@ public class AuthorList : MonoBehaviour {
         Dictionary<string, int> dict = new Dictionary<string, int>();
         ArrayList abcList = new ArrayList();
 
-        float yPos = 0;
+        float yPos = -offset;
         int i = 0;
 
         if (isAuthorScreen)
@@ -111,6 +115,7 @@ public class AuthorList : MonoBehaviour {
 
         foreach (string name in abcList)
         {
+            //Debug.Log(name);
             Quaternion rotation = listItemPrefab.transform.rotation;
             Vector3 position = new Vector3(0, yPos, 0);
 
@@ -128,15 +133,15 @@ public class AuthorList : MonoBehaviour {
             background.localScale = new Vector3(instListItem.GetComponent<RectTransform>().sizeDelta.x/10, 1, 4);
 
             ChooseElement item = instListItem.GetComponent<ChooseElement>();
-            item.id = dict[name];   
+            item.id = dict[name];
 
             i++;
             yPos = yPos - (40/3);
         }
+        abcList.Clear();
     }
 
 
-    // TODO: Test
     // EFFECTS: Sets the height of the Viewport to enable the whole list to be scrolled
     // MODIFIES: this
     // REQUIRES: nothing
@@ -144,8 +149,17 @@ public class AuthorList : MonoBehaviour {
     {
         RectTransform content = transform.GetComponent<RectTransform>();
         RectTransform scrollView = GameObject.Find("Canvas/Scroll View").GetComponent<RectTransform>();
-        content.offsetMin = new Vector2(content.offsetMin.x, -40*numItems + scrollView.sizeDelta.y);
+        content.offsetMin = new Vector2(content.offsetMin.x, -40*numItems + scrollView.sizeDelta.y  + offset);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
+
+        if (content.offsetMin.y > 0)
+        {
+            HideArrows();
+        }
+        else
+        {
+            ShowArrows();
+        }
 
     }
 
@@ -166,8 +180,7 @@ public class AuthorList : MonoBehaviour {
         isAuthorScreen = false;
 
         DestroyItems();
-
-        GetPoemData(authID);
+        GetPoemData(currentAuth);
         DisplayItems();
     }
 
@@ -188,48 +201,55 @@ public class AuthorList : MonoBehaviour {
     // REQUIRES: nothing
     public void GetPoemData(int authID)
     {
+        poemIDs.Clear();
         int currentID = 0;
 
-#if UNITY_EDITOR
-        string[] poemData;
-        string dir = Application.streamingAssetsPath;
-        string path = dir + "\\Authors\\" + authID + ".txt";
+//#if UNITY_EDITOR
+//        string[] poemData;
+//        string dir = Application.streamingAssetsPath;
+//        string path = dir + "\\Authors\\" + authID + ".txt";
 
-        //JUST FOR TESTING
-        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
-        {
-            path = dir + "//Authors//" + authID + ".txt";
-        }
+//        //JUST FOR TESTING
+//        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+//        {
+//            path = dir + "//Authors//" + authID + ".txt";
+//        }
 
-        using (StreamReader sr = new StreamReader(path))
-        {
-            string line;
+//        using (StreamReader sr = new StreamReader(path))
+//        {
+//            string line;
 
-            while ((line = sr.ReadLine()) != null)
-            {
-                if (line.Contains("id ="))
-                {
-                    currentID = int.Parse(line.Substring(5).Trim());
-                }
-                else if (line.Contains("title ="))
-                {
-                    string currentTitle = line.Substring(8).Trim();
-                    poemIDs.Add(currentID, currentTitle);
-                }
-            }
-        }
-#endif
+//            while ((line = sr.ReadLine()) != null)
+//            {
+//                if (line.Contains("id ="))
+//                {
+//                    currentID = int.Parse(line.Substring(5).Trim());
+//                }
+//                else if (line.Contains("title ="))
+//                {
+//                    string currentTitle = line.Substring(8).Trim();
+//                    //Debug.Log(currentTitle);
+//                    poemIDs.Add(currentID, currentTitle);
+
+//                    foreach (int key in poemIDs.Keys)
+//                    {
+//                        Debug.Log(poemIDs[key]);
+//                    }
+//                }
+//            }
+//        }
+//#endif
 
         var _path = "";
 
         //JUST FOR TESTING
         if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
         {
-            _path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
+            _path = Application.streamingAssetsPath + "\\Authors\\" + authID + ".txt";
         }
         else
         {
-            _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+            _path = Application.streamingAssetsPath + "/Authors/" + authID + ".txt";
         }
 
         UnityWebRequest www = UnityWebRequest.Get(_path);
@@ -264,6 +284,28 @@ public class AuthorList : MonoBehaviour {
     {
         Utilities.poemTitle = poemTitle;
         Utilities.SetIDs(currentAuth, poemID);
+
+        DestroyItems();
         SceneManager.LoadScene(1);
+    }
+
+
+    // EFFECTS: hide scroll arrows
+    // MODIFIES: scroll arrow game objects
+    // REQUIRES: nothing
+    private void HideArrows()
+    {
+        GameObject.Find("Canvas/ScrollUp").SetActive(false);
+        GameObject.Find("Canvas/ScrollDown").SetActive(false);
+    }
+
+
+    // EFFECTS: show scroll arrows
+    // MODIFIES: scroll arrow game objects
+    // REQUIRES: nothing
+    private void ShowArrows()
+    {
+        GameObject.Find("Canvas/ScrollUp").SetActive(true);
+        GameObject.Find("Canvas/ScrollDown").SetActive(true);
     }
 }

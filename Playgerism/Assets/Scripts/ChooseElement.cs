@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ChooseElement : MonoBehaviour {
 
@@ -21,29 +22,45 @@ public class ChooseElement : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update() {
+    }
 
 
     // TODO: set parent's currentAuth or currentPoem when clicked
     //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         // ANIMATE: Press down animation
     }
 
-
     //TODO: REPLACE WITH ONTOUCH WITH RAYCAST
-    private void OnMouseUp()
+    public void OnMouseUp()
     {
-        if (isAuthor)
+        Background header = GameObject.Find("Headers").GetComponent<Background>();
+        Background footer = GameObject.Find("Footer").GetComponent<Background>();
+        //Debug.Log(EventSystem.current.currentSelectedGameObject.name);
+        if (EventSystem.current.currentSelectedGameObject != null)
+            //&& EventSystem.current.currentSelectedGameObject.CompareTag("arrow"))
         {
-            list.SelectAuthor(id, text);
+            //Debug.Log("in case of arrow");
+            return;
+        }
+        else if (header.inBackground == true || footer.inBackground == true)
+        {
+            return;
         }
         else
         {
-            list.SelectPoem(id, text);
+            //Debug.Log("not in arrow case");
+            if (isAuthor)
+            {
+                //Debug.Log("Select Author");
+                list.SelectAuthor(id, text);
+            }
+            else
+            {
+                list.SelectPoem(id, text);
+            }
         }
     }
 

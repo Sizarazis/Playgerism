@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler {
 
 	// Use this for initialization
 	void Start () {
@@ -19,15 +19,23 @@ public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         isScroll = false;
 	}
 
+
+    // -- VARIABLES --
+    public Transform content;
+
+    private bool isUp;
+    public bool isScroll;
     private int moveSpeed = 10;
+
 
     // Update is called once per frame
     void Update()
     {
+        if (!isActiveAndEnabled) isScroll = false;
+
         if (isScroll)
         {
-            // TODO: put the mouse handling behind a #unity_editor case.
-            if (Input.touchCount > 0 || (Input.mousePresent && !Input.anyKeyDown))
+            if (Input.touchCount > 0 || (Input.mousePresent && Input.anyKey))
             {
                 Move();
             }
@@ -48,22 +56,10 @@ public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         isScroll = false;
     }
 
-
-    // -- VARIABLES --
-    public Transform content;
-
-    private bool isUp;
-    private bool isScroll;
-
-
-    // TODO:
-    /*
-     * THOUGHTS:
-     * - I may want to have movement be triggered by how far the player moves the
-     *   link from its original screen position.
-     * - I need to think about whether I want to use these for selecting authors
-     *   and poems, or if I should have a different system.
-     */
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        isScroll = false;
+    }
 
 
     // EFFECTS: moves the content up or down
