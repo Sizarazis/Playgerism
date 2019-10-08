@@ -5,6 +5,7 @@ using System.IO;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using UnityEngine.Advertisements;
 
 public class AuthorList : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class AuthorList : MonoBehaviour {
         isAuthorScreen = true;
         FillAuthorDictionary();
         DisplayItems();
-
+        Advertisement.Banner.Hide();
     }
 
 

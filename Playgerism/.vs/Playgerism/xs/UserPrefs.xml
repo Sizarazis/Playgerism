@@ -1,19 +1,14 @@
 ﻿<Properties StartupConfiguration="{C3B9F46B-571B-3ED5-07F3-77896C6C3420}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ScrollArrow.cs">
-    <Files>
-      <File FileName="Assets/Scripts/StateManager.cs" Line="16" Column="28" />
-      <File FileName="Assets/Scripts/Link.cs" />
-      <File FileName="Assets/Scripts/ScrollArrow.cs" Line="80" Column="66" />
-      <File FileName="Assets/Scripts/Line.cs" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Playgerism" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="ScrollArrow.cs" selected="True" />
+                <Node name="AdInitialization.cs" selected="True" />
               </Node>
+              <Node name="UnityAds" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -22,7 +17,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="c991c5b3-5fa6-4e46-a77a-382b122dcdc4" />
+  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="c8282f60-c485-4d67-961e-a98389651e9e" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

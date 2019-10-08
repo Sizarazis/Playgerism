@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Advertisements;
 
 public class StateManager : MonoBehaviour {
 
@@ -33,6 +34,8 @@ public class StateManager : MonoBehaviour {
         AttachLinesAndSlots();
         AttachLinesAndLinks();
         SetContentHeight();
+
+        Advertisement.Banner.Hide();
     }
 
 
