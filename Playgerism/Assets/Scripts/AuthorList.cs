@@ -133,6 +133,9 @@ public class AuthorList : MonoBehaviour {
             Transform background = instListItem.transform.Find("Background");
             background.localScale = new Vector3(instListItem.GetComponent<RectTransform>().sizeDelta.x/10, 1, 4);
 
+            Transform delineator = instListItem.transform.Find("Delineator");
+            delineator.localScale = new Vector3(background.localScale.x, delineator.localScale.y, delineator.localScale.z);
+
             ChooseElement item = instListItem.GetComponent<ChooseElement>();
             item.id = dict[name];
 
