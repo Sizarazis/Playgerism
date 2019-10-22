@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 
 public class Stats : MonoBehaviour {
 
@@ -48,6 +49,7 @@ public class Stats : MonoBehaviour {
         if (!File.Exists(path)) return;
 
         lines = File.ReadAllLines(path);
+        Array.Sort(lines);
 
         if (lines.Length < 1) return;
 

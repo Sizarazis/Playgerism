@@ -1,5 +1,8 @@
 ﻿<Properties StartupConfiguration="{C3B9F46B-571B-3ED5-07F3-77896C6C3420}|">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AdInitialization.cs">
+    <Files>
+      <File FileName="Assets/Scripts/AdInitialization.cs" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
@@ -17,7 +20,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="c8282f60-c485-4d67-961e-a98389651e9e" />
+  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="3eb57acd-707d-4eb2-8d8e-7ba7a7fed5d7" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

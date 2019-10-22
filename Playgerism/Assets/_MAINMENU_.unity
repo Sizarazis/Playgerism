@@ -77,15 +77,17 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
-    m_PVRFiltering: 0
+    m_PVRFilterTypeDirect: 0
+    m_PVRFilterTypeIndirect: 0
+    m_PVRFilterTypeAO: 0
     m_PVRFilteringMode: 1
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
     m_PVRFilteringGaussRadiusAO: 2
-    m_PVRFilteringAtrousColorSigma: 1
-    m_PVRFilteringAtrousNormalSigma: 1
-    m_PVRFilteringAtrousPositionSigma: 1
+    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+    m_PVRFilteringAtrousPositionSigmaAO: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -1155,7 +1157,7 @@ TextMesh:
   m_FontSize: 60
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -1636,7 +1638,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2362,7 +2364,7 @@ RectTransform:
   m_Children:
   - {fileID: 560807218}
   m_Father: {fileID: 1912183642}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2519,7 +2521,7 @@ TextMesh:
   m_FontSize: 60
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -2707,7 +2709,7 @@ TextMesh:
   m_FontSize: 60
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 0}
+  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -2832,7 +2834,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -2843,44 +2845,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\rLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus
-    massa quis maximus consequat. Sed eget est at augue condimentum pulvinar non non
-    tellus. Fusce mollis aliquam metus, sit amet malesuada ante ultricies sed. Pellentesque
-    habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-    Sed vitae ligula id tellus tristique accumsan. In venenatis posuere velit sit
-    amet ornare. Etiam dolor turpis, volutpat nec urna sit amet, convallis aliquam
-    sem. Nullam venenatis, felis a porttitor lobortis, sapien diam egestas enim, bibendum
-    efficitur nisl enim eget arcu. Suspendisse accumsan posuere magna, sit amet mattis
-    nisi mollis egestas. Mauris rhoncus leo sit amet augue pellentesque varius. In
-    in aliquet elit, in feugiat risus.\r\n\r\nDuis ut nisi risus. Nullam suscipit
-    faucibus dictum. Integer mollis elementum libero sed efficitur. Maecenas ut molestie
-    metus, et ultrices nulla. In vel ipsum quis lectus luctus euismod. Maecenas semper
-    eleifend arcu et commodo. Aenean vitae nisl in justo rhoncus tempus eu quis nulla.
-    Sed id malesuada lacus. Nam scelerisque quam tortor, sed venenatis lectus mattis
-    a. Sed a lectus est. Maecenas et tortor sed elit pulvinar venenatis. Nullam eleifend
-    elit eros, a lacinia felis interdum non. Morbi dignissim lacus vitae eros congue
-    mollis.\r\n\r\nMorbi dictum elit sit amet enim lobortis, id convallis metus vestibulum.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-    himenaeos. Sed at leo non nisi elementum cursus. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ac tortor
-    dignissim, feugiat nunc ac, maximus turpis. In luctus, nisl eu auctor accumsan,
-    elit libero iaculis turpis, quis malesuada urna neque eu metus. Morbi eu augue
-    vel purus molestie imperdiet.\r\n\r\nMorbi ultrices erat sapien, vel venenatis
-    nibh luctus egestas. Ut at orci vel mauris elementum consequat in et eros. Suspendisse
-    potenti. Donec semper quam id felis congue tempor. In vehicula nisi nec molestie
-    interdum. In ultrices tristique tincidunt. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Fusce dictum vitae nisi in tincidunt. Mauris vitae congue est.
-    Proin porttitor augue vel volutpat consectetur. Quisque in lorem id magna tempus
-    elementum ac sed enim. Aenean lobortis gravida consequat. Quisque sit amet convallis
-    purus.\r\n\r\nProin pharetra dolor metus, sed posuere urna mollis a. Sed tempus
-    pharetra quam, eu condimentum mauris faucibus ut. Vivamus pellentesque sed tellus
-    lacinia commodo. Pellentesque id lobortis tortor. Donec massa felis, porttitor
-    sit amet tellus a, luctus tristique risus. Donec aliquet sed mi sit amet mollis.
-    Duis et malesuada metus. Curabitur porttitor, augue ornare tempor venenatis, nulla
-    sapien hendrerit dolor, ac imperdiet nibh arcu consectetur turpis. Nulla dapibus
-    felis vitae justo rhoncus, eu fermentum eros cursus. Vivamus viverra dignissim
-    nulla vel convallis. Aenean at neque diam. Nam suscipit dignissim maximus. Maecenas
-    scelerisque ultrices tortor, a vulputate metus posuere eget. "
+  m_Text: "- Once you select a poem, you can start matching!\n\n- Tap and drag a line
+    to move it around, and let go to place that line in a new position.\n\n- If 2
+    lines are correctly matched, they will lock together, and you will be able to
+    move them together. \n\n\nEnjoy!"
 --- !u!222 &1774337251
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3206,8 +3174,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1772550685}
-  - {fileID: 1455037877}
   - {fileID: 2136910680}
+  - {fileID: 1455037877}
   m_Father: {fileID: 246366728}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3235,7 +3203,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3568,7 +3536,7 @@ RectTransform:
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 1912183642}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3596,7 +3564,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3607,44 +3575,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\rLorem ipsum dolor sit amet, consectetur adipiscing elit. Donec cursus
-    massa quis maximus consequat. Sed eget est at augue condimentum pulvinar non non
-    tellus. Fusce mollis aliquam metus, sit amet malesuada ante ultricies sed. Pellentesque
-    habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-    Sed vitae ligula id tellus tristique accumsan. In venenatis posuere velit sit
-    amet ornare. Etiam dolor turpis, volutpat nec urna sit amet, convallis aliquam
-    sem. Nullam venenatis, felis a porttitor lobortis, sapien diam egestas enim, bibendum
-    efficitur nisl enim eget arcu. Suspendisse accumsan posuere magna, sit amet mattis
-    nisi mollis egestas. Mauris rhoncus leo sit amet augue pellentesque varius. In
-    in aliquet elit, in feugiat risus.\r\n\r\nDuis ut nisi risus. Nullam suscipit
-    faucibus dictum. Integer mollis elementum libero sed efficitur. Maecenas ut molestie
-    metus, et ultrices nulla. In vel ipsum quis lectus luctus euismod. Maecenas semper
-    eleifend arcu et commodo. Aenean vitae nisl in justo rhoncus tempus eu quis nulla.
-    Sed id malesuada lacus. Nam scelerisque quam tortor, sed venenatis lectus mattis
-    a. Sed a lectus est. Maecenas et tortor sed elit pulvinar venenatis. Nullam eleifend
-    elit eros, a lacinia felis interdum non. Morbi dignissim lacus vitae eros congue
-    mollis.\r\n\r\nMorbi dictum elit sit amet enim lobortis, id convallis metus vestibulum.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-    himenaeos. Sed at leo non nisi elementum cursus. Class aptent taciti sociosqu
-    ad litora torquent per conubia nostra, per inceptos himenaeos. Curabitur ac tortor
-    dignissim, feugiat nunc ac, maximus turpis. In luctus, nisl eu auctor accumsan,
-    elit libero iaculis turpis, quis malesuada urna neque eu metus. Morbi eu augue
-    vel purus molestie imperdiet.\r\n\r\nMorbi ultrices erat sapien, vel venenatis
-    nibh luctus egestas. Ut at orci vel mauris elementum consequat in et eros. Suspendisse
-    potenti. Donec semper quam id felis congue tempor. In vehicula nisi nec molestie
-    interdum. In ultrices tristique tincidunt. Lorem ipsum dolor sit amet, consectetur
-    adipiscing elit. Fusce dictum vitae nisi in tincidunt. Mauris vitae congue est.
-    Proin porttitor augue vel volutpat consectetur. Quisque in lorem id magna tempus
-    elementum ac sed enim. Aenean lobortis gravida consequat. Quisque sit amet convallis
-    purus.\r\n\r\nProin pharetra dolor metus, sed posuere urna mollis a. Sed tempus
-    pharetra quam, eu condimentum mauris faucibus ut. Vivamus pellentesque sed tellus
-    lacinia commodo. Pellentesque id lobortis tortor. Donec massa felis, porttitor
-    sit amet tellus a, luctus tristique risus. Donec aliquet sed mi sit amet mollis.
-    Duis et malesuada metus. Curabitur porttitor, augue ornare tempor venenatis, nulla
-    sapien hendrerit dolor, ac imperdiet nibh arcu consectetur turpis. Nulla dapibus
-    felis vitae justo rhoncus, eu fermentum eros cursus. Vivamus viverra dignissim
-    nulla vel convallis. Aenean at neque diam. Nam suscipit dignissim maximus. Maecenas
-    scelerisque ultrices tortor, a vulputate metus posuere eget. "
+  m_Text: "Privacy\n\nPlaygerism doesn't take any of your personal information. The
+    game will locally store the times it took you to complete the poems, but at no
+    point will that information leave your device.\n\nRights\n\nAll poems included
+    in this game are over 100 years old, thus are assumed to be public domain. If
+    you believe that a poem included in the game is not public domain, please contact:
+    playgerismthegame@gmail.com, \nand we will look into it."
 --- !u!222 &2136910682
 CanvasRenderer:
   m_ObjectHideFlags: 0

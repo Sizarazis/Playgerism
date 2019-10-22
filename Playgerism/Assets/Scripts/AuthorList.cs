@@ -208,41 +208,41 @@ public class AuthorList : MonoBehaviour {
         poemIDs.Clear();
         int currentID = 0;
 
-//#if UNITY_EDITOR
-//        string[] poemData;
-//        string dir = Application.streamingAssetsPath;
-//        string path = dir + "\\Authors\\" + authID + ".txt";
+#if UNITY_EDITOR
+        string[] poemData;
+        string dir = Application.streamingAssetsPath;
+        string path = dir + "\\Authors\\" + authID + ".txt";
 
-//        //JUST FOR TESTING
-//        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
-//        {
-//            path = dir + "//Authors//" + authID + ".txt";
-//        }
+        //JUST FOR TESTING
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
+        {
+            path = dir + "//Authors//" + authID + ".txt";
+        }
 
-//        using (StreamReader sr = new StreamReader(path))
-//        {
-//            string line;
+        using (StreamReader sr = new StreamReader(path))
+        {
+            string line;
 
-//            while ((line = sr.ReadLine()) != null)
-//            {
-//                if (line.Contains("id ="))
-//                {
-//                    currentID = int.Parse(line.Substring(5).Trim());
-//                }
-//                else if (line.Contains("title ="))
-//                {
-//                    string currentTitle = line.Substring(8).Trim();
-//                    //Debug.Log(currentTitle);
-//                    poemIDs.Add(currentID, currentTitle);
+            while ((line = sr.ReadLine()) != null)
+            {
+                if (line.Contains("id ="))
+                {
+                    currentID = int.Parse(line.Substring(5).Trim());
+                }
+                else if (line.Contains("title ="))
+                {
+                    string currentTitle = line.Substring(8).Trim();
+                    //Debug.Log(currentTitle);
+                    poemIDs.Add(currentID, currentTitle);
 
-//                    foreach (int key in poemIDs.Keys)
-//                    {
-//                        Debug.Log(poemIDs[key]);
-//                    }
-//                }
-//            }
-//        }
-//#endif
+                    foreach (int key in poemIDs.Keys)
+                    {
+                        Debug.Log(poemIDs[key]);
+                    }
+                }
+            }
+        }
+#else
 
         var _path = "";
 
@@ -278,6 +278,7 @@ public class AuthorList : MonoBehaviour {
                 }
             }
         }
+#endif
     }
 
 

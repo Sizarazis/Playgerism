@@ -26,7 +26,3 @@ public class BannerAd : MonoBehaviour {
     }
 }
 
-
-/*
- * - I need to hide the banner ad when not in the first scene
- */
