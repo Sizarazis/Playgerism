@@ -704,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361e70522e9255145898f30ada247279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  listItemPrefab: {fileID: 1284898188311182, guid: 4e44fac7743071541b2bb4b5ca400283,
+  listItemPrefab: {fileID: 1190561887522484, guid: 4e44fac7743071541b2bb4b5ca400283,
     type: 2}
   isAuthorScreen: 1
 --- !u!1 &1199466871

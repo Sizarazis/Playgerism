@@ -16,6 +16,7 @@ public class AuthorList : MonoBehaviour {
         canvasWidth = GameObject.Find("Canvas").GetComponent<RectTransform>().sizeDelta.x;
         authIDs = new Dictionary<int, string>();
         poemIDs = new Dictionary<int, string>();
+        stats = Utilities.GetStats();
 
         isAuthorScreen = true;
         FillAuthorDictionary();
@@ -34,6 +35,7 @@ public class AuthorList : MonoBehaviour {
     private int currentAuth;
     private int currentPoem;
     private int offset = 16;
+    private string[,] stats;
 
 
     // Update is called once per frame
@@ -136,6 +138,9 @@ public class AuthorList : MonoBehaviour {
             Transform delineator = instListItem.transform.Find("Delineator");
             delineator.localScale = new Vector3(background.localScale.x, delineator.localScale.y, delineator.localScale.z);
 
+            Transform checkmark = instListItem.transform.Find("Checkmark");
+            checkmark.gameObject.SetActive(HasCompletedPoem(name));
+
             ChooseElement item = instListItem.GetComponent<ChooseElement>();
             item.id = dict[name];
 
@@ -143,6 +148,30 @@ public class AuthorList : MonoBehaviour {
             yPos = yPos - (40/3);
         }
         abcList.Clear();
+    }
+
+
+    // EFFECTS: returns true if the user has completed the poem of this name
+    // MODIFIES: nothing
+    // REQUIRES: the name of the poem, the stats variable to be  initialized
+    private bool HasCompletedPoem(string name)
+    {
+        if (isAuthorScreen)
+        {
+            return false;
+        }
+        else
+        {
+            for (int i = 0; i < stats.GetLength(0); i++)
+            {
+                if (stats[i, 1].Trim() == name)
+                {
+                    Debug.Log("should be here");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -235,10 +264,10 @@ public class AuthorList : MonoBehaviour {
                     //Debug.Log(currentTitle);
                     poemIDs.Add(currentID, currentTitle);
 
-                    foreach (int key in poemIDs.Keys)
-                    {
-                        Debug.Log(poemIDs[key]);
-                    }
+                    //foreach (int key in poemIDs.Keys)
+                    //{
+                    //    Debug.Log(poemIDs[key]);
+                    //}
                 }
             }
         }

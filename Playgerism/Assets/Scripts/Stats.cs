@@ -9,7 +9,7 @@ public class Stats : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GetStats();
+        stats = Utilities.GetStats();
         DisplayStats();
 	}
 
@@ -35,41 +35,6 @@ public class Stats : MonoBehaviour {
         RectTransform content = transform.GetComponent<RectTransform>();
         content.offsetMin = new Vector2(content.offsetMin.x, -3 * statSize * numItems + 335);
         content.offsetMax = new Vector2(content.offsetMax.x, 0);
-    }
-
-
-    // EFFECTS: Gets the poem titles and author names and thWeir associated best times from resources
-    // MODIFIES: this
-    // REQUIRES: nothing
-    private void GetStats()
-    {
-        string[] lines;
-        string path = Application.persistentDataPath + "/userStats.csv";
-
-        if (!File.Exists(path)) return;
-
-        lines = File.ReadAllLines(path);
-        Array.Sort(lines);
-
-        if (lines.Length < 1) return;
-
-        stats = new string[lines.Length - 1, 3];
-
-        for (int i = 1; i < lines.Length; i++)
-        {
-            if (lines[i] == null || !lines[i].Contains(",")) break;
-
-            string[] split = lines[i].Split(',');
-
-            stats[i - 1, 0] = split[0]; // author name
-
-            stats[i - 1, 1] = split[1]; // poem name
-            for (int j=2; j<split.Length-1; j++)
-            {
-                stats[i - 1, 1] = stats[i - 1, 1] + "," + split[j]; // for when poems have commas
-            }
-            stats[i - 1, 2] = split[split.Length-1]; // record time
-        }
     }
 
 
