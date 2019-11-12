@@ -166,7 +166,6 @@ public class AuthorList : MonoBehaviour {
             {
                 if (stats[i, 1].Trim() == name)
                 {
-                    Debug.Log("should be here");
                     return true;
                 }
             }
