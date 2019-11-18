@@ -6,33 +6,41 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Advertisements;
 
+
 public class StateManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+         
+        // SET TIMER
         timer = 0.0f;
         minutes = 0;
+
+        // SET END AND MENU VARS
         isPaused = false;
         isEnd = false;
         endHandled = false;
-        canvasWidth = GetComponent<RectTransform>().sizeDelta.x;
 
+        // SET PLATFORM SPECIFIC VARS
+        canvasWidth = GetComponent<RectTransform>().sizeDelta.x;
         OSVersion = Utilities.GetOSVersion();
 
-        poem = BuildPoem();
-        numLines = poem.Length;
-        numSlots = poem.Length;
+        // BUILD THE POEM
+        transform.Find("Scroll View/Viewport/Content/Title/Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
+        transform.Find("Scroll View/Viewport/Content/Title/Author").GetComponent<TextMesh>().text = Utilities.authName;
+        poem = Utilities.ParsePoem();
         scrambledPoem = ScramblePoem();
+        solution = new HashSet<Line>();
 
+        // BUILD THE BOARD
         SetTitleHeaderWidth();
         BuildSlots();
-        BuildLinksAndLines();
-        SetLineText();
+        BuildLines();
         ConnectSlots();
 
-        lines = GetLines();
+
+        // CONNECT THE POEM TO THE BOARD
         AttachLinesAndSlots();
-        AttachLinesAndLinks();
         SetContentHeight();
 
         Advertisement.Banner.Hide();
@@ -40,32 +48,22 @@ public class StateManager : MonoBehaviour {
 
 
     // -- VARIABLES -- //
-    public struct IDLine
-    {
-        public int ID;
-        public string line;
-        public bool isLast;
-    }
     public GameObject slotPrefab;
     public GameObject slots;
     public GameObject linePrefab;
-    public GameObject linesObj;
-    public GameObject lineLinks;
-    public GameObject linkPrefab;
+    public GameObject lines;
     public GameObject menu;
 
-    private Line[]      lines;
-    private IDLine[]    poem;
-    private IDLine[]    scrambledPoem;
-    private int         numLines;
-    private int         numSlots;
-    private int         lineHeight = 6;
-    private int         minutes;
-    private float       timer;
-    private float       canvasWidth;
-    private bool        isPaused;
-    private bool        isEnd;
-    private bool        endHandled;
+    private string[] poem;
+    private string[] scrambledPoem;
+    private HashSet<Line> solution;
+    private int lineHeight = 60;
+    private int minutes;
+    private float timer;
+    private float canvasWidth;
+    private bool isPaused;
+    private bool isEnd;
+    private bool endHandled;
 
     private Utilities.OSVersion OSVersion;
 
@@ -76,7 +74,6 @@ public class StateManager : MonoBehaviour {
         if (!isEnd && !isPaused)
         {
             CheckLineMatches();
-            UpdateLineLinks();
 
             if (minutes < 100)
             {
@@ -95,6 +92,7 @@ public class StateManager : MonoBehaviour {
         }
     }
 
+
     void SetTitleHeaderWidth()
     {
         Transform titleHeader = transform.Find("Scroll View/Viewport/Content/Title/Background");
@@ -104,79 +102,42 @@ public class StateManager : MonoBehaviour {
     }
 
 
-    // EFFECTS: Sets the height of the Viewport to enable the whole poem to be scrolled
+    // EFFECTS: Sets the height of the Content window to enable the whole poem to be scrolled
     // MODIFIES: this
     // REQUIRES: nothing
     void SetContentHeight()
     {
+        int headerSize = 160;
+
         Transform content = transform.Find("Scroll View").Find("Viewport").Find("Content");
         RectTransform rectTransform = content.GetComponent<RectTransform>();
-        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -60*numSlots + (GetComponent<RectTransform>().sizeDelta.y - 160));
+
+        rectTransform.offsetMin = new Vector2(rectTransform.offsetMin.x, -lineHeight*poem.Length + (GetComponent<RectTransform>().sizeDelta.y - headerSize));
         rectTransform.offsetMax = new Vector2(rectTransform.offsetMax.x, 0);
     }
 
 
-    // EFFECTS: builds an array of lines with IDs attached
-    // MODIFIES: this
-    // REQUIRES: stringPoems and numLines to be instantiated
-    IDLine[] BuildPoem()
-    {
-        string[] lines = Utilities.ParsePoem();
-        int size = lines.Length;
-
-        transform.Find("Scroll View/Viewport/Content/Title/Title").GetComponent<TextMesh>().text = Utilities.poemTitle;
-        transform.Find("Scroll View/Viewport/Content/Title/Author").GetComponent<TextMesh>().text = Utilities.authName;
-
-        IDLine[] output = new IDLine[size];
-        for (int i = 0; i < size; i++)
-        {
-            output[i].line = lines[i];
-            output[i].ID = i;
-            output[i].isLast = false;
-            if (i == size - 1)
-            {
-                output[i].isLast = true;
-            }
-        }
-
-        return output;
-    }
-
-
-    // EFFECTS: randomly shuffles the poem's lines
+    // EFFECTS: randomly shuffles the lines of the poem after the first line
     // MODIFIES: nothing
     // REQUIRES: nothing
-    IDLine[] ScramblePoem()
+    string[] ScramblePoem()
     {
         int len = poem.Length;
-        IDLine[] outPoem = new IDLine[numLines];
+        string[] res = new string[len];
 
-        for (int i = 0; i < numLines; i++)
+        for (int i = 0; i < len; i++)
         {
-            outPoem[i] = poem[i];
+            res[i] = poem[i];
         }
 
-        for (int j = 0; j < len; j++)
+        for (int j = 1; j < len; j++)
         {
-            IDLine temp = outPoem[j];
-            int random = UnityEngine.Random.Range(j, outPoem.Length);
-            outPoem[j] = outPoem[random];
-            outPoem[random] = temp;
+            string temp = res[j];
+            int random = UnityEngine.Random.Range(j, len);
+            res[j] = res[random];
+            res[random] = temp;
         }
-
-        return outPoem;
-    }
-
-
-    Line[] GetLines()
-    {
-        return lineLinks.GetComponentsInChildren<Line>();
-    }
-
-
-    Link[] GetLinks()
-    {
-        return lineLinks.GetComponentsInChildren<Link>();
+        return res;
     }
 
 
@@ -187,19 +148,19 @@ public class StateManager : MonoBehaviour {
     {
         int yPos = -110;
 
-        for (int i = 0; i < numSlots; i++)
+        for (int i = 0; i < poem.Length; i++)
         {
             Quaternion rotation = slotPrefab.transform.rotation;
             Vector3 position = new Vector3(canvasWidth/2, yPos, 1);
 
             GameObject instSlot = Instantiate(slotPrefab, position, rotation, slots.transform);
             instSlot.transform.localPosition = position;
-            instSlot.transform.localScale = new Vector3(canvasWidth/10, 1, lineHeight);
+            instSlot.transform.localScale = new Vector3(canvasWidth/10, 1, lineHeight/10);
 
             instSlot.name = "Slot " + i;
-            instSlot.GetComponent<Slot>().relPosition = i;
+            instSlot.GetComponent<Slot>().position = i;
 
-            yPos = yPos - lineHeight*10;
+            yPos = yPos - lineHeight;
         }
     }
 
@@ -207,49 +168,33 @@ public class StateManager : MonoBehaviour {
     // EFFECTS: instantiates links and lines from their prefabs
     // MODIFIES: the lines and links gameObjects
     // REQUIRES: references prefabs and gameObjects in the Unity project
-    void BuildLinksAndLines()
+    void BuildLines()
     {
-        int yPos = -110;
+       int yPos = -110;
 
-        for (int i = 0; i < numLines; i++)
+        for (int i = 0; i < poem.Length; i++)
         {
-            Quaternion linkRot = linkPrefab.transform.rotation;
-            Vector3 linkPos = new Vector3(canvasWidth/2, yPos, -2);
-            GameObject instLink = Instantiate(linkPrefab, linkPos, linkRot, lineLinks.transform);
-            instLink.transform.localPosition = linkPos;
-            instLink.transform.localScale = new Vector3(canvasWidth/100, lineHeight, 1);
+            Quaternion rotation = linePrefab.transform.rotation;
+            Vector3 position = new Vector3(canvasWidth/2, yPos, -2);
+            GameObject line = Instantiate(linePrefab, position, rotation, lines.transform);
+            line.transform.localPosition = new Vector3(canvasWidth/2, yPos, -2);
+            line.transform.localScale = new Vector3(canvasWidth/100, lineHeight/10, 1);
 
-            instLink.name = "Link " + i;
+            line.name = "Line " + i;
+            line.transform.Find("Text").GetComponent<TextMesh>().text = scrambledPoem[i];
 
-            Quaternion lineRot = linePrefab.transform.rotation;
-            Vector3 linePos = new Vector3(0, 0, 0);
-            GameObject instLine = Instantiate(linePrefab, linePos, lineRot, instLink.transform);
-            instLine.transform.localPosition = new Vector3(0,0,2);
+            Line line_script = line.GetComponent<Line>();
+            line_script.text = scrambledPoem[i];
 
-            instLine.name = "Line " + i;
-
-            yPos = yPos - lineHeight*10;
-        }
-    }
-
-
-    // EFFECTS: sets the lines 
-    // MODIFIES: the text displayed in each Lines/Line/Text gameObject
-    // REQUIRES: lines to have already instantiated its line children
-    void SetLineText()
-    {
-        //Transform lineLoc = lineLinks.Get
-        int i = 0;
-        foreach(Transform line in lineLinks.GetComponentsInChildren<Transform>())
-        {
-            if (line.name == "Text")
+            for (int j=0; j<poem.Length; j++)
             {
-                line.GetComponentInChildren<TextMesh>().text = scrambledPoem[i].line;
-                line.GetComponentInParent<Line>().lineID = scrambledPoem[i].ID;
-                line.GetComponentInParent<Line>().isLast = scrambledPoem[i].isLast;
-
-                i++;
+                if (poem[j] == scrambledPoem[i])
+                {
+                    line_script.id = j;
+                }
             }
+
+            yPos = yPos - lineHeight;
         }
     }
 
@@ -259,15 +204,15 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     void ConnectSlots()
     {
-        Slot prevSlot = null;
+        Slot prev = null;
         foreach (Slot slot in slots.transform.GetComponentsInChildren<Slot>())
         {
-            if (prevSlot != null)
+            if (prev != null)
             {
-                slot.prevSlot = prevSlot;
-                prevSlot.nextSlot = slot;
+                slot.prev = prev;
+                prev.next = slot;
             }
-            prevSlot = slot;
+            prev = slot;
         }
     }
 
@@ -278,29 +223,12 @@ public class StateManager : MonoBehaviour {
     void AttachLinesAndSlots()
     {
         Slot[] allSlots = slots.transform.GetComponentsInChildren<Slot>();
+        Line[] allLines = lines.transform.GetComponentsInChildren<Line>();
 
-        int i = 0;
-        foreach (Line instLine in lineLinks.transform.GetComponentsInChildren<Line>())
+        for (int i = 0; i<allLines.Length; i++)
         {
-            instLine.inSlot = allSlots[i];
-            allSlots[i].currentLine = instLine;
-
-            i++;
-        }
-    }
-
-
-    // EFFECTS: initially attaches the Lines to Links and Links to Lines
-    // MODIFIES: the Link game objects
-    // REQUIRES: the lines[] array to be instantiated first
-    void AttachLinesAndLinks()
-    {
-        int i = 0;
-        foreach (Link link in lineLinks.transform.GetComponentsInChildren<Link>())
-        {
-            link.lines.Add(lines[i]);
-            lines[i].inLink = link;
-            i++;
+            allLines[i].slot = allSlots[i];
+            allSlots[i].line = allLines[i];
         }
     }
 
@@ -310,36 +238,15 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     void CheckLineMatches()
     {
-        lines = GetLines();
-        foreach(Line line in lines)
+        foreach (Line line in lines.transform.GetComponentsInChildren<Line>())
         {
             line.UpdateMatches();
-        }
-    }
 
-
-    // EFFECTS: moves a line to its correct link
-    // MODIFIES: line and link objects
-    // REQUIRES: nothing
-    void UpdateLineLinks()
-    {
-        lines = GetLines();
-        if (lines.Length <= 0) return;
-
-        foreach (Line line in lines)
-        {
-            if (line.topMatch || line.bottomMatch)
+            if (line.solved && !solution.Contains(line))
             {
-                if (line.topMatch && line.lineID > 0)
-                {
-                    line.inSlot.prevSlot.currentLine.inLink.MergeLinks(line.inLink);
-                }
-                if (line.bottomMatch && line.isLast == false)
-                {
-                    line.inLink.MergeLinks(line.inSlot.nextSlot.currentLine.inLink);
-                }
+                solution.Add(line);
+                UpdateLineColors(line);
             }
-            UpdateLineColors(line);
         }
     }
 
@@ -350,18 +257,17 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: the background to have a MeshRenderer
     void UpdateLineColors(Line line)
     {
-        Color baseColor = new Color (0.94117f, 0.94117f, 0.94117f, 1);
-        Color green = new Color(0.23529f, 0.68627f, 0.39215f, 1);
-        Color test = new Color(118/255f, 219/255f, 148/255f, 1);
-        Color outColor;
+        Color initial = new Color (0.94117f, 0.94117f, 0.94117f, 1);
+        Color green = new Color(118 / 255f, 219 / 255f, 148 / 255f, 1);
+        Color color;
 
-        if (line.topMatch || line.bottomMatch)
+        if (line.solved)
         {
-            outColor = test;
+            color = green;
         }
-        else outColor = baseColor;
+        else color = initial;
 
-        line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = outColor;
+        line.gameObject.transform.Find("Background").GetComponent<MeshRenderer>().material.color = color;
     }
 
 
@@ -406,9 +312,9 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void CheckEnd()
     {
-        foreach (Line line in lines)
+        foreach (Line line in lines.GetComponentsInChildren<Line>())
         {
-            if (line.lineID != line.inSlot.relPosition)
+            if (solution.Count != poem.Length)
             {
                 isEnd = false;
                 return;
@@ -442,8 +348,8 @@ public class StateManager : MonoBehaviour {
     // REQUIRES: nothing
     private void HandleEnd()
     {
-        BoxCollider2D[] linkColliders = lineLinks.transform.GetComponentsInChildren<BoxCollider2D>();
-        foreach (BoxCollider2D col in linkColliders)
+        BoxCollider2D[] lineColliders = lines.transform.GetComponentsInChildren<BoxCollider2D>();
+        foreach (BoxCollider2D col in lineColliders)
         {
             col.enabled = false;
         }

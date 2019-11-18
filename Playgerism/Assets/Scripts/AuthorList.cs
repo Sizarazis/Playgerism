@@ -18,7 +18,7 @@ public class AuthorList : MonoBehaviour {
         poemIDs = new Dictionary<int, string>();
         stats = Utilities.GetStats();
 
-        isAuthorScreen = true;
+        isAuthorScreen = true; 
         FillAuthorDictionary();
         DisplayItems();
         Advertisement.Banner.Hide();
