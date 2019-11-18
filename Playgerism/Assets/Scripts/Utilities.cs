@@ -167,7 +167,7 @@ public static class Utilities {
 
         if (lines.Length < 1) return null;
 
-        string[,] stats = new string[lines.Length - 1, 3];
+        string[,] stats = new string[lines.Length, 3];
 
         for (int i = 1; i < lines.Length; i++)
         {

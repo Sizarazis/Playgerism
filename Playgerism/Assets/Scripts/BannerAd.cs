@@ -5,7 +5,7 @@ using UnityEngine.Advertisements;
 
 public class BannerAd : MonoBehaviour {
 
-    public string gameId_android = "3317782";
+    public string gameId_android = "3317802";
     public string placementId = "banner1";
     public bool testMode = true;
 

@@ -53,9 +53,12 @@ public class AuthorList : MonoBehaviour {
 
         foreach (string line in data)
         {
-            string[] split = line.Split(',');
-            int id = int.Parse(split[0]);
-            authIDs.Add(id, split[1].Trim());
+            if (line.Contains(","))
+            {
+                string[] split = line.Split(',');
+                int id = int.Parse(split[0]);
+                authIDs.Add(id, split[1].Trim());
+            }
         }
     }
 
@@ -118,7 +121,6 @@ public class AuthorList : MonoBehaviour {
 
         foreach (string name in abcList)
         {
-            //Debug.Log(name);
             Quaternion rotation = listItemPrefab.transform.rotation;
             Vector3 position = new Vector3(0, yPos, 0);
 
@@ -162,7 +164,11 @@ public class AuthorList : MonoBehaviour {
         }
         else
         {
-            for (int i = 0; i < stats.GetLength(0); i++)
+            if (stats == null)
+            {
+                return false;
+            }
+            for (int i = 0; i < stats.GetLength(0)-1; i++)
             {
                 if (stats[i, 1].Trim() == name)
                 {
@@ -271,7 +277,7 @@ public class AuthorList : MonoBehaviour {
             }
         }
 #else
-
+        Debug.Log("ENTERED NON-EDITOR CASE");
         var _path = "";
 
         //JUST FOR TESTING
@@ -290,7 +296,6 @@ public class AuthorList : MonoBehaviour {
         {
         }
         string[] content = www.downloadHandler.text.Split('\n');
-
         for (int i = 0; i < content.Length; i++)
         {
             if (content[i].Contains("id ="))
