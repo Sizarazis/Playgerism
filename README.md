@@ -17,6 +17,7 @@ The players are scored based on a timer.  </br>
 
 ### Bugs and Issues
 - BUG: game doesn't recognize the correct line when the text of two lines are the same (See: "Silently Invisibly" in William Blake's 'Never Seek to Tell thy Love')
+- BUG: 'Cor Cordium' best time parsing bug
 - ISSUE: game text horizontally stretches according to the width of the screen. 
 
 ### Moving Forward
