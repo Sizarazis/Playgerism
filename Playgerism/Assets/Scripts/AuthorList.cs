@@ -168,7 +168,7 @@ public class AuthorList : MonoBehaviour {
             {
                 return false;
             }
-            for (int i = 0; i < stats.GetLength(0)-1; i++)
+            for (int i = 0; i < stats.GetLength(0); i++)
             {
                 if (stats[i, 1].Trim() == name)
                 {

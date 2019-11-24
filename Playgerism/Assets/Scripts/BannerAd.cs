@@ -7,7 +7,7 @@ public class BannerAd : MonoBehaviour {
 
     public string gameId_android = "3317802";
     public string placementId = "banner1";
-    public bool testMode = true;
+    public bool testMode = false;
 
     void Start()
     {
