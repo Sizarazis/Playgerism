@@ -169,20 +169,24 @@ public static class Utilities {
 
         string[,] stats = new string[lines.Length, 3];
 
-        for (int i = 1; i < lines.Length; i++)
+        for (int i = 0; i < lines.Length; i++)
         {
+            if (lines[i].Equals("authorName,poemTitle,bestTime"))
+            {
+                continue;
+            }
             if (lines[i] == null || !lines[i].Contains(",")) break;
 
             string[] split = lines[i].Split(',');
 
-            stats[i - 1, 0] = split[0]; // author name
+            stats[i, 0] = split[0]; // author name
 
-            stats[i - 1, 1] = split[1]; // poem name
+            stats[i, 1] = split[1]; // poem name
             for (int j = 2; j < split.Length - 1; j++)
             {
-                stats[i - 1, 1] = stats[i - 1, 1] + "," + split[j]; // for when poems have commas
+                stats[i, 1] = stats[i, 1] + "," + split[j]; // for when poems have commas
             }
-            stats[i - 1, 2] = split[split.Length - 1]; // record time
+            stats[i, 2] = split[split.Length - 1]; // record time
         }
         return stats;
     }

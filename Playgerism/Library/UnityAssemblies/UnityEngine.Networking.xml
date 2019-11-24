@@ -418,7 +418,7 @@
     </member>
     <member name="F:UnityEngine.Networking.MsgType.Disconnect">
       <summary>
-        <para>Internal networking system message for communicating a disconnect has occurred,.</para>
+        <para>Internal networking system message for communicating a disconnect has occurred.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.MsgType.Error">
@@ -827,7 +827,7 @@
     </member>
     <member name="T:UnityEngine.Networking.NetworkClient">
       <summary>
-        <para>This is a network client class used by the networking system. It contains a NetworkConnection that is used to connection to a network server.</para>
+        <para>This is a network client class used by the networking system. It contains a NetworkConnection that is used to connect to a network server.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.Networking.NetworkClient.active">
@@ -1778,7 +1778,7 @@
       <summary>
         <para>This is called on the client when the client is finished loading a new networked scene.</para>
       </summary>
-      <param name="conn"></param>
+      <param name="conn">The connection that finished loading a new networked scene.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyServerConnect(UnityEngine.Networking.NetworkConnection)">
       <summary>
@@ -1816,8 +1816,8 @@
       <summary>
         <para>This is called on the server when a player is removed.</para>
       </summary>
-      <param name="conn"></param>
-      <param name="playerControllerId"></param>
+      <param name="conn">The connection the player object is for.</param>
+      <param name="playerControllerId">The controllerId of the player that was removed.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyServerPlayersReady">
       <summary>
@@ -1844,7 +1844,7 @@
       <summary>
         <para>This is called on the client when a client is started.</para>
       </summary>
-      <param name="lobbyClient"></param>
+      <param name="lobbyClient">The connection for the lobby.</param>
     </member>
     <member name="M:UnityEngine.Networking.NetworkLobbyManager.OnLobbyStartHost">
       <summary>
@@ -3484,6 +3484,14 @@ All of the player objects in the game are disabled when the host is lost. Then, 
       <param name="msg">Message struct to send.</param>
       <param name="msgType">Message type.</param>
     </member>
+    <member name="M:UnityEngine.Networking.NetworkServer.SendToClient(System.Int32,System.Int16,UnityEngine.Networking.MessageBase)">
+      <summary>
+        <para>Send a message to the client which owns the given connection ID.</para>
+      </summary>
+      <param name="connectionId">Client connection ID.</param>
+      <param name="msg">Message struct to send.</param>
+      <param name="msgType">Message type.</param>
+    </member>
     <member name="M:UnityEngine.Networking.NetworkServer.SendToClientOfPlayer">
       <summary>
         <para>Send a message to the client which owns the given player object instance.</para>
@@ -4752,7 +4760,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="M:UnityEngine.Networking.NetworkWriter.WriteBytesAndSize(System.Byte[],System.Int32)">
       <summary>
-        <para>This writes a 16-bit count and a array of bytes of that length to the stream.</para>
+        <para>This writes a 16-bit count and an array of bytes of that length to the stream.</para>
       </summary>
       <param name="buffer">Array of bytes to write.</param>
       <param name="count">Number of bytes from the array to write.</param>
@@ -4847,7 +4855,7 @@ All of the player objects in the game are disabled when the host is lost. Then, 
     </member>
     <member name="T:UnityEngine.Networking.SyncEventAttribute">
       <summary>
-        <para>This is an attribute that can be put on events in NetworkBehaviour classes to allow them to be invoked on client when the event is called on the sserver.</para>
+        <para>This is an attribute that can be put on events in NetworkBehaviour classes to allow them to be invoked on client when the event is called on the server.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.Networking.SyncEventAttribute.channel">

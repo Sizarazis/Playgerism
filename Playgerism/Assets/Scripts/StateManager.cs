@@ -186,11 +186,30 @@ public class StateManager : MonoBehaviour {
             Line line_script = line.GetComponent<Line>();
             line_script.text = scrambledPoem[i];
 
-            for (int j=0; j<poem.Length; j++)
+            //Get for line copies
+            int occurances = 1;
+            for (int j=0; j<i; j++)
             {
-                if (poem[j] == scrambledPoem[i])
+                if (scrambledPoem[j] == scrambledPoem[i])
                 {
-                    line_script.id = j;
+                    occurances++;
+                }
+            }
+
+            //Set id's according to how many times this line is repeated in the poem
+            for (int k=0; k<poem.Length; k++)
+            {
+                if (scrambledPoem[i] == poem[k])
+                {
+                    if (occurances == 1)
+                    {
+                        line_script.id = k;
+                        break;
+                    }
+                    else
+                    {
+                        occurances--;
+                    }
                 }
             }
 
@@ -396,7 +415,7 @@ public class StateManager : MonoBehaviour {
 
         if (!File.Exists(path))
         {
-            File.WriteAllLines(path, new string[1]{"authorName,poemTitle,bestTime"});
+            File.WriteAllText(path, "");
             InsertNewRecord();
 
             return transform.Find("Header/Timer Text").GetComponent<TextMesh>().text.Substring(7);
