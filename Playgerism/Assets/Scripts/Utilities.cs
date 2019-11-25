@@ -166,7 +166,6 @@ public static class Utilities {
         Array.Sort(lines);
 
         if (lines.Length < 1) return null;
-
         string[,] stats = new string[lines.Length, 3];
 
         for (int i = 0; i < lines.Length; i++)
@@ -175,7 +174,10 @@ public static class Utilities {
             {
                 continue;
             }
-            if (lines[i] == null || !lines[i].Contains(",")) break;
+            if (lines[i] == null || !lines[i].Contains(","))
+            {
+                continue;
+            }
 
             string[] split = lines[i].Split(',');
 

@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using UnityEngine.Networking;
 using UnityEngine.Advertisements;
 
 public class AuthorList : MonoBehaviour {
@@ -153,6 +151,7 @@ public class AuthorList : MonoBehaviour {
     }
 
 
+    // TODO: Handle the case where two authors wrote a poem by the same name
     // EFFECTS: returns true if the user has completed the poem of this name
     // MODIFIES: nothing
     // REQUIRES: the name of the poem, the stats variable to be  initialized
@@ -170,6 +169,7 @@ public class AuthorList : MonoBehaviour {
             }
             for (int i = 0; i < stats.GetLength(0); i++)
             {
+                if (stats[i, 1] == null) continue;
                 if (stats[i, 1].Trim() == name)
                 {
                     return true;
