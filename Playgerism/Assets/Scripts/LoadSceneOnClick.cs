@@ -24,9 +24,7 @@ public class LoadSceneOnClick : MonoBehaviour {
 
         string tp = Resources.Load<TextAsset>("AuthIDs").ToString();
         string[] lines = tp.Split('\n');
-
-        int randomAuth = UnityEngine.Random.Range(1, lines.Length);
-        Utilities.authID = randomAuth - 1;
+        Utilities.authID = Random.Range(0, lines.Length-2);
         string[] authLines;
 
 #if PLATFORM_ANDROID

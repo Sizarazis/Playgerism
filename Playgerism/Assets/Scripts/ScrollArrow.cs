@@ -25,14 +25,14 @@ public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private bool isUp;
     public bool isScroll;
-    private int moveSpeed = 10;
+    private float enterYPosition;
+    private int moveSpeed = 12;
 
 
     // Update is called once per frame
     void Update()
     {
         if (!isActiveAndEnabled) isScroll = false;
-
         if (isScroll)
         {
             if (Input.touchCount > 0 || (Input.mousePresent && Input.anyKey))
@@ -49,11 +49,21 @@ public class ScrollArrow : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public void OnPointerEnter(PointerEventData eventData)
     {
         isScroll = true;
+        enterYPosition = eventData.position.y;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        isScroll = false;
+        if (isUp && eventData.position.y <= enterYPosition)
+        {
+            isScroll = false;
+        }
+        else if (!isUp && eventData.position.y >= enterYPosition)
+        {
+            isScroll = false;
+        }
+
+        //looks like things aren't being reset on the pointer exit
     }
 
     public void OnPointerDown(PointerEventData eventData)
