@@ -1,7 +1,11 @@
 ﻿<Properties StartupConfiguration="{C3B9F46B-571B-3ED5-07F3-77896C6C3420}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/AdInitialization.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BannerAd.cs">
     <Files>
-      <File FileName="Assets/Scripts/AdInitialization.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/StateManager.cs" Line="73" Column="33" />
+      <File FileName="Assets/Scripts/Utilities.cs" />
+      <File FileName="Assets/Scripts/AuthorList.cs" />
+      <File FileName="Assets/Scripts/LoadSceneOnClick.cs" />
+      <File FileName="Assets/Scripts/BannerAd.cs" Line="19" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -9,7 +13,7 @@
           <Node name="Playgerism" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="AdInitialization.cs" selected="True" />
+                <Node name="BannerAd.cs" selected="True" />
               </Node>
               <Node name="UnityAds" expanded="True" />
             </Node>
@@ -20,7 +24,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="3eb57acd-707d-4eb2-8d8e-7ba7a7fed5d7" />
+  <MonoDevelop.Ide.ItemProperties.Playgerism PreferredExecutionTarget="6b5dd776-f6e0-40e1-8cb3-6ffd8e90c485" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

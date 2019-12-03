@@ -58,12 +58,17 @@ public static class Utilities {
     {
         string[] poem = new string[0];
         int poemSize = 0;
+        string path = "";
 
-//JUST FOR TESTING
-#if UNITY_EDITOR
+#if UNITY_EDITOR || PLATFORM_IOS
         string dir = Application.streamingAssetsPath;
-        string path = dir + "\\Authors\\" + authID + ".txt";
 
+        // WINDOWS EDITOR
+        if (GetOSVersion() == OSVersion.Windows)
+        {
+            path = dir + "\\Authors\\" + authID + ".txt";
+        }
+        // OSX EDITOR
         if (GetOSVersion() == OSVersion.MacOSX)
         {
             path = dir + "//Authors//" + authID + ".txt";

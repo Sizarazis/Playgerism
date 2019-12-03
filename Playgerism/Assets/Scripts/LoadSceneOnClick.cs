@@ -26,18 +26,26 @@ public class LoadSceneOnClick : MonoBehaviour {
         string[] lines = tp.Split('\n');
         Utilities.authID = Random.Range(0, lines.Length-2);
         string[] authLines;
+        string path;
 
 #if PLATFORM_ANDROID
-        var _path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
-        UnityWebRequest www = UnityWebRequest.Get(_path);
+        path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        UnityWebRequest www = UnityWebRequest.Get(path);
         www.Send();
         while (!www.isDone)
         {
         }
         authLines = www.downloadHandler.text.Split('\n');
+#elif PLATFORM_IOS
+        path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
+        authLines = File.ReadAllLines(path);
 #else
-        string path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
-
+        // WINDOWS EDITOR
+        if (Utilities.GetOSVersion() == Utilities.OSVersions.Windows)
+        {
+            path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
+        }
+        // OSX EDITOR 
         if (Utilities.GetOSVersion() == Utilities.OSVersion.MacOSX)
         {
             path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";

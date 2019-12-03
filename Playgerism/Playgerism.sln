@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
+# Visual Studio for Mac
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Playgerism", "Playgerism.csproj", "{C3B9F46B-571B-3ED5-07F3-77896C6C3420}"
 EndProject
 Global

@@ -243,7 +243,7 @@ public class AuthorList : MonoBehaviour {
         poemIDs.Clear();
         int currentID = 0;
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || PLATFORM_IOS
         string[] poemData;
         string dir = Application.streamingAssetsPath;
         string path = dir + "\\Authors\\" + authID + ".txt";

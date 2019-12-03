@@ -11,7 +11,6 @@ public class StateManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-         
         // SET TIMER
         timer = 0.0f;
         minutes = 0;
