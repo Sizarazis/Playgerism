@@ -26,7 +26,7 @@ public class LoadSceneOnClick : MonoBehaviour {
         string[] lines = tp.Split('\n');
         Utilities.authID = Random.Range(0, lines.Length-2);
         string[] authLines;
-        string path;
+        string path = "";
 
 #if PLATFORM_ANDROID
         path = Application.streamingAssetsPath + "/Authors/" + Utilities.authID + ".txt";
@@ -41,7 +41,7 @@ public class LoadSceneOnClick : MonoBehaviour {
         authLines = File.ReadAllLines(path);
 #else
         // WINDOWS EDITOR
-        if (Utilities.GetOSVersion() == Utilities.OSVersions.Windows)
+        if (Utilities.GetOSVersion() == Utilities.OSVersion.Windows)
         {
             path = Application.streamingAssetsPath + "\\Authors\\" + Utilities.authID + ".txt";
         }
