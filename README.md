@@ -9,11 +9,10 @@ The player will be notified when the found the correct line, and that line will 
 The players are scored based on a timer.  </br>
 
 ### To Do
-1. Test Android integration (in an internal testing phase)
-2. Release Android build
-3. IPhone integration
-4. Animations
-5. Art
+1. IPhone integration
+2. Improve the scrolling speed
+3. Animations
+4. Art
 
 ### Bugs and Issues
 - ISSUE: game text horizontally stretches according to the width of the screen.
@@ -22,4 +21,3 @@ The players are scored based on a timer.  </br>
 - IMPROVEMENT: Build the poem database
 - IMPROVEMENT: Make the scoring system more robust
 - IDEA: Colour line links uniquely
-- IMPROVEMENT: Make the 'Best Times' screen prettier and more organized.
